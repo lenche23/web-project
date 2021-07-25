@@ -1,14 +1,28 @@
 tr.selected {
 	background: lightblue;
 }
+
 tr {
 	cursor: pointer;
 }
 
-#error {
-	color: red;
+body {
+	background-image: url('background.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-#success {
-	color: green;	
+#titleRectangle {
+    background: gray;
+    text-align: center;
+}
+
+#titleText {
+	font-family: Georgia, serif;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 90px;
+	font-size: 50px;
+	color: white;
 }
