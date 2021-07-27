@@ -6,7 +6,82 @@
 </head>
 <body>
 	<div id="titleRectangle">
+		<img id="titlePhoto" src="titlePhoto.png" alt="Slika naslova" />
 		<p id="titleText">Naruči!</p>
+	</div>
+	
+	<div id="restaurantsRectangle">
+		<div>
+			<input type="text" placeholder="Naziv restorana">
+			<input type="text" placeholder="Lokacija restorana">
+			<select>
+				<option>Tip restorana</option>
+				<option>Kineski</option>
+				<option>Italijanski</option>
+				<option>Roštilj</option>
+			</select>
+			<select>
+				<option>Izaberi ocenu</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			<input id="searchIcon" type="image" src="searchIcon.png" />
+		</div>
+		<div style="height: 20px;"></div>
+		<div>
+			<div id="typesFilter">
+				Tip:<br />
+				<button style="background: lightSlateGray;">Prikaži sve</button>
+			    <button>Kineski</button>
+			    <button>Italijanski</button>
+			    <button>Roštilj</button>
+			</div>
+			<div id="statusFilter">
+				Status:<br />
+				<button style="background: lightSlateGray;">Prikaži sve</button>
+			    <button>Otvoren</button>
+			    <button>Zatvoren</button>
+			</div>
+		</div>
+		<div style="height: 50px;"></div>
+		<table id="restaurantsTable">
+		  <tr>
+		    <th>Logo</th>
+		    <th>Naziv</th> 
+		    <th>Lokacija</th>
+		    <th>Tip</th>
+		    <th>Ocena</th>
+		    <th>Otvoren</th>
+		  </tr>
+		  <tr>
+		  	<td><img id="photo" src="restaurant1.jpg" alt="Slika" /></td>
+		    <td>Restoran 1</td>
+		    <td>Beograd, Srbija</td>
+		    <td>Kineski</td>
+		    <td>4.5</td>
+		    <td>Da</td>
+		  </tr>
+		  <tr>
+		  	<td><img id="photo" src="restaurant2.jpg" alt="Slika" /></td>
+		  	<td>Restoran 2</td>
+		    <td>Novi Sad, Srbija</td>
+		    <td>Italijanski</td>
+		    <td>4.0</td>
+		    <td>Da</td>
+		  </tr>
+		  <tr>
+		  	<td><img id="photo" src="restaurant3.jpg" alt="Slika" /></td>
+		  	<td>Restoran 3</td>
+		  	<td>Zagreb, Hrvatska</td>
+		    <td>Roštilj</td>
+		    <td>-</td>
+		    <td>Ne</td>
+		  </tr>
+		</table>
+		<div style="height: 50px; background: gray;"></div>
 	</div>
 </body>
 </html>
