@@ -5,6 +5,8 @@
 	<script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
+
+
 	<header id="titleRectangle">
 		<h1 id="titleText">WebShop</h1>
 	</header>
@@ -13,7 +15,7 @@
 		<div>
 			<br>
 			<label id="promoText1">&nbsp&nbsp&nbspDobrodošli na mesto</label>
-			<button class="signInBtns">Prijava</button>
+			<button class="signInBtns" id="loginBtn">Prijava</button>
 			<button class="signInBtns">Registracija</button>
 			<label id="promoText2"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
 		</div>
@@ -92,5 +94,13 @@
 			</tbody>
 		</table>
 	</div>
+
+	<script>
+		$(document).ready(function(){
+			$('loginBtn').click(function(){
+				alert("hello");
+			})
+		});
+	</script>
 </body>
 </html>
