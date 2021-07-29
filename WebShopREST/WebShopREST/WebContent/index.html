@@ -5,18 +5,15 @@
 	<script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
-
-
 	<header id="titleRectangle">
 		<h1 id="titleText">WebShop</h1>
 	</header>
-
 	<div id="restaurantsRectangle">
 		<div>
 			<br>
 			<label id="promoText1">&nbsp&nbsp&nbspDobrodošli na mesto</label>
 			<button class="signInBtns" id="loginBtn">Prijava</button>
-			<button class="signInBtns">Registracija</button>
+			<button class="signInBtns" id="registerBtn">Registracija</button>
 			<label id="promoText2"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
 		</div>
 		<br>	
@@ -41,7 +38,6 @@
 			</select>
 			<input id="searchIcon" type="image" src="searchIcon.png" />
 		</div>
-
 		<div style="padding-left: 3%; padding-top: 15px;">
 			<label style="padding-right: 40px"  class="searchText">Filter:</label>
 			<select class="dropdownBoxes" name="select_1" >
@@ -97,9 +93,12 @@
 
 	<script>
 		$(document).ready(function(){
-			$('loginBtn').click(function(){
-				alert("hello");
-			})
+			$('#registerBtn').click(function(){
+				window.location.href='register.html';
+			});
+			$('#loginBtn').click(function(){
+				window.location.href='login.html';
+			});
 		});
 	</script>
 </body>
