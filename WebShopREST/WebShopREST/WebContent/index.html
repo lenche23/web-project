@@ -1,0 +1,106 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="index.css"/>
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+
+	<header id="titleRectangle">
+		<h1 id="titleText">WebShop</h1>
+	</header>
+
+	<div id="restaurantsRectangle">
+		<div>
+			<br>
+			<label id="promoText1">&nbsp&nbsp&nbspDobrodošli na mesto</label>
+			<button class="signInBtns" id="loginBtn">Prijava</button>
+			<button class="signInBtns">Registracija</button>
+			<label id="promoText2"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
+		</div>
+		<br>	
+		<br>
+		<div style="padding-left: 3%;">
+			<label class="searchText">Pretraga:</label>
+			<input class="inputBoxes" type="text" placeholder="Naziv restorana">
+			<input class="inputBoxes" type="text" placeholder="Lokacija restorana">
+			<select class="dropdownBoxes">
+				<option>Tip restorana</option>
+				<option>Kineski</option>
+				<option>Italijanski</option>
+				<option>Roštilj</option>
+			</select>
+			<select class="dropdownBoxes">
+				<option>Izaberi ocenu</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			<input id="searchIcon" type="image" src="searchIcon.png" />
+		</div>
+
+		<div style="padding-left: 3%; padding-top: 15px;">
+			<label style="padding-right: 40px"  class="searchText">Filter:</label>
+			<select class="dropdownBoxes" name="select_1" >
+				<option selected="selected" value="0">Tip restorana</option>
+				  <option value="1">Kineski</option>
+				  <option value="2">Italijanski</option>
+				  <option value="3">Roštilj</option>
+			</select>
+			<input type="checkbox" style="margin-left: 18px;"/>
+			<label style="color: black; font-weight: bold; font-size: 13pt;" >Otvoren</label>
+		</div>
+		<div style="height: 50px;"></div>
+		<table id="restaurantsTable">
+			<thead>
+				<tr>
+					<th>Logo</th>
+					<th>Naziv</th> 
+					<th>Lokacija</th>
+					<th>Tip</th>
+					<th>Ocena</th>
+					<th>Otvoren</th>
+				</tr>
+			</thead>
+		
+			<tbody>
+				<tr>
+					<td><img class="photo" src="restaurant1.jpg" alt="Slika" /></td>
+					<td>Restoran 1</td>
+					<td>Beograd, Srbija</td>
+					<td>Kineski</td>
+					<td>4.5</td>
+					<td>Da</td>
+				</tr>
+				<tr>
+					<td><img class="photo" src="restaurant2.jpg" alt="Slika" /></td>
+					<td>Restoran 2</td>
+					<td>Novi Sad, Srbija</td>
+					<td>Italijanski</td>
+					<td>4.0</td>
+					<td>Da</td>
+				</tr>
+				<tr>
+					<td><img class="photo" src="restaurant3.jpg" alt="Slika" /></td>
+					<td>Restoran 3</td>
+					<td>Zagreb, Hrvatska</td>
+					<td>Roštilj</td>
+					<td>-</td>
+					<td>Ne</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			$('loginBtn').click(function(){
+				alert("hello");
+			})
+		});
+	</script>
+</body>
+</html>
