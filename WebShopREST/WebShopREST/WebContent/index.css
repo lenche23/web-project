@@ -20,14 +20,7 @@ body {
 	color: black;
 }
 
-#promoText1 {
-	color: black;
-	font-family: Lucida Handwriting;
-	text-align: left;
-	font-size: 40px;
-}
-
-#promoText2 {
+#promoText {
 	color: black;
 	font-family: Lucida Handwriting;
 	text-align: left;
@@ -77,7 +70,8 @@ body {
 	border-radius: 25px;
 }
 
-#restaurantsTable{
+#restaurantsTable {
+	border-spacing: 0px;
 	border-style: ridge;
 	border-radius: 15px;
 	border-color: rgb(214, 164, 45);
@@ -134,6 +128,7 @@ div button {
 	height: 33px;
 	background-color: rgb(199, 207, 199);
 	font-size: 13pt;
+	cursor: pointer;
 }
 
 .searchText {

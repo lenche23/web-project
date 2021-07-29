@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="administrator.css"/>
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<header id="titleRectangle">
+		<h1 id="titleText">WebShop</h1>
+	</header>
+	
+	<div id="restaurantsRectangle">
+		<div>
+			<br />
+			<label id="korisniciText">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspKorisnici</label>
+			<button class="menuBtns">Moj profil</button>
+			<button class="menuBtns">Restorani</button>
+			<button class="menuBtns">Korisnici</button>
+		</div>
+		<br /><br />
+		<div style="padding-left: 3%;">
+			<label class="searchText">Pretraga:</label>
+			<input class="inputBoxes" type="text" placeholder="Ime korisnika" />
+			<input class="inputBoxes" type="text" placeholder="Prezime korisnika" />
+			<input class="inputBoxes" type="text" placeholder="Korisničko ime" />
+			<input id="searchIcon" type="image" src="searchIcon.png" />
+		</div>
+		<div style="padding-left: 3%; padding-top: 15px;">
+			<label style="padding-right: 40px"  class="searchText">Filter:</label>
+			<select class="dropdownBoxes">
+				<option selected="selected" value="0">Uloga korisnika</option>
+				<option value="1">Menadžer</option>
+			 	<option value="2">Dobavljač</option>
+				<option value="3">Kupac</option>
+				<option value="4">Administrator</option>
+			</select>
+			<select class="dropdownBoxes">
+				<option selected="selected" value="0">Tip kupca</option>
+				<option value="1">Zlatni</option>
+			 	<option value="2">Srebrni</option>
+				<option value="3">Bronzani</option>
+			</select>
+		</div>
+		<div style="height: 50px;"></div>
+		<div style="text-align: center; margin: 0 auto; width: 600px;">
+			<button class="administratorBtns">Dodaj restoran</button>
+			<button class="administratorBtns">Dodaj dobavljača</button>
+			<button class="administratorBtns">Dodaj menadžera</button>
+		</div>
+		<div style="height: 50px;"></div>
+		<table id="usersTable">
+			<thead>
+				<tr>
+					<th>Korisničko ime</th>
+					<th>Ime</th> 
+					<th>Prezime</th>
+					<th>Lozinka</th>
+					<th>Uloga</th>
+					<th>Broj bodova</th>
+				</tr>
+			</thead>
+		
+			<tbody>
+				<tr>
+					<td>pero</td>
+					<td>Pero</td>
+					<td>Perić</td>
+					<td>123</td>
+					<td>Menadžer</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>mica</td>
+					<td>Milica</td>
+					<td>Tomić</td>
+					<td>456</td>
+					<td>Kupac</td>
+					<td>2500</td>
+				</tr>
+				<tr>
+					<td>petar</td>
+					<td>Petar</td>
+					<td>Petrović</td>
+					<td>789</td>
+					<td>Dostavljač</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>stefo</td>
+					<td>Stefan</td>
+					<td>Savić</td>
+					<td>stefke</td>
+					<td>Kupac</td>
+					<td>5500</td>
+				</tr>
+				<tr>
+					<td>mara</td>
+					<td>Mara</td>
+					<td>Marić</td>
+					<td>12345</td>
+					<td>Administrator</td>
+					<td>-</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

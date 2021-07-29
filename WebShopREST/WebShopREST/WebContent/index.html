@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -5,8 +6,6 @@
 	<script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
-
-
 	<header id="titleRectangle">
 		<h1 id="titleText">WebShop</h1>
 	</header>
@@ -14,10 +13,10 @@
 	<div id="restaurantsRectangle">
 		<div>
 			<br>
-			<label id="promoText1">&nbsp&nbsp&nbspDobrodošli na mesto</label>
+			<label id="promoText">&nbsp&nbsp&nbspDobrodošli na mesto</label>
 			<button class="signInBtns" id="loginBtn">Prijava</button>
 			<button class="signInBtns">Registracija</button>
-			<label id="promoText2"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
+			<label id="promoText"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
 		</div>
 		<br>	
 		<br>
@@ -50,7 +49,7 @@
 				  <option value="2">Italijanski</option>
 				  <option value="3">Roštilj</option>
 			</select>
-			<input type="checkbox" style="margin-left: 18px;"/>
+			<input type="checkbox" style="margin-left: 18px; cursor: pointer;"/>
 			<label style="color: black; font-weight: bold; font-size: 13pt;" >Otvoren</label>
 		</div>
 		<div style="height: 50px;"></div>
@@ -95,12 +94,12 @@
 		</table>
 	</div>
 
-	<script>
+	<!-- <script>
 		$(document).ready(function(){
-			$('loginBtn').click(function(){
+			$('#loginBtn').click(function(){
 				alert("hello");
 			})
 		});
-	</script>
+	</script> -->
 </body>
 </html>
