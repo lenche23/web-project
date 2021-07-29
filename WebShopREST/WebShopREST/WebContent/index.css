@@ -126,6 +126,7 @@ div button {
 	border-radius: 15px;
 	text-align: left;
 	height: 33px;
+	width: 165px;
 	background-color: rgb(199, 207, 199);
 	font-size: 13pt;
 	cursor: pointer;

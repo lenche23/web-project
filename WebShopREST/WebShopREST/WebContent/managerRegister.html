@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="managerRegister.css"/>
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<header id="titleRectangle">
+		<h1 id="titleText">WebShop</h1>
+	</header>
+	
+	<div id="registerRectangle">
+		<label id="formTitle">Registracija Menadžera</label>
+		<form action="#">
+			<div style="margin-top: 8%; margin-left: 10%; float: left;">
+				<label class="labels">Ime</label><br />
+				<input class="inputBoxes" type="text" required />
+			</div>
+			<div style="margin-top: 8%; margin-left: 10%; float: left;">
+				<label class="labels">Prezime</label><br />
+				<input class="inputBoxes" type="text" required />
+			</div>
+			<div style="margin-top: 8%; margin-left: 10%; float: left;">
+				<label class="labels">Datum rođenja</label><br />
+				<input class="inputBoxes" style="cursor: pointer;" type="date" required />
+			</div>
+			<div style="margin-top: 8%; margin-left: 10%; float: left;">
+				<label class="labels">Pol</label><br />
+				<select class="dropdownBoxes">
+					<option selected="selected" value="0">Muško</option>
+					<option value="1">Žensko</option>
+				</select>
+			</div>
+			<div style="margin-top: 8%; margin-left: 10%; float: left;">
+				<label class="labels">Korisničko ime</label><br />
+				<input class="inputBoxes" type="text" required />
+			</div>
+			<div style="margin-top: 8%; margin-left: 10%; float: left;">
+				<label class="labels">Lozinka</label><br />
+				<input class="inputBoxes" type="text" required />
+			</div>
+			<div style="margin-top: 12%; margin-left: 12%; float: left;">
+				<button class="submitBtn" type="submit">Kreiraj</button>
+			</div>
+			<div style="margin-top: 12%; margin-left: 10%; float: left;">
+				<button class="cancelBtn">Otkaži</button>
+			</div>
+			<div style="height: 140px; float: left;"></div>
+		</form>
+	</div>
+</body>
+</html>
