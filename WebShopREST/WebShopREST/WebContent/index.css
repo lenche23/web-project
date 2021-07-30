@@ -20,14 +20,14 @@ body {
 	color: black;
 }
 
-#promoText {
+.promoText {
 	color: black;
 	font-family: Lucida Handwriting;
 	text-align: left;
 	font-size: 40px;
 }
 
-.signInBtns {
+.navBtns {
 	color: black;
 	font-weight: 200;
 	background-color: rgb(241, 190, 72);

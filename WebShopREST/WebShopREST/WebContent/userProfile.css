@@ -1,0 +1,111 @@
+body {
+	background-image: url('background.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#titleRectangle {
+	position: relative;
+    background: rgba(241, 190, 72, 0.897);
+	border-radius: 25px;
+}
+
+#titleText {
+	font-family: Lucida Handwriting;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 90px;
+	font-size: 45px;
+	color: black;
+}
+
+#promoText {
+	color: black;
+	font-family: Lucida Handwriting;
+	text-align: left;
+	font-size: 40px;
+    margin-left: 30px;
+}
+
+#profileRectangle{
+	position: relative;
+    background: rgba(241, 190, 72, 0.774);
+	display: grid;
+	place-items: left;
+	border-radius: 25px;
+    padding-bottom: 100px;
+}
+
+#changeBtn {
+	color: black;
+	font-weight: 200;
+	background-color: rgb(241, 190, 72);
+	width: 110px;
+	height: 40px;
+	font-size: 15px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-weight: bold;
+	float: right;
+	margin-top: 0.5%;
+	margin-right: 30px;
+}
+
+.container {
+    display: block;
+    width: auto;
+}
+
+.container-pic {
+    display: block;
+    background: rgba(199, 207, 199, 0.76);
+    width: 210px;
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+    border-radius: 25px;
+    float: left;
+}
+
+.container-data {
+    display: block;
+    background: rgba(199, 207, 199, 0.76);
+    width: 70%;
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    border-radius: 25px;
+    float: right;
+    height: 210px;
+}
+
+.container .labels {
+    float: left;
+    padding-right: 10px;
+}
+
+.container .datas {
+    float: left;
+}
+
+.label {
+    color: black;
+	font-size: 19.5pt;
+    padding-bottom: 5px;
+    margin: 5px;
+    height: 20px;
+}
+
+.inputBoxes {
+	border-radius: 15px;
+	text-align: left;
+	height: 20px;
+	background-color: rgb(199, 207, 199);
+	font-size: 17pt;
+    margin: 5px;
+}

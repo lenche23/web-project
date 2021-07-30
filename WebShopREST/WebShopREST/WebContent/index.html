@@ -12,10 +12,11 @@
 	<div id="restaurantsRectangle">
 		<div>
 			<br>
-			<label id="promoText">&nbsp&nbsp&nbspDobrodošli na mesto</label>
-			<button class="signInBtns" id="loginBtn">Prijava</button>
-			<button class="signInBtns" id="registerBtn">Registracija</button>
-			<label id="promoText"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
+			<label class="promoText">&nbsp&nbsp&nbspDobrodošli na mesto</label>
+			<button class="navBtns" id="loginBtn">Prijava</button>
+			<button class="navBtns" id="registerBtn">Registracija</button>
+			<button class="navBtns" id="profileBtn">Moj profil</button>
+			<label class="promoText"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
 		</div>
 		<br>
 		<br>
@@ -94,6 +95,13 @@
 
 	<script>
 		$(document).ready(function(){
+			$('#profileBtn').click(function(){
+				// if (korisnik ulogovan) {
+					window.location.href='userProfile.html';
+				// } else {
+				// 	window.location.href='login.html';
+				// }
+			});
 			$('#registerBtn').click(function(){
 				window.location.href='register.html';
 			});
