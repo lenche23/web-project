@@ -1,3 +1,13 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing:  border-box;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 25px;
+}
+
 body {
 	background-image: url('background.jpg');
     background-attachment: fixed;
@@ -9,6 +19,7 @@ body {
 	position: relative;
     background: rgba(241, 190, 72, 0.897);
 	border-radius: 25px;
+	margin: 20px;
 }
 
 #titleText {
@@ -20,69 +31,100 @@ body {
 	color: black;
 }
 
-#registerRectangle{
-	position: relative;
-    background: #fff;
-	display: grid;
-	place-items: left;
-	border-radius: 25px;
-	width: 50%;
-	left: 25%;
+.container {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-#formTitle {
-	font-size: 35px;
+.container {
+    display: block;
+    background: #fff;
+    width: 410px;
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.container .text {
+    font-size: 35px;
     font-weight: 600;
     text-align: center;
     color: black;
-    font-family: 'Poppins', sans-serif;
 }
 
-.labels {
-	font-size: 18px;
-	font-family: 'Poppins', sans-serif;
+.container form {
+    margin-top: -20px;
 }
 
-input, div button {
-	border-radius: 25px;
-	height: 30px;
-    width: 220px;
+.container form .data {
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+    color: black;
+}
+
+form .data label {
+    font-size: 18px;
+}
+
+form .data input {
+    height: 100%;
+    width: 100%;
     padding-left: 10px;
     font-size: 17px;
     border: 1px solid silver;
 }
 
-.dropdownBoxes {
-	padding-left: 10px;
-	border-radius: 25px;
-	text-align: left;
-	height: 32px;
-	width: 235px;
-	border: 1px solid silver;
-	font-size: 17px;
-	cursor: pointer;
+form .data input:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
 }
 
-.submitBtn {
-	cursor: pointer;
-	color: white;
-	background-color: blue; 
-	border-style: ridge;
-	border-radius: 25px;
-	border-color: blue;
-	border-width: 3px;
-	font-weight: bold;
-	font-weight: 200;
+form .data select {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
 }
 
-.cancelBtn {
-	cursor: pointer;
-	color: white;
-	background-color: red; 
-	border-style: ridge;
-	border-radius: 25px;
-	border-color: red;
-	border-width: 3px;
-	font-weight: bold;
-	font-weight: 200;
+form .data select:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
+}
+
+form .btn {
+    margin: 5px 0;
+    height: 45px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+form .btn .inner {
+    height: 100%;
+    width: 300%;
+    position: absolute;
+    left: -100%;
+    z-index: -1;
+    transition: all 0.4s;
+    background: -webkit-linear-gradient(right, rgba(199, 207, 199, 0.76), rgb(241, 190, 72), rgba(199, 207, 199, 0.76), rgb(241, 190, 72));
+}
+
+form .btn:hover .inner{
+    left: 0;
+}
+
+form .btn button {
+    height: 100%;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
 }
