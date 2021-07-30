@@ -63,17 +63,17 @@ form .data input:focus {
     border-bottom-width: 2px;
 }
 
-form .forgotPass{
-    margin-top: -8px;
+form .data select {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
 }
 
-form .forgotPass a{
-    color: silver;
-    text-decoration: none;
-}
-
-form .forgotPass a:hover{
-    text-decoration: underline;
+form .data select:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
 }
 
 form .btn {
@@ -111,16 +111,16 @@ form .btn button {
     cursor: pointer;
 }
 
-form .signUp-link {
+form .logIn-link {
     text-align: center;
     color: black;
 }
 
-form .signUp-link a{
+form .logIn-link a{
     color: #3498db;
     text-decoration: none;   
 }
 
-form .signUp-link a:hover{
+form .logIn-link a:hover{
     text-decoration: underline;   
 }

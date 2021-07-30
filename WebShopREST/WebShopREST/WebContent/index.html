@@ -9,16 +9,15 @@
 	<header id="titleRectangle">
 		<h1 id="titleText">WebShop</h1>
 	</header>
-
 	<div id="restaurantsRectangle">
 		<div>
 			<br>
 			<label id="promoText">&nbsp&nbsp&nbspDobrodošli na mesto</label>
 			<button class="signInBtns" id="loginBtn">Prijava</button>
-			<button class="signInBtns">Registracija</button>
-			<label id="promoText"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
+			<button class="signInBtns" id="registerBtn">Registracija</button>
+			<label id="promoText2"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
 		</div>
-		<br>	
+		<br>
 		<br>
 		<div style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
@@ -40,7 +39,6 @@
 			</select>
 			<input id="searchIcon" type="image" src="searchIcon.png" />
 		</div>
-
 		<div style="padding-left: 3%; padding-top: 15px;">
 			<label style="padding-right: 40px"  class="searchText">Filter:</label>
 			<select class="dropdownBoxes" name="select_1" >
@@ -57,14 +55,14 @@
 			<thead>
 				<tr>
 					<th>Logo</th>
-					<th>Naziv</th> 
+					<th>Naziv</th>
 					<th>Lokacija</th>
 					<th>Tip</th>
 					<th>Ocena</th>
 					<th>Otvoren</th>
 				</tr>
 			</thead>
-		
+
 			<tbody>
 				<tr>
 					<td><img class="photo" src="restaurant1.jpg" alt="Slika" /></td>
@@ -96,9 +94,12 @@
 
 	<!-- <script>
 		$(document).ready(function(){
+			$('#registerBtn').click(function(){
+				window.location.href='register.html';
+			});
 			$('#loginBtn').click(function(){
-				alert("hello");
-			})
+				window.location.href='login.html';
+			});
 		});
 	</script> -->
 </body>
