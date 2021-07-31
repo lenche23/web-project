@@ -42,6 +42,7 @@ body {
 	float: right;
 	margin-top: 0.5%;
 	margin-right: 1%;
+	cursor: pointer;
 }
 
 #navBar {

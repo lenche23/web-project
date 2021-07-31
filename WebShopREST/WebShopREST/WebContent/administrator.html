@@ -14,9 +14,9 @@
 		<div>
 			<br />
 			<label id="korisniciText">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspKorisnici</label>
-			<button class="menuBtns">Moj profil</button>
-			<button class="menuBtns">Restorani</button>
-			<button class="menuBtns">Korisnici</button>
+			<button class="menuBtns" id="profile">Moj profil</button>
+			<button class="menuBtns" id="restaurants">Restorani</button>
+			<button class="menuBtns" id="users">Korisnici</button>
 		</div>
 		<br /><br />
 		<div style="padding-left: 3%;">
@@ -44,9 +44,9 @@
 		</div>
 		<div style="height: 50px;"></div>
 		<div style="text-align: center; margin: 0 auto; width: 600px;">
-			<button class="administratorBtns">Dodaj restoran</button>
-			<button class="administratorBtns">Dodaj dobavljača</button>
-			<button class="administratorBtns">Dodaj menadžera</button>
+			<button class="administratorBtns">Obriši korisnika</button>
+			<button class="administratorBtns" id="delivererAdd">Dodaj dobavljača</button>
+			<button class="administratorBtns" id="managerAdd">Dodaj menadžera</button>
 		</div>
 		<div style="height: 50px;"></div>
 		<table id="usersTable">
@@ -63,7 +63,7 @@
 				</tr>
 			</thead>
 		
-			<tbody>
+			<tbody id="tableBody">
 				<tr>
 					<td>pero</td>
 					<td>Pero</td>
@@ -117,5 +117,32 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			$('#users').click(function(){
+					window.location.href='administrator.html';
+			});
+			$('#restaurants').click(function(){
+				window.location.href='index.html';
+			});
+			$('#profile').click(function(){
+				window.location.href='userProfile.html';
+			});
+			$('#delivererAdd').click(function(){
+				window.location.href='delivererRegister.html';
+			});
+			$('#managerAdd').click(function(){
+				window.location.href='managerRegister.html';
+			});
+			
+			$("#tableBody tr").click(function() {
+			    var selected = $(this).hasClass("selected");
+			    $("#tableBody tr").removeClass("selected");
+			    if(!selected)
+			            $(this).addClass("selected");
+			});
+		});
+	</script>
 </body>
 </html>

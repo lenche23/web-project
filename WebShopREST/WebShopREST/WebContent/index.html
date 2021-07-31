@@ -64,11 +64,11 @@
 				</tr>
 			</thead>
 
-			<tbody>
+			<tbody id="tableBody">
 				<tr>
 					<td><img class="photo" src="restaurant1.jpg" alt="Slika" /></td>
 					<td>Restoran 1</td>
-					<td>Beograd, Srbija</td>
+					<td>Batutova 5, Beograd, Srbija</td>
 					<td>Kineski</td>
 					<td>4.5</td>
 					<td>Da</td>
@@ -76,7 +76,7 @@
 				<tr>
 					<td><img class="photo" src="restaurant2.jpg" alt="Slika" /></td>
 					<td>Restoran 2</td>
-					<td>Novi Sad, Srbija</td>
+					<td>Cara Dušana 2, Novi Sad, Srbija</td>
 					<td>Italijanski</td>
 					<td>4.0</td>
 					<td>Da</td>
@@ -84,7 +84,7 @@
 				<tr>
 					<td><img class="photo" src="restaurant3.jpg" alt="Slika" /></td>
 					<td>Restoran 3</td>
-					<td>Zagreb, Hrvatska</td>
+					<td>Vlaška 23, Zagreb, Hrvatska</td>
 					<td>Roštilj</td>
 					<td>-</td>
 					<td>Ne</td>
@@ -107,6 +107,13 @@
 			});
 			$('#loginBtn').click(function(){
 				window.location.href='login.html';
+			});
+			
+			$("#tableBody tr").click(function() {
+			    var selected = $(this).hasClass("selected");
+			    $("#tableBody tr").removeClass("selected");
+			    if(!selected)
+			            $(this).addClass("selected");
 			});
 		});
 	</script>
