@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="userProfile.css"/>
+	<link rel="stylesheet" type="text/css" href="updateProfile.css"/>
 	<script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -26,20 +26,24 @@
                     <br>
                     <label class="label">Korisničko ime:</label>
                     <br>
+                    <label class="label">Lozinka:</label>
+                    <br>
                     <label class="label">Datum rođenja:</label>
                     <br>
                     <label class="label">Pol:</label>
                 </div>
                 <div class=datas>
-                    <input class="inputBoxes" type="text" value="Petar" disabled />
+                    <input class="inputBoxes" type="text" value="Petar"/>
                     <br>
-                    <input class="inputBoxes" type="text" value="Petrović" disabled />
+                    <input class="inputBoxes" type="text" value="Petrović"/>
                     <br>
-                    <input class="inputBoxes" type="text" value="petar" disabled />
+                    <input class="inputBoxes" type="text" value="petar"/>
                     <br>
-                    <input class="inputBoxes" type="text" value="15.2.1993." disabled />
+                    <input class="inputBoxes" type="text" value="pera"/>
                     <br>
-                    <input class="inputBoxes" type="text" value="Muško" disabled />
+                    <input class="inputBoxes" type="text" value="15.2.1993."/>
+                    <br>
+                    <input class="inputBoxes" type="text" value="Muško"/>
                 </div>
                 <div>
                     <br>
@@ -49,20 +53,12 @@
                     <br>
                     <br>
                     <br>
-                    <button id="changeBtn">Izmeni profil</button>
+                    <br>
+                    <br>
+                    <button id="changeBtn">Sačuvaj izmene</button>
                 </div>
-                <div style="clear: both; margin-top: 200px;"><label style="color: grey; font-size: 15pt;" class="label">Da biste izmenili lozinku, idite na "Izmeni profil"</label></div>
             </div>
         </div>
     </div>
-
-    <script>
-		$(document).ready(function(){
-			$('#changeBtn').click(function(){
-				window.location.href='changeProfile.html';
-			});
-			
-		});
-	</script>
 </body>
 </html>
