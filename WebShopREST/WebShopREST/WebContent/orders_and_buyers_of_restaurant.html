@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="manager.css"/>
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<header id="titleRectangle">
+		<h1 id="titleText">WebShop</h1>
+	</header>
+	
+	<div id="articlesRectangle">
+		<div>
+			<br />
+			<label id="buyersText">&nbsp&nbsp&nbspPorudžbine</label>
+		</div>
+		<div style="padding-left: 3%;">
+			<label class="searchText">Pretraga:</label>
+			<input class="inputBoxes" type="text" placeholder="" />
+			<input id="searchIcon" type="image" src="searchIcon.png" />
+		</div>
+        <br>
+		<table id="articlesTable">
+			<thead>
+				<tr>
+                    <th>ID</th>
+					<th>Artikli</th>
+					<th>Datum i vreme porudžbine</th>
+					<th>Cena</th>
+                    <th>Kupac</th>
+                    <th>Status</th>
+				</tr>
+			</thead>
+			<tbody id="tableBody">
+				<tr>
+					<td>1234567891</td>
+					<td>Špagete sa ćuftama, Kečap</td>
+					<td>01.01.2021. 13:30</td>
+					<td>429.99</td> 
+					<td>Milica Tomić</td>
+					<td>Dostavljena</td>
+				</tr>
+			</tbody>
+		</table>
+        <div>
+			<br />
+			<label id="buyersText">&nbsp&nbsp&nbspKupci</label>
+		</div>
+		<div style="padding-left: 3%;">
+			<label class="searchText">Pretraga:</label>
+			<input class="inputBoxes" type="text" placeholder="" />
+			<input id="searchIcon" type="image" src="searchIcon.png" />
+		</div>
+        <br>
+		<table id="articlesTable">
+			<thead>
+				<tr>
+                    <th>Ime</th>
+					<th>Prezime</th>
+					<th>Tip kupca</th>
+				</tr>
+			</thead>
+			<tbody id="tableBody">
+				<tr>
+					<td>Milica</td>
+					<td>Tomić</td>
+					<td>Zlatni</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
