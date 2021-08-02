@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="restaurant.css"/>
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<header id="titleRectangle">
+		<h1 id="titleText">WebShop</h1>
+	</header>
+	
+	<div id="restaurantRectangle">
+        <div>
+			<br>
+			<label id="promoText">O restoranu</label>
+		</div>
+        <div class="container">
+            <div class="container-pic">
+                <img style="width: 210px; height: 210px;" src="restaurant1.jpg"/>
+            </div>
+            <div class="container-data">
+                <div class="labels">
+                    <label class="label">Naziv:</label>
+                    <br>
+                    <label class="label">Lokacija:</label>
+                    <br>
+                    <label class="label">Tip:</label>
+                    <br>
+                    <label class="label">Ocena:</label>
+                    <br>
+                    <label class="label">Otvoren:</label>
+                </div>
+                <div class=datas>
+                    <input class="inputBoxes" type="text" value="Restoran 1" disabled />
+                    <br>
+                    <input class="inputBoxes" type="text" value="Batutova 5, Beograd, Srbija" disabled />
+                    <br>
+                    <input class="inputBoxes" type="text" value="Kineski" disabled />
+                    <br>
+                    <input class="inputBoxes" type="text" value="4.5" disabled />
+                    <br>
+                    <input class="inputBoxes" type="text" value="Da" disabled />
+                </div>
+            </div>
+        </div>
+        <div>
+			<br>
+			<label id="promoText">Artikli</label>
+		</div>
+		<div style="height: 30px;"></div>
+		<table id="articlesTable">
+			<tbody id="tableBody">
+				<tr>
+					<td><img class="photo" src="riblja_corba.jpg" alt="Slika" /></td>
+					<td>Riblja čorba</td>
+					<td>Riba, razno povrće, začini</td>
+					<td>200 RSD</td>
+				</tr>
+				<tr>
+					<td><img class="photo" src="cevapi.jpg" alt="Slika" /></td>
+					<td>Ćevapi</td>
+					<td>Svinjsko meso, razno povrće</td>
+					<td>300 RSD</td>
+				</tr>
+				<tr>
+					<td><img class="photo" src="fanta.jpg" alt="Slika" /></td>
+					<td>Fanta Orange</td>
+					<td>Gazirani sok</td>
+					<td>250 RSD</td>
+				</tr>
+			</tbody>
+		</table>
+		<div style="height: 25px;"></div>
+		<div>
+			<br>
+			<label id="promoText">Komentari</label>
+		</div>
+		<div style="height: 30px;"></div>
+		<table id="articlesTable">
+			<thead>
+				<tr>
+					<th>Korisnik</th>
+					<th>Ocena</th>
+					<th>Komentar</th>
+				</tr>
+			</thead>
+			<tbody id="tableBody">
+				<tr>
+					<td>stefo</td>
+					<td>5</td>
+					<td>Najbolji ćevapi u gradu!</td>
+				</tr>
+				<tr>
+					<td>mica</td>
+					<td>1</td>
+					<td>Stigla mi je hladna riblja čorba..</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+</body>
+</html>
