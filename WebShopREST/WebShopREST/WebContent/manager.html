@@ -13,38 +13,62 @@
 	<div id="articlesRectangle">
 		<div>
 			<br />
-			<label id="buyersText">&nbsp&nbsp&nbsp&nbspPero Perić</label>
+			<label id="buyersText">&nbspPero Perić</label>
 			<button class="menuBtns" id="profile">Moj profil</button>
 			<button class="menuBtns" id="ordersAndBuyers">Porudžbine i kupci</button>
 		</div>
-        <div class="container">
-            <div class="container-pic">
-                <img src="italian.png" style="width: 210px;"/>
-            </div>
-            <div class="container-data">
-                <div class="labels">
-                    <label class="label">Naziv mog restorana:</label>
-                    <br>
-                    <label class="label">Tip restorana:</label>
-                    <br>
-                    <label class="label">Status restorana:</label>
-                </div>
-                <div class=datas>
-                    <input class="inputBoxes" type="text" value="Italian wonderland" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="italijanski" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="radi" disabled />
-                </div>
-            </div>
-        </div>
+		<table class="container">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <th>
+                    <td>
+                        <div class="container-pic">
+                            <img src="italian.png" style="width: 210px;"/>
+                        </div>
+                    </td>
+                </th>
+                <th>
+                    <td>
+                        <div class="container-data-labels">
+                            <label class="label">Naziv<nobr> restorana:</label>
+                            <br>
+                            <label class="label">Lokacija:</label>
+                            <br>
+                            <label class="label">Tip:</label>
+                            <br>
+                            <label class="label">Ocena:</label>
+                            <br>
+                            <label class="label">Status:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container-data-data">
+                            <input class="inputBoxes" type="text" value="Italian wonderland" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="Cara Dušana 2, Novi Sad, Srbija" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="italijanski" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="4.0" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="radi" disabled />
+                        </div>
+                    </td>  
+                </th>
+            </tbody>
+        </table>
 		<div style="text-align: center; float: left;">
 			<button class="navBtn" id="addArticle">Dodaj artikal</button>
 			<button class="navBtn" id="updateArticle">Izmeni artikal</button>
 		</div>
 		<div style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
-			<input class="inputBoxes" type="text" placeholder="Naziv artikla" />
+			<input id="inputBox" type="text" placeholder="Naziv artikla" />
 			<input id="searchIcon" type="image" src="searchIcon.png" />
 		</div>
         <div style="padding-left: 3%; padding-top: 15px;">
