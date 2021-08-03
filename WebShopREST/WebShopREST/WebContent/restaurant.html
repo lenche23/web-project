@@ -13,58 +13,80 @@
 	<div id="restaurantRectangle">
         <div>
 			<br>
-			<label id="promoText">O restoranu</label>
+			<label id="promoText">&nbspChinese wonderland</label>
 		</div>
-        <div class="container">
-            <div class="container-pic">
-                <img style="width: 210px; height: 210px;" src="restaurant1.jpg"/>
-            </div>
-            <div class="container-data">
-                <div class="labels">
-                    <label class="label">Naziv:</label>
-                    <br>
-                    <label class="label">Lokacija:</label>
-                    <br>
-                    <label class="label">Tip:</label>
-                    <br>
-                    <label class="label">Ocena:</label>
-                    <br>
-                    <label class="label">Otvoren:</label>
-                </div>
-                <div class=datas>
-                    <input class="inputBoxes" type="text" value="Restoran 1" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="Batutova 5, Beograd, Srbija" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="Kineski" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="4.5" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="Da" disabled />
-                </div>
-            </div>
-        </div>
+		<table class="container">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <th>
+                    <td>
+                        <div class="container-pic">
+                            <img src="chinese.png" style="width: 210px;"/>
+                        </div>
+                    </td>
+                </th>
+                <th>
+                    <td>
+                        <div class="container-data-labels">
+                            <label class="label">Naziv:</label>
+                            <br>
+                            <label class="label">Lokacija:</label>
+                            <br>
+                            <label class="label">Tip:</label>
+                            <br>
+                            <label class="label">Ocena:</label>
+                            <br>
+                            <label class="label">Status:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container-data-data">
+                            <input class="inputBoxes" type="text" value="Chinese wonderland" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="Batutova 5, Beograd, Srbija" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="kineski" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="4.5" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="radi" disabled />
+                        </div>
+                    </td>  
+                </th>
+            </tbody>
+        </table>
         <div>
 			<br>
-			<label id="promoText">Artikli</label>
+			<label id="promoText">&nbspArtikli</label>
 		</div>
 		<div style="height: 30px;"></div>
 		<table id="articlesTable">
+			<thead>
+				<th>Slika</th>
+				<th>Naziv</th>
+				<th>Opis</th>
+				<th>Cena</th>
+			</thead>
 			<tbody id="tableBody">
 				<tr>
-					<td><img class="photo" src="riblja_corba.jpg" alt="Slika" /></td>
+					<td><img class="photo" src="riblja_corba.png" alt="Slika" /></td>
 					<td>Riblja čorba</td>
 					<td>Riba, razno povrće, začini</td>
 					<td>200 RSD</td>
 				</tr>
 				<tr>
-					<td><img class="photo" src="cevapi.jpg" alt="Slika" /></td>
+					<td><img class="photo" src="kebab.png" alt="Slika" /></td>
 					<td>Ćevapi</td>
 					<td>Svinjsko meso, razno povrće</td>
 					<td>300 RSD</td>
 				</tr>
 				<tr>
-					<td><img class="photo" src="fanta.jpg" alt="Slika" /></td>
+					<td><img class="photo" src="juice.png" alt="Slika" /></td>
 					<td>Fanta Orange</td>
 					<td>Gazirani sok</td>
 					<td>250 RSD</td>
@@ -74,7 +96,7 @@
 		<div style="height: 25px;"></div>
 		<div>
 			<br>
-			<label id="promoText">Komentari</label>
+			<label id="promoText">&nbspKomentari</label>
 		</div>
 		<div style="height: 30px;"></div>
 		<table id="articlesTable">
