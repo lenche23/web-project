@@ -52,14 +52,14 @@
 		<table id="usersTable">
 			<thead>
 				<tr>
-					<th>Korisničko ime</th>
-					<th>Ime</th> 
-					<th>Prezime</th>
+					<th onclick="sortTable(0)">Korisničko ime</th>
+					<th onclick="sortTable(1)">Ime</th> 
+					<th onclick="sortTable(2)">Prezime</th>
 					<th>Pol</th> 
 					<th>Datum rođenja</th>
 					<th>Lozinka</th>
 					<th>Uloga</th>
-					<th>Broj bodova</th>
+					<th onclick="sortTable(3)">Broj bodova</th>
 				</tr>
 			</thead>
 		
@@ -143,6 +143,44 @@
 			            $(this).addClass("selected");
 			});
 		});
+
+		function sortTable(n) {
+			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+			table = document.getElementById("usersTable");
+			switching = true;
+			dir = "asc";
+			while (switching) {
+				switching = false;
+				rows = table.rows;
+				for (i = 1; i < (rows.length - 1); i++) {
+					shouldSwitch = false;
+					x = rows[i].getElementsByTagName("TD")[n];
+					y = rows[i + 1].getElementsByTagName("TD")[n];
+
+					if (dir == "asc") {
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					} else if (dir == "desc") {
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+				}
+				if (shouldSwitch) {
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					switchcount ++;
+				} else {
+					if (switchcount == 0 && dir == "asc") {
+						dir = "desc";
+						switching = true;
+					}
+				}
+			}
+		}
 	</script>
 </body>
 </html>
