@@ -1,0 +1,204 @@
+body {
+	background-image: url('background.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#titleRectangle {
+	position: relative;
+    background: rgba(241, 190, 72, 0.897);
+	border-radius: 25px;
+}
+
+#titleText {
+	font-family: Lucida Handwriting;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 90px;
+	font-size: 45px;
+	color: black;
+}
+
+#articlesRectangle{
+	position: relative;
+    background: rgba(241, 190, 72, 0.774);
+	display: grid;
+	place-items: left;
+	border-radius: 25px;
+}
+
+#buyersText {
+	color: black;
+	font-family: Lucida Handwriting;
+	text-align: left;
+	font-size: 40px;
+}
+
+.searchText {
+	color: black;
+	font-weight: bold;
+	padding-right: 13px;
+	font-size: 13pt;
+}
+
+.inputBoxes {
+	border-radius: 15px;
+	text-align: left;
+	height: 20px;
+	background-color: rgb(199, 207, 199);
+	font-size: 13pt;
+}
+
+.dropdownBoxes {
+	border-radius: 15px;
+	text-align: left;
+	height: 33px;
+	width: 165px;
+	background-color: rgb(199, 207, 199);
+	font-size: 13pt;
+	cursor: pointer;
+}
+
+input, select {
+	padding: 5px;
+    margin: 1px;
+}
+
+#searchIcon {
+	width: 27px;
+	height: 27px;
+	position: relative;
+	top: 14px;
+	right: 2px;
+}
+
+#articlesTable {
+	border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-family: Georgia, serif;
+	text-align: center;
+	background-color: rgba(199, 207, 199, 0.76);
+	color: black;
+	font-size: 12pt;
+    margin: 10px;
+}
+
+td, th {
+	padding: 15px;
+	border-bottom: 1px solid rgb(177, 135, 38);
+}
+
+tr.selected {
+	background: lightblue;
+}
+
+tr {
+	cursor: pointer;
+}
+
+.menuBtns {
+	color: black;
+	font-weight: 200;
+	background-color: rgb(241, 190, 72);
+	width: 110px;
+	height: 40px;
+	font-size: 15px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-weight: bold;
+	float: right;
+	margin-top: 0.5%;
+	margin-right: 1%;
+	cursor: pointer;
+}
+
+#profileRectangle{
+	position: relative;
+    background: rgba(241, 190, 72, 0.774);
+	display: grid;
+	place-items: left;
+	border-radius: 25px;
+    padding-bottom: 100px;
+}
+
+.container {
+    display: block;
+    width: auto;
+}
+
+.container-pic {
+    display: block;
+    background: rgba(199, 207, 199, 0.76);
+    width: 210px;
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+    border-radius: 25px;
+    float: left;
+    height: 210px;
+    border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+}
+
+.container-data {
+    display: block;
+    background: rgba(199, 207, 199, 0.76);
+    width: 68.4%;
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    border-radius: 25px;
+    float: left;
+    height: 210px;
+    border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+}
+
+.container .labels {
+    float: left;
+    padding-right: 10px;
+    line-height: 1.35;
+}
+
+.container .datas {
+    float: left;
+}
+
+.label {
+    color: black;
+	font-size: 19.5pt;
+    padding-bottom: 5px;
+    margin: 5px;
+    height: 20px;
+}
+
+
+.location {
+    display: block;
+	border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-family: Georgia, serif;
+	text-align: center;
+	background-color: rgba(199, 207, 199, 0.76);
+	color: black;
+	font-size: 12pt;
+    margin: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}

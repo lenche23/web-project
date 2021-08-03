@@ -56,17 +56,17 @@
 			<thead>
 				<tr>
 					<th>Logo</th>
-					<th>Naziv</th>
-					<th>Lokacija</th>
+					<th onclick="sortTable(0)">Naziv</th>
+					<th onclick="sortTable(1)">Lokacija</th>
 					<th>Tip</th>
-					<th>Ocena</th>
+					<th onclick="sortTable(3)">Ocena</th>
 					<th>Otvoren</th>
 				</tr>
 			</thead>
 
 			<tbody id="tableBody">
 				<tr>
-					<td><img class="photo" src="restaurant1.jpg" alt="Slika" /></td>
+					<td><img class="photo" src="chinese.png" alt="Slika"/></td>
 					<td>Restoran 1</td>
 					<td>Batutova 5, Beograd, Srbija</td>
 					<td>Kineski</td>
@@ -74,7 +74,7 @@
 					<td>Da</td>
 				</tr>
 				<tr>
-					<td><img class="photo" src="restaurant2.jpg" alt="Slika" /></td>
+					<td><img class="photo" src="italian.png" alt="Slika" /></td>
 					<td>Restoran 2</td>
 					<td>Cara Dušana 2, Novi Sad, Srbija</td>
 					<td>Italijanski</td>
@@ -82,7 +82,7 @@
 					<td>Da</td>
 				</tr>
 				<tr>
-					<td><img class="photo" src="restaurant3.jpg" alt="Slika" /></td>
+					<td><img class="photo" src="barbeque.png" alt="Slika" /></td>
 					<td>Restoran 3</td>
 					<td>Vlaška 23, Zagreb, Hrvatska</td>
 					<td>Roštilj</td>
@@ -116,6 +116,44 @@
 			            $(this).addClass("selected");
 			});
 		});
+
+		function sortTable(n) {
+			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+			table = document.getElementById("restaurantsTable");
+			switching = true;
+			dir = "asc";
+			while (switching) {
+				switching = false;
+				rows = table.rows;
+				for (i = 1; i < (rows.length - 1); i++) {
+					shouldSwitch = false;
+					x = rows[i].getElementsByTagName("TD")[n];
+					y = rows[i + 1].getElementsByTagName("TD")[n];
+
+					if (dir == "asc") {
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					} else if (dir == "desc") {
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+				}
+				if (shouldSwitch) {
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					switchcount ++;
+				} else {
+					if (switchcount == 0 && dir == "asc") {
+						dir = "desc";
+						switching = true;
+					}
+				}
+			}
+	}
 	</script>
 </body>
 </html>
