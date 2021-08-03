@@ -186,7 +186,6 @@ tr {
     height: 20px;
 }
 
-
 .location {
     display: block;
 	border-spacing: 0px;
@@ -201,4 +200,21 @@ tr {
 	font-size: 12pt;
     margin: 10px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.navBtn {
+	color: black;
+	font-weight: 200;
+	background-color: rgb(241, 190, 72);
+	width: 200px;
+	height: 40px;
+	font-size: 15px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-weight: bold;
+	float: none;
+	cursor: pointer;
+	margin: 5px;
 }

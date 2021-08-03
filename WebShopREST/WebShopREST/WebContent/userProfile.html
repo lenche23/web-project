@@ -12,48 +12,87 @@
     <div id="profileRectangle">
         <div>
 			<br>
-			<label id="promoText">Petar Petrović</label>
+            <button id="changeBtn">Izmeni profil</button>
+			<label id="promoText">&nbspPetar Petrović</label>
 		</div>
-        <div class="container">
-            <div class="container-pic">
-                <img src="user-pic.svg"/>
-            </div>
-            <div class="container-data">
-                <div class="labels">
-                    <label class="label">Ime:</label>
-                    <br>
-                    <label class="label">Prezime:</label>
-                    <br>
-                    <label class="label">Korisničko ime:</label>
-                    <br>
-                    <label class="label">Datum rođenja:</label>
-                    <br>
-                    <label class="label">Pol:</label>
-                </div>
-                <div class=datas>
-                    <input class="inputBoxes" type="text" value="Petar" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="Petrović" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="petar" disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="15.2.1993." disabled />
-                    <br>
-                    <input class="inputBoxes" type="text" value="Muško" disabled />
-                </div>
-                <div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <button id="changeBtn">Izmeni profil</button>
-                </div>
-                <div style="clear: both; margin-top: 80px;"><label style="color: grey; font-size: 15pt;" class="label">Da biste izmenili lozinku, idite na "Izmeni profil"</label></div>
-            </div>
+        <table class="container">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <th>
+                    <td>
+                        <div class="container-pic">
+                            <img src="user-pic.svg"/>
+                        </div>
+                    </td>
+                </th>
+                <th>
+                    <td>
+                        <div class="container-data-labels">
+                            <label class="label">Ime:</label>
+                            <br>
+                            <label class="label">Prezime:</label>
+                            <br>
+                            <label class="label">Korisničko<nobr> ime:</label>
+                            <br>
+                            <label class="label">Datum rođenja:</label>
+                            <br>
+                            <label class="label">Pol:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container-data-data">
+                            <input class="inputBoxes" type="text" value="Petar" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="Petrović" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="petar" disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="15.2.1993." disabled />
+                            <br>
+                            <input class="inputBoxes" type="text" value="Muško" disabled />
+                        </div>
+                    </td>  
+                </th>
+            </tbody>
+        </table>
+        <div>
+            <br>
+			<label id="promoText">&nbspMoje porudžbine</label>
+            <br>
+            <br>
         </div>
+        <div style="padding-left: 3%; padding-top: 15px;">
+			<label style="padding-right: 40px"  class="searchText">Filter:</label>
+			<input type="checkbox" style="margin-left: 18px; cursor: pointer;"/>
+			<label style="color: black; font-weight: bold; font-size: 13pt;">Nedostavljene porudžbine</label>
+		</div>
+        <table id="articlesTable">
+			<thead>
+				<tr>
+                    <th>ID</th>
+					<th>Artikli</th>
+					<th>Datum i vreme porudžbine</th>
+					<th>Cena</th>
+                    <th>Kupac</th>
+                    <th>Status</th>
+				</tr>
+			</thead>
+			<tbody id="tableBody">
+				<tr>
+					<td>1234567891</td>
+					<td>Špagete sa ćuftama, Kečap</td>
+					<td>01.01.2021. 13:30</td>
+					<td>429.99</td> 
+					<td>Milica Tomić</td>
+					<td>Dostavljena</td>
+				</tr>
+			</tbody>
+		</table>
     </div>
 
     <script>

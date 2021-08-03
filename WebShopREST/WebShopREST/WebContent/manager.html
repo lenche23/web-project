@@ -38,6 +38,10 @@
                 </div>
             </div>
         </div>
+		<div style="text-align: center; float: left;">
+			<button class="navBtn" id="addArticle">Dodaj artikal</button>
+			<button class="navBtn" id="updateArticle">Izmeni artikal</button>
+		</div>
 		<div style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
 			<input class="inputBoxes" type="text" placeholder="Naziv artikla" />
@@ -115,6 +119,12 @@
 			});
 			$('#profile').click(function(){
 				window.location.href='userProfile.html';
+			});
+			$('#addArticle').click(function(){
+				window.location.href='articleAdd.html';
+			});
+			$('#updateArticle').click(function(){
+				window.location.href='articleUpdate.html';
 			});
 
 			$("#tableBody tr").click(function() {

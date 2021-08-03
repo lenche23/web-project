@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="articleAdd.css"/>
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<header id="titleRectangle">
+		<h1 id="titleText">WebShop</h1>
+	</header>
+	<div class="container">
+        <div class="text">Kreiranje Artikla</div>
+        <form action="#">
+            <div class="data">
+                <label>Naziv *</label>
+                <input type="text" required/>
+            </div>
+            <div class="data">
+                <label>Cena *</label>
+                <input type="text" required/>
+            </div>
+            <div class="data">
+                <label>Tip *</label>
+                <select style="cursor: pointer;" required>
+					<option value="">Izaberi tip artikla</option>
+					<option value="1">Jelo</option>
+					<option value="2">Piće</option>
+				</select>
+            </div>
+            <div class="data">
+                <label>Logo *</label>
+                <input type='file' required/>
+            </div>
+            <div class="data">
+                <label>Opis</label>
+                <input type="text"/>
+            </div>      
+            <div class="data">
+                <label>Količina</label>
+                <input type="text"/>
+            </div>
+            <div class="btn">
+                <div class="inner"></div>
+                <button type="submit">Kreiraj</button>
+            </div>
+        </form>
+    </div>
+    <div style="min-height: 20px;"></div>
+</body>
+</html>

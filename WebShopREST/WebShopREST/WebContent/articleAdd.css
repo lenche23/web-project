@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing:  border-box;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 25px;
+}
+
+body {
+	background-image: url('background.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#titleRectangle {
+	position: relative;
+    background: rgba(241, 190, 72, 0.897);
+	border-radius: 25px;
+	margin: 20px;
+}
+
+#titleText {
+	font-family: Lucida Handwriting;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 90px;
+	font-size: 45px;
+	color: black;
+}
+
+.container {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.container {
+    display: block;
+    background: #fff;
+    width: 410px;
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.container .text {
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+}
+
+.container form {
+    margin-top: -20px;
+}
+
+.container form .data {
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+    color: black;
+}
+
+form .data label {
+    font-size: 18px;
+}
+
+form .data input {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
+}
+
+form .data input:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
+}
+
+form .data select {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
+}
+
+form .data select:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
+}
+
+form .btn {
+    margin: 5px 0;
+    height: 45px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+form .btn .inner {
+    height: 100%;
+    width: 300%;
+    position: absolute;
+    left: -100%;
+    z-index: -1;
+    transition: all 0.4s;
+    background: -webkit-linear-gradient(right, rgba(199, 207, 199, 0.76), rgb(241, 190, 72), rgba(199, 207, 199, 0.76), rgb(241, 190, 72));
+}
+
+form .btn:hover .inner{
+    left: 0;
+}
+
+form .btn button {
+    height: 100%;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
