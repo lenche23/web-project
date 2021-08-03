@@ -2,63 +2,50 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="updateProfile.css"/>
+	<link rel="stylesheet" type="text/css" href="articleAdd.css"/>
 	<script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
-    <header id="titleRectangle">
+	<header id="titleRectangle">
 		<h1 id="titleText">WebShop</h1>
 	</header>
-    <div id="profileRectangle">
-        <div>
-			<br>
-			<label id="promoText">Petar Petrović</label>
-		</div>
-        <div class="container">
-            <div class="container-pic">
-                <img src="user-pic.svg"/>
+	<div class="container">
+        <div class="text">Izmeni Profil</div>
+        <form action="#">
+            <div class="data">
+                <label>Korisničko ime *</label>
+                <input type="text" value="petar" required/>
             </div>
-            <div class="container-data">
-                <div class="labels">
-                    <label class="label">Ime:</label>
-                    <br>
-                    <label class="label">Prezime:</label>
-                    <br>
-                    <label class="label">Korisničko ime:</label>
-                    <br>
-                    <label class="label">Lozinka:</label>
-                    <br>
-                    <label class="label">Datum rođenja:</label>
-                    <br>
-                    <label class="label">Pol:</label>
-                </div>
-                <div class=datas>
-                    <input class="inputBoxes" type="text" value="Petar"/>
-                    <br>
-                    <input class="inputBoxes" type="text" value="Petrović"/>
-                    <br>
-                    <input class="inputBoxes" type="text" value="petar"/>
-                    <br>
-                    <input class="inputBoxes" type="text" value="pera"/>
-                    <br>
-                    <input class="inputBoxes" type="text" value="15.2.1993."/>
-                    <br>
-                    <input class="inputBoxes" type="text" value="Muško"/>
-                </div>
-                <div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <button id="changeBtn">Sačuvaj izmene</button>
-                </div>
+            <div class="data">
+                <label>Ime *</label>
+                <input type="text" value="Petar" required/>
             </div>
-        </div>
+            <div class="data">
+                <label>Prezime *</label>
+                <input type="text" value="Petrović" required/>
+            </div>
+            <div class="data">
+                <label>Pol *</label>
+                <select style="cursor: pointer;" required>
+					<option value="">Izaberi pol</option>
+					<option value="1" selected>Muško</option>
+					<option value="2">Žensko</option>
+				</select>
+            </div>
+            <div class="data">
+                <label>Datum rođenja *</label>
+                <input type='date' value="15/02/1993" required/>
+            </div>
+            <div class="data">
+                <label>Lozinka</label>
+                <input type="password" value="petar"/>
+            </div>      
+            <div class="btn">
+                <div class="inner"></div>
+                <button type="submit">Sačuvaj izmene</button>
+            </div>
+        </form>
     </div>
+    <div style="min-height: 20px;"></div>
 </body>
 </html>

@@ -1,3 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing:  border-box;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 25px;
+}
+
 body {
 	background-image: url('background.jpg');
     background-attachment: fixed;
@@ -9,6 +18,7 @@ body {
 	position: relative;
     background: rgba(241, 190, 72, 0.897);
 	border-radius: 25px;
+	margin: 20px;
 }
 
 #titleText {
@@ -20,96 +30,100 @@ body {
 	color: black;
 }
 
-#promoText {
-	color: black;
-	font-family: Lucida Handwriting;
-	text-align: left;
-	font-size: 40px;
-    margin-left: 30px;
-}
-
-#profileRectangle{
-	position: relative;
-    background: rgba(241, 190, 72, 0.774);
-	display: grid;
-	place-items: left;
-	border-radius: 25px;
-    padding-bottom: 100px;
-}
-
-#changeBtn {
-	color: black;
-	font-weight: 200;
-	background-color: rgb(241, 190, 72);
-	width: 160px;
-	height: 40px;
-	font-size: 15px;
-	border-style: ridge;
-	border-radius: 15px;
-	border-color: rgb(214, 164, 45);
-	border-width: 3px;
-	font-weight: bold;
-	float: left;
-	margin-top: 0.5%;
-	margin-left: 30px;
-	cursor: pointer;
+.container {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .container {
     display: block;
-    width: auto;
-}
-
-.container-pic {
-    display: block;
-    background: rgba(199, 207, 199, 0.76);
-    width: 210px;
+    background: #fff;
+    width: 410px;
     padding: 30px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    margin: 30px;
-    border-radius: 25px;
-    float: left;
-    height: 210px;
 }
 
-.container-data {
-    display: block;
-    background: rgba(199, 207, 199, 0.76);
-    width: 68.4%;
-    padding: 30px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-right: 30px;
-    border-radius: 25px;
-    float: left;
-    height: 210px;
-    
-}
-
-.container .labels {
-    float: left;
-    padding-right: 10px;
-    line-height: 1.35;
-}
-
-.container .datas {
-    float: left;
-}
-
-.label {
+.container .text {
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
     color: black;
-	font-size: 19.5pt;
-    padding-bottom: 5px;
-    margin: 5px;
-    height: 20px;
 }
 
-.inputBoxes {
-	border-radius: 15px;
-	text-align: left;
-	height: 20px;
-	background-color: rgb(199, 207, 199);
-	font-size: 17pt;
-    margin: 5px;
+.container form {
+    margin-top: -20px;
 }
+
+.container form .data {
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+    color: black;
+}
+
+form .data label {
+    font-size: 18px;
+}
+
+form .data input {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
+}
+
+form .data input:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
+}
+
+form .data select {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
+}
+
+form .data select:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
+}
+
+form .btn {
+    margin: 5px 0;
+    height: 45px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+form .btn .inner {
+    height: 100%;
+    width: 300%;
+    position: absolute;
+    left: -100%;
+    z-index: -1;
+    transition: all 0.4s;
+    background: -webkit-linear-gradient(right, rgba(199, 207, 199, 0.76), rgb(241, 190, 72), rgba(199, 207, 199, 0.76), rgb(241, 190, 72));
+}
+
+form .btn:hover .inner{
+    left: 0;
+}
+
+form .btn button {
+    height: 100%;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
