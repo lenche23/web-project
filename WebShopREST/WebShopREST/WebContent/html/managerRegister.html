@@ -2,47 +2,47 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="articleAdd.css"/>
-	<script src="jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/managerRegister.css"/>
+	<script src="../jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
 		<h1 id="titleText">WebShop</h1>
 	</header>
-	<div class="container">
-        <div class="text">Izmeni Profil</div>
+    <div class="container">
+        <div class="text">Registracija Menadžera</div>
         <form action="#">
             <div class="data">
                 <label>Korisničko ime *</label>
-                <input type="text" value="petar" required/>
+                <input type="text" required/>
+            </div>
+            <div class="data">
+                <label>Lozinka *</label>
+                <input type="password" required/>
             </div>
             <div class="data">
                 <label>Ime *</label>
-                <input type="text" value="Petar" required/>
+                <input type="text" required/>
             </div>
             <div class="data">
                 <label>Prezime *</label>
-                <input type="text" value="Petrović" required/>
+                <input type="text" required/>
             </div>
             <div class="data">
                 <label>Pol *</label>
                 <select style="cursor: pointer;" required>
-					<option value="">Izaberi pol</option>
-					<option value="1" selected>Muško</option>
-					<option value="2">Žensko</option>
-				</select>
+                	<option value="">Izaberi pol</option>
+                    <option value="1">Muški</option>
+                    <option value="2">Ženski</option>
+                </select>
             </div>
             <div class="data">
                 <label>Datum rođenja *</label>
-                <input type='date' value="15/02/1993" required/>
+                <input style="cursor: pointer;" type="date" required/>
             </div>
-            <div class="data">
-                <label>Lozinka</label>
-                <input type="password" value="petar"/>
-            </div>      
             <div class="btn">
                 <div class="inner"></div>
-                <button type="submit">Sačuvaj izmene</button>
+                <button type="submit">Registruj</button>
             </div>
         </form>
     </div>
