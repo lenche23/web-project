@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/index.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/index.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -56,10 +57,10 @@
 			<thead>
 				<tr>
 					<th>Logo</th>
-					<th onclick="sortTable(0)">Naziv</th>
-					<th onclick="sortTable(1)">Lokacija</th>
+					<th onclick="sortTable(1)">Naziv</th>
+					<th onclick="sortTable(2)">Lokacija</th>
 					<th>Tip</th>
-					<th onclick="sortTable(3)">Ocena</th>
+					<th onclick="sortTable(4)">Ocena</th>
 					<th>Otvoren</th>
 				</tr>
 			</thead>
@@ -67,7 +68,7 @@
 			<tbody id="tableBody">
 				<tr>
 					<td><img class="photo" src="../images/chinese.png" alt="Slika"/></td>
-					<td>Restoran 1</td>
+					<td>Chinese wonderland</td>
 					<td>Batutova 5, Beograd, Srbija</td>
 					<td>Kineski</td>
 					<td>4.5</td>
@@ -75,7 +76,7 @@
 				</tr>
 				<tr>
 					<td><img class="photo" src="../images/italian.png" alt="Slika" /></td>
-					<td>Restoran 2</td>
+					<td>Italian wonderland</td>
 					<td>Cara Dušana 2, Novi Sad, Srbija</td>
 					<td>Italijanski</td>
 					<td>4.0</td>
@@ -83,7 +84,7 @@
 				</tr>
 				<tr>
 					<td><img class="photo" src="../images/barbeque.png" alt="Slika" /></td>
-					<td>Restoran 3</td>
+					<td>Roštiljnica</td>
 					<td>Vlaška 23, Zagreb, Hrvatska</td>
 					<td>Roštilj</td>
 					<td>-</td>
@@ -92,68 +93,5 @@
 			</tbody>
 		</table>
 	</div>
-
-	<script>
-		$(document).ready(function(){
-			$('#profileBtn').click(function(){
-				// if (korisnik ulogovan) {
-					window.location.href='userProfile.html';
-				// } else {
-				// 	window.location.href='login.html';
-				// }
-			});
-			$('#registerBtn').click(function(){
-				window.location.href='register.html';
-			});
-			$('#loginBtn').click(function(){
-				window.location.href='login.html';
-			});
-			
-			$("#tableBody tr").click(function() {
-			    var selected = $(this).hasClass("selected");
-			    $("#tableBody tr").removeClass("selected");
-			    if(!selected)
-			            $(this).addClass("selected");
-			});
-		});
-
-		function sortTable(n) {
-			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-			table = document.getElementById("restaurantsTable");
-			switching = true;
-			dir = "asc";
-			while (switching) {
-				switching = false;
-				rows = table.rows;
-				for (i = 1; i < (rows.length - 1); i++) {
-					shouldSwitch = false;
-					x = rows[i].getElementsByTagName("TD")[n];
-					y = rows[i + 1].getElementsByTagName("TD")[n];
-
-					if (dir == "asc") {
-						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-							shouldSwitch = true;
-							break;
-						}
-					} else if (dir == "desc") {
-						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-							shouldSwitch = true;
-							break;
-						}
-					}
-				}
-				if (shouldSwitch) {
-					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-					switching = true;
-					switchcount ++;
-				} else {
-					if (switchcount == 0 && dir == "asc") {
-						dir = "desc";
-						switching = true;
-					}
-				}
-			}
-		}
-	</script>
 </body>
 </html>

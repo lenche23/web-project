@@ -1,21 +1,60 @@
-$(document).ready(function() {
-	$('#forma').submit(function(event) {
-		event.preventDefault();
-		let name = $('input[name="username"]').val();
-		let price = $('input[name="password"]').val();
-		$('#error').hide();
-		$.post({
-			url: 'rest/products',
-			data: JSON.stringify({username: username, password: password}),
-			contentType: 'application/json',
-			success: function(product) {
-				$('#success').text('Novi proizvod uspešno kreiran.');
-				$("#success").show().delay(3000).fadeOut();
-			},
-			error: function(message) {
-				$('#error').text(message);
-				$("#error").show().delay(3000).fadeOut();
-			}
+$(document).ready(function(){
+			$('#profileBtn').click(function(){
+				// if (korisnik ulogovan) {
+					window.location.href='userProfile.html';
+				// } else {
+				// 	window.location.href='login.html';
+				// }
+			});
+			$('#registerBtn').click(function(){
+				window.location.href='register.html';
+			});
+			$('#loginBtn').click(function(){
+				window.location.href='login.html';
+			});
+			
+			$("#tableBody tr").click(function() {
+			    var selected = $(this).hasClass("selected");
+			    $("#tableBody tr").removeClass("selected");
+			    if(!selected)
+			            $(this).addClass("selected");
+			});
 		});
-	});
-});
+
+		function sortTable(n) {
+			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+			table = document.getElementById("restaurantsTable");
+			switching = true;
+			dir = "asc";
+			while (switching) {
+				switching = false;
+				rows = table.rows;
+				for (i = 1; i < (rows.length - 1); i++) {
+					shouldSwitch = false;
+					x = rows[i].getElementsByTagName("TD")[n];
+					y = rows[i + 1].getElementsByTagName("TD")[n];
+
+					if (dir == "asc") {
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					} else if (dir == "desc") {
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+				}
+				if (shouldSwitch) {
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					switchcount ++;
+				} else {
+					if (switchcount == 0 && dir == "asc") {
+						dir = "desc";
+						switching = true;
+					}
+				}
+			}
+		}
