@@ -1,7 +1,6 @@
 package beans;
 
 public enum RestaurantStatus {
-
-	OPENED,
+	OPEN,
 	CLOSED
 }

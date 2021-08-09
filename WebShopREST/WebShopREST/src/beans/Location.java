@@ -2,8 +2,8 @@ package beans;
 
 public class Location {
 
-	private double width;
 	private double length;
+	private double width;
 	private String address;
 	
 	public Location() {
@@ -75,10 +75,10 @@ public class Location {
 		return "Location [width=" + width + ", length=" + length + ", address=" + address + "]";
 	}
 
-	public Location(double width, double length, String address) {
+	public Location(double length, double width, String address) {
 		super();
-		this.width = width;
 		this.length = length;
+		this.width = width;
 		this.address = address;
 	}
 	

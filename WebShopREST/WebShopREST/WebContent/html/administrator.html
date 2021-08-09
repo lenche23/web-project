@@ -47,6 +47,7 @@
 			<button class="administratorBtns">Obriši korisnika</button>
 			<button class="administratorBtns" id="delivererAdd">Dodaj dobavljača</button>
 			<button class="administratorBtns" id="managerAdd">Dodaj menadžera</button>
+			<button class="administratorBtns" id="restaurantAdd">Dodaj restoran</button>
 		</div>
 		<div style="height: 50px;"></div>
 		<table id="usersTable">
@@ -134,6 +135,9 @@
 			});
 			$('#managerAdd').click(function(){
 				window.location.href='managerRegister.html';
+			});
+			$('#restaurantAdd').click(function(){
+				window.location.href='restaurantAdd.html';
 			});
 			
 			$("#tableBody tr").click(function() {

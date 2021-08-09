@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/restaurantAdd.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/restaurantAdd.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -11,14 +12,14 @@
 	</header>
 	<div class="container">
         <div class="text">Kreiranje Restorana</div>
-        <form action="#">
+        <form id="forma" action="#">
             <div class="data">
                 <label>Naziv *</label>
-                <input type="text" required/>
+                <input id="name" type="text" required/>
             </div>
             <div class="data">
                 <label>Tip *</label>
-                <select style="cursor: pointer;" required>
+                <select id="type" style="cursor: pointer;" required>
 					<option value="">Izaberi tip restorana</option>
 					<option value="1">Kineski</option>
 					<option value="2">Italijanski</option>
@@ -26,12 +27,20 @@
 				</select>
             </div>
             <div class="data">
-                <label>Lokacija *</label>
-                <input type="text" required/>
+                <label>Adresa *</label>
+                <input id="location" type="text" required/>
+            </div>
+            <div class="data">
+                <label>Geografska dužina *</label>
+                <input id="length" type="text" required/>
+            </div>
+            <div class="data">
+                <label>Geografska širina *</label>
+                <input id="width" type="text" required/>
             </div>
             <div class="data">
                 <label>Logo *</label>
-                <input type='file' required/>
+                <input id="logo" type='file' required/>
             </div>
             <div class="data">
                 <label>Menadžer *</label>
@@ -39,11 +48,12 @@
                     <option value="">Izaberi menadžera</option>
                     <option value="1">pero</option>
                     <option value="2">marija</option>
+                	<option value="3">lazo</option>
                 </select>
             </div>
             <div class="btn">
                 <div class="inner"></div>
-                <button type="submit">Kreiraj</button>
+                <button type="button" id="submit">Kreiraj</button>
             </div>
         </form>
     </div>
