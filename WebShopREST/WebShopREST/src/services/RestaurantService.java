@@ -28,8 +28,7 @@ public class RestaurantService {
 	@PostConstruct
 	public void init() {
 		if (request.getAttribute("restaurantDAO") == null) {
-	    	String contextPath = request.getRealPath("");
-	    	request.getSession().setAttribute("restaurantDAO", new RestaurantDAO(contextPath));
+	    	request.getSession().setAttribute("restaurantDAO", new RestaurantDAO());
 		}
 	}
 	

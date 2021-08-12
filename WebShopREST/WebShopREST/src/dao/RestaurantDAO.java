@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -22,11 +20,6 @@ public class RestaurantDAO {
 	private String pathToRepository;
 	
 	public RestaurantDAO() {
-		allRestaurants = new ArrayList<>();
-		pathToRepository = "";
-	}
-	
-	public RestaurantDAO(String contextPath) {
 		allRestaurants = new ArrayList<>();
 		pathToRepository = "WebContent/Repository/";
 		loadRestaurants();
