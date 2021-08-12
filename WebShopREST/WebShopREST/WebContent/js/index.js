@@ -21,6 +21,14 @@ $(document).ready(function(){
 	    if(!selected)
 	            $(this).addClass("selected");
 	});
+	
+	$("#filterType").change(function() {
+		filterByType();
+	});
+	
+	$("#filterOpen").change(function() {
+		filterOpen();
+	});
 });
 
 function loadRestaurants() {
@@ -92,3 +100,29 @@ function sortTable(n) {
 	}
 }
 
+function filterByType() {
+	let type = $('#filterType').val();
+	$.get({
+		url: '../rest/restaurants/filterByType?filterType=' + type,
+		success: function(restaurants){
+			removeRestaurantsFromTable();
+			for(let restaurant of restaurants)
+				addRestaurantToTable(restaurant);
+		}
+	})
+}
+
+function removeRestaurantsFromTable() {
+	$('#tableBody').empty();
+}
+
+function filterOpen() {
+	$.get({
+		url: '../rest/restaurants/filterOpen',
+		success: function(restaurants){
+			removeRestaurantsFromTable();
+			for(let restaurant of restaurants)
+				addRestaurantToTable(restaurant);
+		}
+	})
+}

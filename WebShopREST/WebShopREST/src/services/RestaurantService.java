@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -51,5 +52,21 @@ public class RestaurantService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@GET
+	@Path("/filterByType")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Restaurant> getRestaurantsByType(@QueryParam("filterType") String type) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) request.getSession().getAttribute("restaurantDAO");
+		return restaurantDAO.getRestaurantsByType(type);
+	}
+	
+	@GET
+	@Path("/filterOpen")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Restaurant> getOpenRestaurants() {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) request.getSession().getAttribute("restaurantDAO");
+		return restaurantDAO.getOpenRestaurants();
 	}
 }

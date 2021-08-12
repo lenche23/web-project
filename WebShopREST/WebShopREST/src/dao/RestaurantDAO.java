@@ -28,6 +28,27 @@ public class RestaurantDAO {
 	public ArrayList<Restaurant> getAllRestaurants() {
 		return allRestaurants;
 	}
+	
+	public ArrayList<Restaurant> getRestaurantsByType(String type) {
+		if(type.equals("0"))
+			return allRestaurants;
+		
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+		for(int i = 0; i < allRestaurants.size(); i++) {
+			if(allRestaurants.get(i).getType().equals(type))
+				restaurants.add(allRestaurants.get(i));
+		}
+		return restaurants;
+	}
+	
+	public ArrayList<Restaurant> getOpenRestaurants() {
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+		for(int i = 0; i < allRestaurants.size(); i++) {
+			if(RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
+				restaurants.add(allRestaurants.get(i));
+		}
+		return restaurants;
+	}
 
 	public void loadRestaurants() {
 		JSONParser jsonParser = new JSONParser();
@@ -69,7 +90,7 @@ public class RestaurantDAO {
     }
 	
 	public void saveRestaurant(Restaurant restaurant) throws IOException {
-		restaurant.setStatus(RestaurantStatus.OPEN);
+		restaurant.setStatus(RestaurantStatus.CLOSED);
 		restaurant.setDeleted(false);
 		allRestaurants.add(restaurant);
 		System.out.print(pathToRepository + "restaurants.json");

@@ -25,31 +25,24 @@
 			<label class="searchText">Pretraga:</label>
 			<input class="inputBoxes" type="text" placeholder="Naziv restorana">
 			<input class="inputBoxes" type="text" placeholder="Lokacija restorana">
+			<input class="inputBoxes" type="text" placeholder="Ocena restorana">
 			<select class="dropdownBoxes">
-				<option>Tip restorana</option>
-				<option>Kineski</option>
-				<option>Italijanski</option>
-				<option>Roštilj</option>
-			</select>
-			<select class="dropdownBoxes">
-				<option>Izaberi ocenu</option>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
+				<option selected="selected" value="">Tip restorana</option>
+				<option value="1">Kineski</option>
+				<option value="2">Italijanski</option>
+				<option value="3">Roštilj</option>
 			</select>
 			<input id="searchIcon" type="image" src="../images/searchIcon.png" />
 		</div>
 		<div style="padding-left: 3%; padding-top: 15px;">
 			<label style="padding-right: 40px"  class="searchText">Filter:</label>
-			<select class="dropdownBoxes" name="select_1" >
+			<select id="filterType" class="dropdownBoxes" name="filterType" >
 				<option selected="selected" value="0">Tip restorana</option>
-				  <option value="1">Kineski</option>
-				  <option value="2">Italijanski</option>
-				  <option value="3">Roštilj</option>
+				<option value="1">Kineski</option>
+				<option value="2">Italijanski</option>
+				<option value="3">Roštilj</option>
 			</select>
-			<input type="checkbox" style="margin-left: 18px; cursor: pointer;"/>
+			<input type="checkbox" id="filterOpen" style="margin-left: 18px; cursor: pointer;"/>
 			<label style="color: black; font-weight: bold; font-size: 13pt;" >Otvoren</label>
 		</div>
 		<div style="height: 50px;"></div>
