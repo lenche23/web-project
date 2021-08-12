@@ -55,18 +55,10 @@ public class RestaurantService {
 	}
 	
 	@GET
-	@Path("/filterByType")
+	@Path("/filterByTypeAndOpen")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Restaurant> getRestaurantsByType(@QueryParam("filterType") String type) {
+	public ArrayList<Restaurant> getRestaurantsByType(@QueryParam("filterType") String type, @QueryParam("filterOpen") String open) {
 		RestaurantDAO restaurantDAO = (RestaurantDAO) request.getSession().getAttribute("restaurantDAO");
-		return restaurantDAO.getRestaurantsByType(type);
-	}
-	
-	@GET
-	@Path("/filterOpen")
-	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Restaurant> getOpenRestaurants() {
-		RestaurantDAO restaurantDAO = (RestaurantDAO) request.getSession().getAttribute("restaurantDAO");
-		return restaurantDAO.getOpenRestaurants();
+		return restaurantDAO.getRestaurantsByTypeAndOpen(type, open);
 	}
 }

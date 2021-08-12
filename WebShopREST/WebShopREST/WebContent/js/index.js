@@ -23,11 +23,11 @@ $(document).ready(function(){
 	});
 	
 	$("#filterType").change(function() {
-		filterByType();
+		filterByTypeAndOpen();
 	});
 	
 	$("#filterOpen").change(function() {
-		filterOpen();
+		filterByTypeAndOpen();
 	});
 });
 
@@ -100,10 +100,11 @@ function sortTable(n) {
 	}
 }
 
-function filterByType() {
+function filterByTypeAndOpen() {
 	let type = $('#filterType').val();
+	let open = $('#filterOpen').is(':checked'); 
 	$.get({
-		url: '../rest/restaurants/filterByType?filterType=' + type,
+		url: '../rest/restaurants/filterByTypeAndOpen?filterType=' + type + '&filterOpen=' + open,
 		success: function(restaurants){
 			removeRestaurantsFromTable();
 			for(let restaurant of restaurants)
@@ -114,15 +115,4 @@ function filterByType() {
 
 function removeRestaurantsFromTable() {
 	$('#tableBody').empty();
-}
-
-function filterOpen() {
-	$.get({
-		url: '../rest/restaurants/filterOpen',
-		success: function(restaurants){
-			removeRestaurantsFromTable();
-			for(let restaurant of restaurants)
-				addRestaurantToTable(restaurant);
-		}
-	})
 }

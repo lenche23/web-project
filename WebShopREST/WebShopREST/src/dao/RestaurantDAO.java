@@ -29,25 +29,32 @@ public class RestaurantDAO {
 		return allRestaurants;
 	}
 	
-	public ArrayList<Restaurant> getRestaurantsByType(String type) {
-		if(type.equals("0"))
-			return allRestaurants;
+	public ArrayList<Restaurant> getRestaurantsByTypeAndOpen(String type, String open) {
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 		
-		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		for(int i = 0; i < allRestaurants.size(); i++) {
-			if(allRestaurants.get(i).getType().equals(type))
-				restaurants.add(allRestaurants.get(i));
+		if(type.equals("0") && open.equals("false"))
+			return allRestaurants;
+		else if(!type.equals("0") && open.equals("false")) {
+			for(int i = 0; i < allRestaurants.size(); i++) {
+				if(allRestaurants.get(i).getType().equals(type))
+					restaurants.add(allRestaurants.get(i));
+			}
+			return restaurants;
 		}
-		return restaurants;
-	}
-	
-	public ArrayList<Restaurant> getOpenRestaurants() {
-		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		for(int i = 0; i < allRestaurants.size(); i++) {
-			if(RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
-				restaurants.add(allRestaurants.get(i));
+		else if(type.equals("0") && open.equals("true")) {
+			for(int i = 0; i < allRestaurants.size(); i++) {
+				if(RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
+					restaurants.add(allRestaurants.get(i));
+			}
+			return restaurants;
 		}
-		return restaurants;
+		else {
+			for(int i = 0; i < allRestaurants.size(); i++) {
+				if(allRestaurants.get(i).getType().equals(type) && RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
+					restaurants.add(allRestaurants.get(i));
+			}
+			return restaurants;
+		}
 	}
 
 	public void loadRestaurants() {
