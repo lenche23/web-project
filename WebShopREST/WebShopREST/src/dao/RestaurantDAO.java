@@ -28,8 +28,7 @@ public class RestaurantDAO {
 	
 	public RestaurantDAO(String contextPath) {
 		allRestaurants = new ArrayList<>();
-		String address[] = contextPath.split(".metadata");
-		pathToRepository = address[0] + "web-project\\WebShopREST\\WebShopREST\\WebContent\\Repository\\";
+		pathToRepository = "WebContent/Repository/";
 		loadRestaurants();
 	}
 	
@@ -40,7 +39,7 @@ public class RestaurantDAO {
 	public void loadRestaurants() {
 		JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader(pathToRepository + "restaurants.json", StandardCharsets.UTF_8))
+        try (FileReader reader = new FileReader(pathToRepository + "restaurants.json"))
         {
             Object object = jsonParser.parse(reader);
 
@@ -101,7 +100,7 @@ public class RestaurantDAO {
 	        restaurants.add(restoranObject2);
 		}
          
-        try (FileWriter file = new FileWriter(pathToRepository + "restaurants.json", Charset.forName("UTF8"))) {
+        try (FileWriter file = new FileWriter(pathToRepository + "restaurants.json")) {
             file.write(restaurants.toJSONString()); 
             file.flush();
         } catch (IOException e) {
