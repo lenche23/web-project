@@ -17,10 +17,12 @@ import beans.RestaurantStatus;
 
 public class RestaurantDAO {
 	private ArrayList<Restaurant> allRestaurants;
+	private ArrayList<Restaurant> filteredRestaurants;
 	private String pathToRepository;
 	
 	public RestaurantDAO() {
-		allRestaurants = new ArrayList<>();
+		allRestaurants = new ArrayList<Restaurant>();
+		filteredRestaurants = new ArrayList<Restaurant>();
 		pathToRepository = "WebContent/Repository/";
 		loadRestaurants();
 	}
@@ -29,32 +31,105 @@ public class RestaurantDAO {
 		return allRestaurants;
 	}
 	
-	public ArrayList<Restaurant> getRestaurantsByTypeAndOpen(String type, String open) {
-		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+	public ArrayList<Restaurant> getFilteredRestaurants(String type, String open) {
+		filteredRestaurants.clear();
 		
 		if(type.equals("0") && open.equals("false"))
 			return allRestaurants;
 		else if(!type.equals("0") && open.equals("false")) {
 			for(int i = 0; i < allRestaurants.size(); i++) {
 				if(allRestaurants.get(i).getType().equals(type))
-					restaurants.add(allRestaurants.get(i));
+					filteredRestaurants.add(allRestaurants.get(i));
 			}
-			return restaurants;
+			return filteredRestaurants;
 		}
 		else if(type.equals("0") && open.equals("true")) {
 			for(int i = 0; i < allRestaurants.size(); i++) {
 				if(RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
-					restaurants.add(allRestaurants.get(i));
+					filteredRestaurants.add(allRestaurants.get(i));
 			}
-			return restaurants;
+			return filteredRestaurants;
 		}
 		else {
 			for(int i = 0; i < allRestaurants.size(); i++) {
 				if(allRestaurants.get(i).getType().equals(type) && RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
-					restaurants.add(allRestaurants.get(i));
+					filteredRestaurants.add(allRestaurants.get(i));
 			}
-			return restaurants;
+			return filteredRestaurants;
 		}
+	}
+	
+	public ArrayList<Restaurant> getSearchedRestaurants(String name, String location, String gradeStr, String type) { 
+		ArrayList<Restaurant> restaurantsByName = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> restaurantsByNameAndLocation = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> restaurantsByNameLocationAndGrade = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> restaurantsByNameLocationGradeAndType = new ArrayList<Restaurant>();
+		if(filteredRestaurants.isEmpty()) {
+			if(name.equals("")) {
+				for(int i = 0; i < allRestaurants.size(); i++) {
+					restaurantsByName.add(allRestaurants.get(i));
+				}
+			}
+			else {
+				for(int i = 0; i < allRestaurants.size(); i++) {
+					if(allRestaurants.get(i).getName().toLowerCase().contains(name.toLowerCase()))
+						restaurantsByName.add(allRestaurants.get(i));
+				}
+			}
+		}
+		else {
+			if(name.equals("")) {
+				for(int i = 0; i < filteredRestaurants.size(); i++) {
+					restaurantsByName.add(filteredRestaurants.get(i));
+				}
+			}
+			else {
+				for(int i = 0; i < filteredRestaurants.size(); i++) {
+					if(filteredRestaurants.get(i).getName().toLowerCase().contains(name.toLowerCase()))
+						restaurantsByName.add(filteredRestaurants.get(i));
+				}
+			}
+		}
+		
+		if(location.equals("")) {
+			for(int i = 0; i < restaurantsByName.size(); i++) {
+				restaurantsByNameAndLocation.add(restaurantsByName.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < restaurantsByName.size(); i++) {
+				String[] address = restaurantsByName.get(i).getLocation().getAddress().split("\\s*,\\s*");
+				if(address[1].toLowerCase().contains(location.toLowerCase()) || address[3].toLowerCase().contains(location.toLowerCase()))
+					restaurantsByNameAndLocation.add(restaurantsByName.get(i));
+			}
+		}
+		
+		if(gradeStr.equals("")) {
+			for(int i = 0; i < restaurantsByNameAndLocation.size(); i++) {
+				restaurantsByNameLocationAndGrade.add(restaurantsByNameAndLocation.get(i));
+			}
+		}
+		else {
+			double grade = Double.parseDouble(gradeStr);
+			for(int i = 0; i < restaurantsByNameAndLocation.size(); i++) {
+				if(4.5 == grade)
+					restaurantsByNameLocationAndGrade.add(restaurantsByNameAndLocation.get(i));
+			}
+		}
+		
+		if(type.equals("0")) {
+			for(int i = 0; i < restaurantsByNameLocationAndGrade.size(); i++) {
+				restaurantsByNameLocationGradeAndType.add(restaurantsByNameLocationAndGrade.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < restaurantsByNameLocationAndGrade.size(); i++) {
+				if(restaurantsByNameLocationAndGrade.get(i).getType().equals(type))
+					restaurantsByNameLocationGradeAndType.add(restaurantsByNameLocationAndGrade.get(i));
+			}
+		}
+		
+		return restaurantsByNameLocationGradeAndType;
 	}
 
 	public void loadRestaurants() {
@@ -97,7 +172,7 @@ public class RestaurantDAO {
     }
 	
 	public void saveRestaurant(Restaurant restaurant) throws IOException {
-		restaurant.setStatus(RestaurantStatus.CLOSED);
+		restaurant.setStatus(RestaurantStatus.OPEN);
 		restaurant.setDeleted(false);
 		allRestaurants.add(restaurant);
 		System.out.print(pathToRepository + "restaurants.json");

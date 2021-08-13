@@ -23,14 +23,14 @@
 		<br>
 		<div style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
-			<input class="inputBoxes" type="text" placeholder="Naziv restorana">
-			<input class="inputBoxes" type="text" placeholder="Lokacija restorana">
-			<input class="inputBoxes" type="text" placeholder="Ocena restorana">
-			<select class="dropdownBoxes">
-				<option selected="selected" value="">Tip restorana</option>
-				<option value="1">Kineski</option>
-				<option value="2">Italijanski</option>
-				<option value="3">Roštilj</option>
+			<input id="searchName" name="searchName" class="inputBoxes" type="text" placeholder="Naziv restorana">
+			<input id="searchLocation" name="searchLocation" class="inputBoxes" type="text" placeholder="Lokacija restorana">
+			<input id="searchGrade" name="searchGrade" class="inputBoxes" type="text" placeholder="Ocena restorana">
+			<select id="searchType" name="searchType" class="dropdownBoxes">
+				<option selected="selected" value="0">Tip restorana</option>
+				<option value="Kineski">Kineski</option>
+				<option value="Italijanski">Italijanski</option>
+				<option value="Roštilj">Roštilj</option>
 			</select>
 			<input id="searchIcon" type="image" src="../images/searchIcon.png" />
 		</div>
@@ -38,11 +38,11 @@
 			<label style="padding-right: 40px"  class="searchText">Filter:</label>
 			<select id="filterType" class="dropdownBoxes" name="filterType" >
 				<option selected="selected" value="0">Tip restorana</option>
-				<option value="1">Kineski</option>
-				<option value="2">Italijanski</option>
-				<option value="3">Roštilj</option>
+				<option value="Kineski">Kineski</option>
+				<option value="Italijanski">Italijanski</option>
+				<option value="Roštilj">Roštilj</option>
 			</select>
-			<input type="checkbox" id="filterOpen" style="margin-left: 18px; cursor: pointer;"/>
+			<input type="checkbox" name="filterOpen" id="filterOpen" style="margin-left: 18px; cursor: pointer;"/>
 			<label style="color: black; font-weight: bold; font-size: 13pt;" >Otvoren</label>
 		</div>
 		<div style="height: 50px;"></div>

@@ -139,3 +139,11 @@ div button {
 	padding-right: 13px;
 	font-size: 13pt;
 }
+
+.red::placeholder { 
+   color: red;
+}
+
+.red {
+	border-color: red;
+}

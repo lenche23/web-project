@@ -23,11 +23,15 @@ $(document).ready(function(){
 	});
 	
 	$("#filterType").change(function() {
-		filterByTypeAndOpen();
+		filter();
 	});
 	
 	$("#filterOpen").change(function() {
-		filterByTypeAndOpen();
+		filter();
+	});
+	
+	$("#searchIcon").click(function() {
+		search();
 	});
 });
 
@@ -100,11 +104,11 @@ function sortTable(n) {
 	}
 }
 
-function filterByTypeAndOpen() {
+function filter() {
 	let type = $('#filterType').val();
 	let open = $('#filterOpen').is(':checked'); 
 	$.get({
-		url: '../rest/restaurants/filterByTypeAndOpen?filterType=' + type + '&filterOpen=' + open,
+		url: '../rest/restaurants/filter?filterType=' + type + '&filterOpen=' + open,
 		success: function(restaurants){
 			removeRestaurantsFromTable();
 			for(let restaurant of restaurants)
@@ -115,4 +119,27 @@ function filterByTypeAndOpen() {
 
 function removeRestaurantsFromTable() {
 	$('#tableBody').empty();
+}
+
+function search() {
+	let name = $('#searchName').val();
+	let location = $('#searchLocation').val();
+	let grade = $('#searchGrade').val();
+	let type = $('#searchType').val();
+	if(isNaN(grade)) {
+		$('#searchGrade').attr('placeholder', 'Ocena mora biti broj');
+		$('#searchGrade').addClass('red');
+	}
+	else {
+		$('#searchGrade').attr('placeholder', 'Ocena restorana');
+		$('#searchGrade').removeClass('red');
+		$.get({
+			url: '../rest/restaurants/search?searchName=' + name + '&searchLocation=' + location + '&searchGrade=' + grade + '&searchType=' + type,
+			success: function(restaurants){
+				removeRestaurantsFromTable();
+				for(let restaurant of restaurants)
+					addRestaurantToTable(restaurant);
+			}
+		})
+	}
 }

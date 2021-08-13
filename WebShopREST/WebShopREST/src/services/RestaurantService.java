@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,15 +21,15 @@ import dao.RestaurantDAO;
 public class RestaurantService {	
 	
 	@Context
-	HttpServletRequest request;
+	ServletContext ctx;
 	
 	public RestaurantService() {
 	}
 	
 	@PostConstruct
 	public void init() {
-		if (request.getAttribute("restaurantDAO") == null) {
-	    	request.getSession().setAttribute("restaurantDAO", new RestaurantDAO());
+		if (ctx.getAttribute("restaurantDAO") == null) {
+	    	ctx.setAttribute("restaurantDAO", new RestaurantDAO());
 		}
 	}
 	
@@ -37,7 +37,7 @@ public class RestaurantService {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Restaurant> getRestaurants() {
-		RestaurantDAO restaurantDAO = (RestaurantDAO) request.getSession().getAttribute("restaurantDAO");
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		return restaurantDAO.getAllRestaurants();
 	}
 	
@@ -45,7 +45,7 @@ public class RestaurantService {
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addRestaurant(Restaurant restaurant) {
-		RestaurantDAO restaurantDAO = (RestaurantDAO) request.getSession().getAttribute("restaurantDAO");
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		
 		try {
 			restaurantDAO.saveRestaurant(restaurant);
@@ -55,10 +55,18 @@ public class RestaurantService {
 	}
 	
 	@GET
-	@Path("/filterByTypeAndOpen")
+	@Path("/filter")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Restaurant> getRestaurantsByType(@QueryParam("filterType") String type, @QueryParam("filterOpen") String open) {
-		RestaurantDAO restaurantDAO = (RestaurantDAO) request.getSession().getAttribute("restaurantDAO");
-		return restaurantDAO.getRestaurantsByTypeAndOpen(type, open);
+	public ArrayList<Restaurant> getFilteredRestaurants(@QueryParam("filterType") String type, @QueryParam("filterOpen") String open) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		return restaurantDAO.getFilteredRestaurants(type, open);
+	}
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Restaurant> getSearchedRestaurants(@QueryParam("searchName") String name, @QueryParam("searchLocation") String location, @QueryParam("searchGrade") String grade, @QueryParam("searchType") String type) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		return restaurantDAO.getSearchedRestaurants(name, location, grade, type);
 	}
 }
