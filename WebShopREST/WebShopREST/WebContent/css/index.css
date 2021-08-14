@@ -142,6 +142,7 @@ div button {
 
 .red::placeholder { 
    color: red;
+   opacity: 0.6;
 }
 
 .red {
