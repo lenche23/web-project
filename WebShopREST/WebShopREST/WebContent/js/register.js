@@ -13,10 +13,7 @@ $(document).ready(function(){
 			url: "../rest/users/saveBuyer",
 			data: JSON.stringify({"firstName": firstName, "lastName": lastName, "email": email, "username": username, "password": password, "gender": gender, "dateOfBirth": dateOfBirth}),
 			contentType: 'application/json',
-			dataType: 'json',
-			success: function(){
-				alert('Done');
-			}
+			dataType: 'json'
 		});
 	});
 });

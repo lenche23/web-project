@@ -11,10 +11,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Basket;
 import beans.Buyer;
 import beans.BuyerType;
 import beans.Deliverer;
 import beans.Manager;
+import beans.Order;
 import beans.Sex;
 import beans.TypeName;
 
@@ -168,6 +170,8 @@ public class UserDAO {
 	public void saveBuyer(Buyer buyer) throws IOException {
 		buyer.setPoints(0);
 		buyer.setDeleted(false);
+		buyer.setBasket(new Basket());
+		buyer.setOrders(new ArrayList<Order>());
 		buyer.setType(new BuyerType(TypeName.BRONZE, 0, 3000));
 		allBuyers.add(buyer);
 		
