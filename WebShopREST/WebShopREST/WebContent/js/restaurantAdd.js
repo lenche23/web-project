@@ -114,10 +114,7 @@ $(document).ready(function(){
 				url: "../rest/restaurants/save",
 				data: JSON.stringify({"name": name, "type": type, "location": location, "logo": logo}),
 				contentType: 'application/json',
-				dataType: 'json',
-				success: function(){
-					alert('Done');
-				}
+				dataType: 'json'
 			});
 		}
 	});

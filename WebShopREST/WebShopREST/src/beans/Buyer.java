@@ -95,14 +95,20 @@ public class Buyer extends User {
 	public String toString() {
 		return "Buyer [orders=" + orders + ", basket=" + basket + ", points=" + points + ", type=" + type + "]";
 	}
+	
+	public Buyer(String firstName, String lastName, String email, String username, String password, Sex gender,
+			String dateOfBirth, boolean deleted, int points, BuyerType type) {
+		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted);
+		this.points = points;
+		this.type = type;
+	}
 
-	public Buyer(ArrayList<Order> orders, Basket basket, int points, BuyerType type) {
-		super();
+	public Buyer(String firstName, String lastName, String email, String username, String password, Sex gender,
+			String dateOfBirth, boolean deleted, ArrayList<Order> orders, Basket basket, int points, BuyerType type) {
+		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted);
 		this.orders = orders;
 		this.basket = basket;
 		this.points = points;
 		this.type = type;
 	}
-	
-	
 }

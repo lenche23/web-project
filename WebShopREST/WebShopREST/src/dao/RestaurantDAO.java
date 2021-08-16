@@ -175,7 +175,6 @@ public class RestaurantDAO {
 		restaurant.setStatus(RestaurantStatus.OPEN);
 		restaurant.setDeleted(false);
 		allRestaurants.add(restaurant);
-		System.out.print(pathToRepository + "restaurants.json");
 		
 		JSONArray restaurants = new JSONArray();
 		for (Restaurant r : allRestaurants) {

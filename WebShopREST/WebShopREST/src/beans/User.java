@@ -4,18 +4,35 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 	
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String username;
-	private String password;
-	private Sex gender;
-	private String dateOfBirth;
+	protected String firstName;
+	protected String lastName;
+	protected String email;
+	protected String username;
+	protected String password;
+	protected Sex gender;
+	protected String dateOfBirth;
+	protected boolean deleted;
 	
 	public User() {
+		this.firstName = "";
+		this.lastName = "";
+		this.email = "";
+		this.username = "";
+		this.password = "";
+		this.gender = Sex.FEMALE;
+		this.dateOfBirth = "";
+		this.deleted = false;
 	}
 
 	private static final long serialVersionUID = 6640936480584723344L;
+	
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -78,6 +95,7 @@ public class User implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+		result = prime * result + (deleted ? 1231 : 1237);
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
@@ -100,6 +118,8 @@ public class User implements Serializable {
 			if (other.dateOfBirth != null)
 				return false;
 		} else if (!dateOfBirth.equals(other.dateOfBirth))
+			return false;
+		if (deleted != other.deleted)
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -134,11 +154,12 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username
-				+ ", password=" + password + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + "]";
+				+ ", password=" + password + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", deleted="
+				+ deleted + "]";
 	}
 
 	public User(String firstName, String lastName, String email, String username, String password, Sex gender,
-			String dateOfBirth) {
+			String dateOfBirth, boolean deleted) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -147,7 +168,6 @@ public class User implements Serializable {
 		this.password = password;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
+		this.deleted = deleted;
 	}
-	
-
 }
