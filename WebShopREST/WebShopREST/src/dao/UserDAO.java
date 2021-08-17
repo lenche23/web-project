@@ -30,7 +30,6 @@ public class UserDAO {
 		allDeliverers = new ArrayList<Deliverer>();
 		pathToRepository = "WebContent/Repository/";
 		loadBuyers();
-		System.out.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		loadManagers();
 		loadDeliverers();
 	}
