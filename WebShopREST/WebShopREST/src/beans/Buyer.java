@@ -7,14 +7,12 @@ public class Buyer extends User {
 	private static final long serialVersionUID = 1L;
 			
 	private ArrayList<Order> orders;
-	private Basket basket;
 	private int points;
 	private BuyerType type;
 	
 	public Buyer() {
 		super();
 		this.orders = new ArrayList<Order>();
-		this.basket = new Basket();
 		this.points = 0;
 		this.type = new BuyerType();
 	}
@@ -26,15 +24,7 @@ public class Buyer extends User {
 	public void setOrders(ArrayList<Order> orders) {
 		this.orders = orders;
 	}
-
-	public Basket getBasket() {
-		return basket;
-	}
-
-	public void setBasket(Basket basket) {
-		this.basket = basket;
-	}
-
+	
 	public int getPoints() {
 		return points;
 	}
@@ -55,7 +45,6 @@ public class Buyer extends User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((basket == null) ? 0 : basket.hashCode());
 		result = prime * result + ((orders == null) ? 0 : orders.hashCode());
 		result = prime * result + points;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -71,11 +60,6 @@ public class Buyer extends User {
 		if (getClass() != obj.getClass())
 			return false;
 		Buyer other = (Buyer) obj;
-		if (basket == null) {
-			if (other.basket != null)
-				return false;
-		} else if (!basket.equals(other.basket))
-			return false;
 		if (orders == null) {
 			if (other.orders != null)
 				return false;
@@ -93,7 +77,7 @@ public class Buyer extends User {
 
 	@Override
 	public String toString() {
-		return "Buyer [orders=" + orders + ", basket=" + basket + ", points=" + points + ", type=" + type + "]";
+		return "Buyer [orders=" + orders + ", points=" + points + ", type=" + type + "]";
 	}
 	
 	public Buyer(String firstName, String lastName, String email, String username, String password, Sex gender,
@@ -107,7 +91,6 @@ public class Buyer extends User {
 			String dateOfBirth, boolean deleted, ArrayList<Order> orders, Basket basket, int points, BuyerType type) {
 		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted);
 		this.orders = orders;
-		this.basket = basket;
 		this.points = points;
 		this.type = type;
 	}

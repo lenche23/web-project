@@ -1,25 +1,25 @@
 package beans;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Basket {
 	
-	private HashMap<Article, Integer> articles;
+	private ArrayList<ArticleWithQuantity> articlesWithQuantity;
 	private Buyer buyer;
 	private double price;
 	
 	public Basket() {
-		this.articles = new HashMap<Article, Integer>();
+		this.articlesWithQuantity = new ArrayList<ArticleWithQuantity>();
 		this.buyer = new Buyer();
 		this.price = 0.0;
 	}
 
-	public HashMap<Article, Integer> getArticles() {
-		return articles;
+	public ArrayList<ArticleWithQuantity> getArticlesWithQuantity() {
+		return articlesWithQuantity;
 	}
 
-	public void setArticles(HashMap<Article, Integer> articles) {
-		this.articles = articles;
+	public void setArticlesWithQuantity(ArrayList<ArticleWithQuantity> articlesWithQuantity) {
+		this.articlesWithQuantity = articlesWithQuantity;
 	}
 
 	public Buyer getBuyer() {
@@ -42,7 +42,6 @@ public class Basket {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((articles == null) ? 0 : articles.hashCode());
 		result = prime * result + ((buyer == null) ? 0 : buyer.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
@@ -59,11 +58,6 @@ public class Basket {
 		if (getClass() != obj.getClass())
 			return false;
 		Basket other = (Basket) obj;
-		if (articles == null) {
-			if (other.articles != null)
-				return false;
-		} else if (!articles.equals(other.articles))
-			return false;
 		if (buyer == null) {
 			if (other.buyer != null)
 				return false;
@@ -76,15 +70,13 @@ public class Basket {
 
 	@Override
 	public String toString() {
-		return "Basket [articles=" + articles + ", buyer=" + buyer + ", price=" + price + "]";
+		return "Basket [buyer=" + buyer + ", price=" + price + "]";
 	}
 
-	public Basket(HashMap<Article, Integer> articles, Buyer buyer, double price) {
+	public Basket(ArrayList<ArticleWithQuantity> articlesWithQuantity, Buyer buyer, double price) {
 		super();
-		this.articles = articles;
+		this.articlesWithQuantity = articlesWithQuantity;
 		this.buyer = buyer;
 		this.price = price;
-	}
-	
-	
+	}	
 }

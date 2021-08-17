@@ -11,12 +11,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import beans.Basket;
 import beans.Buyer;
 import beans.BuyerType;
 import beans.Deliverer;
 import beans.Manager;
-import beans.Order;
 import beans.Sex;
 import beans.TypeName;
 
@@ -32,6 +30,7 @@ public class UserDAO {
 		allDeliverers = new ArrayList<Deliverer>();
 		pathToRepository = "WebContent/Repository/";
 		loadBuyers();
+		System.out.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		loadManagers();
 		loadDeliverers();
 	}
@@ -80,13 +79,13 @@ public class UserDAO {
         String gender = (String) buyerObject.get("gender");
         String dateOfBirth = (String) buyerObject.get("dateOfBirth");
         boolean deleted = (boolean) buyerObject.get("deleted");
-        int points = (int) buyerObject.get("points");
-        String typeName = (String) buyerObject.get("typeName");
-        int discount = (int) buyerObject.get("discount");
-        int pointsNeeded = (int) buyerObject.get("pointsNeeded");
+        String points = (String) buyerObject.get("points");
+        String typeName = (String) buyerObject.get("name");
+        String discount = (String) buyerObject.get("discount");
+        String pointsNeeded = (String) buyerObject.get("pointsNeeded");
         
-        BuyerType buyerType = new BuyerType(TypeName.valueOf(typeName), discount, pointsNeeded);
-        Buyer newBuyer = new Buyer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted, points, buyerType);
+        BuyerType buyerType = new BuyerType(TypeName.valueOf(typeName), Integer.parseInt(discount), Integer.parseInt(pointsNeeded));
+        Buyer newBuyer = new Buyer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted, Integer.parseInt(points), buyerType);
         
 		return newBuyer;
     }
@@ -170,8 +169,6 @@ public class UserDAO {
 	public void saveBuyer(Buyer buyer) throws IOException {
 		buyer.setPoints(0);
 		buyer.setDeleted(false);
-		buyer.setBasket(new Basket());
-		buyer.setOrders(new ArrayList<Order>());
 		buyer.setType(new BuyerType(TypeName.BRONZE, 0, 3000));
 		allBuyers.add(buyer);
 		
@@ -187,10 +184,10 @@ public class UserDAO {
 			buyerObject.put("gender", b.getGender().toString());
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
-			buyerObject.put("points", b.getPoints());
-			buyerObject.put("typeName", b.getType().getName().toString());
-			buyerObject.put("discount", b.getType().getDiscount());
-			buyerObject.put("pointsNeeded", b.getType().getPointsNeeded());
+			buyerObject.put("points", Integer.toString(b.getPoints()));
+			buyerObject.put("name", b.getType().getName().toString());
+			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
+			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
 			
 			JSONObject buyerObject2 = new JSONObject(); 
 	        buyerObject2.put("buyer", buyerObject);
