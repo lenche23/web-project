@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/managerRegister.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/managerRegister.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -14,35 +15,39 @@
         <form action="#">
             <div class="data">
                 <label>Korisničko ime *</label>
-                <input type="text" required/>
+                <input id="username" type="text"/>
+            </div>
+            <div class="data">
+                <label>Email *</label>
+                <input id="email" type="text"/>
             </div>
             <div class="data">
                 <label>Lozinka *</label>
-                <input type="password" required/>
+                <input id="password" type="password"/>
             </div>
             <div class="data">
                 <label>Ime *</label>
-                <input type="text" required/>
+                <input id="firstName" type="text"/>
             </div>
             <div class="data">
                 <label>Prezime *</label>
-                <input type="text" required/>
+                <input id="lastName" type="text"/>
             </div>
             <div class="data">
                 <label>Pol *</label>
-                <select style="cursor: pointer;" required>
+                <select id="gender" style="cursor: pointer;">
                 	<option value="">Izaberi pol</option>
-                    <option value="1">Muški</option>
-                    <option value="2">Ženski</option>
+                    <option value="MALE">Muški</option>
+                    <option value="FEMALE">Ženski</option>
                 </select>
             </div>
             <div class="data">
                 <label>Datum rođenja *</label>
-                <input style="cursor: pointer;" type="date" required/>
+                <input id="dateOfBirth" style="cursor: pointer;" type="date"/>
             </div>
             <div class="btn">
                 <div class="inner"></div>
-                <button type="submit">Registruj</button>
+                <button id="submit" type="button">Registruj</button>
             </div>
         </form>
     </div>

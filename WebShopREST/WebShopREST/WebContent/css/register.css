@@ -124,3 +124,12 @@ form .logIn-link a{
 form .logIn-link a:hover{
     text-decoration: underline;   
 }
+
+.red::placeholder { 
+   color: red;
+   opacity: 0.6;
+}
+
+.red {
+	border: 1px solid red !important;
+}

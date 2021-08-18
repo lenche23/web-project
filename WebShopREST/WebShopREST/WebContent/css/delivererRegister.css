@@ -127,3 +127,12 @@ form .btn button {
     letter-spacing: 1px;
     cursor: pointer;
 }
+
+.red::placeholder { 
+   color: red;
+   opacity: 0.6;
+}
+
+.red {
+	border: 1px solid red !important;
+}

@@ -89,7 +89,7 @@ $(document).ready(function(){
 		if(valid) {
 			$.ajax({
 				type: 'POST',
-				url: "../rest/buyers/save",
+				url: "../rest/deliverers/save",
 				data: JSON.stringify({"firstName": firstName, "lastName": lastName, "email": email, "username": username, "password": password, "gender": gender, "dateOfBirth": dateOfBirth}),
 				contentType: 'application/json',
 				dataType: 'json'

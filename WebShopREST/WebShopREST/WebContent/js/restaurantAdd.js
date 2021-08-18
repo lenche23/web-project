@@ -8,8 +8,8 @@ $(document).ready(function(){
 		let logo = $('#logo').val().split('\\').pop();
 		let location = {"length": length,"width": width,"address": address};
 		let valid = true;
-		const nameRegex = new RegExp('^[A-Za-z ]+$');
-		const addressRegex = new RegExp('^[A-Za-z ]+ [0-9]+, ?[A-Za-z ]+, ?[0-9]{5}, ?[A-Za-z ]+$');
+		const nameRegex = new RegExp('^[A-Za-zčšćđžČŠĆĐŽ ]+$');
+		const addressRegex = new RegExp('^[A-Za-zčšćđžČŠĆĐŽ ]+ [0-9]+, ?[A-Za-zčšćđžČŠĆĐŽ ]+, ?[0-9]{5}, ?[A-Za-zčšćđžČŠĆĐŽ ]+$');
 		
 		$('#name').removeAttr('placeholder');
 		$('#name').removeClass('red');
