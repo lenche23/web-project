@@ -30,6 +30,56 @@ $(document).ready(function(){
 			valid = false;
 		}
 		
+		if(valid) { 
+			$.get({
+					url: '../rest/buyers/',
+					success: function(buyers){
+						for(let buyer of buyers)
+							if(buyer.username === username) {
+								$('#username').attr('placeholder', 'Korisničko ime mora biti jedinstveno');
+								$('#username').addClass('red');
+								valid = false;
+							}
+					}
+			})
+			
+			$.get({
+					url: '../rest/managers/',
+					success: function(managers){
+						for(let manager of managers)
+							if(manager.username === username) {
+								$('#username').attr('placeholder', 'Korisničko ime mora biti jedinstveno');
+								$('#username').addClass('red');
+								valid = false;
+							}
+					}
+			})
+			
+			$.get({
+					url: '../rest/deliverers/',
+					success: function(deliverers){
+						for(let deliverer of deliverers)
+							if(deliverer.username === username) {
+								$('#username').attr('placeholder', 'Korisničko ime mora biti jedinstveno');
+								$('#username').addClass('red');
+								valid = false;
+							}
+					}
+			})
+			
+			$.get({
+					url: '../rest/administrators/',
+					success: function(administrators){
+						for(let administrator of administrators)
+							if(administrator.username === username) {
+								$('#username').attr('placeholder', 'Korisničko ime mora biti jedinstveno');
+								$('#username').addClass('red');
+								valid = false;
+							}
+					}
+			})
+		}
+		
 		if(email === "") {
 			$('#email').attr('placeholder', 'Email ne može biti prazan');
 			$('#email').addClass('red');
