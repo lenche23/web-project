@@ -10,7 +10,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type: 'POST',
-			url: "../rest/users/saveBuyer",
+			url: "../rest/buyers/save",
 			data: JSON.stringify({"firstName": firstName, "lastName": lastName, "email": email, "username": username, "password": password, "gender": gender, "dateOfBirth": dateOfBirth}),
 			contentType: 'application/json',
 			dataType: 'json'
