@@ -5,12 +5,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Buyer;
 import beans.Location;
 import beans.Restaurant;
 import beans.RestaurantStatus;
@@ -33,27 +35,36 @@ public class RestaurantDAO {
 	
 	public ArrayList<Restaurant> getFilteredRestaurants(String type, String open) {
 		filteredRestaurants.clear();
+		for(int i = 0; i < allRestaurants.size(); i++) {
+        	filteredRestaurants.add(allRestaurants.get(i));
+		}
 		
 		if(type.equals("0") && open.equals("false"))
 			return allRestaurants;
 		else if(!type.equals("0") && open.equals("false")) {
-			for(int i = 0; i < allRestaurants.size(); i++) {
-				if(allRestaurants.get(i).getType().equals(type))
-					filteredRestaurants.add(allRestaurants.get(i));
+			Iterator<Restaurant> i = filteredRestaurants.iterator();
+			while(i.hasNext()) {
+				Restaurant restaurant = i.next();
+				if(!restaurant.getType().equals(type))
+					i.remove();
 			}
 			return filteredRestaurants;
 		}
 		else if(type.equals("0") && open.equals("true")) {
-			for(int i = 0; i < allRestaurants.size(); i++) {
-				if(RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
-					filteredRestaurants.add(allRestaurants.get(i));
+			Iterator<Restaurant> i = filteredRestaurants.iterator();
+			while(i.hasNext()) {
+				Restaurant restaurant = i.next();
+				if(RestaurantStatus.CLOSED == restaurant.getStatus())
+					i.remove();
 			}
 			return filteredRestaurants;
 		}
 		else {
-			for(int i = 0; i < allRestaurants.size(); i++) {
-				if(allRestaurants.get(i).getType().equals(type) && RestaurantStatus.OPEN == allRestaurants.get(i).getStatus())
-					filteredRestaurants.add(allRestaurants.get(i));
+			Iterator<Restaurant> i = filteredRestaurants.iterator();
+			while(i.hasNext()) {
+				Restaurant restaurant = i.next();
+				if(!restaurant.getType().equals(type) || RestaurantStatus.CLOSED == restaurant.getStatus())
+					i.remove();
 			}
 			return filteredRestaurants;
 		}
@@ -64,30 +75,16 @@ public class RestaurantDAO {
 		ArrayList<Restaurant> restaurantsByNameAndLocation = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> restaurantsByNameLocationAndGrade = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> restaurantsByNameLocationGradeAndType = new ArrayList<Restaurant>();
-		if(filteredRestaurants.isEmpty()) {
-			if(name.equals("")) {
-				for(int i = 0; i < allRestaurants.size(); i++) {
-					restaurantsByName.add(allRestaurants.get(i));
-				}
-			}
-			else {
-				for(int i = 0; i < allRestaurants.size(); i++) {
-					if(allRestaurants.get(i).getName().toLowerCase().contains(name.toLowerCase()))
-						restaurantsByName.add(allRestaurants.get(i));
-				}
+		
+		if(name.equals("")) {
+			for(int i = 0; i < filteredRestaurants.size(); i++) {
+				restaurantsByName.add(filteredRestaurants.get(i));
 			}
 		}
 		else {
-			if(name.equals("")) {
-				for(int i = 0; i < filteredRestaurants.size(); i++) {
+			for(int i = 0; i < filteredRestaurants.size(); i++) {
+				if(filteredRestaurants.get(i).getName().toLowerCase().contains(name.toLowerCase()))
 					restaurantsByName.add(filteredRestaurants.get(i));
-				}
-			}
-			else {
-				for(int i = 0; i < filteredRestaurants.size(); i++) {
-					if(filteredRestaurants.get(i).getName().toLowerCase().contains(name.toLowerCase()))
-						restaurantsByName.add(filteredRestaurants.get(i));
-				}
 			}
 		}
 		
@@ -117,7 +114,7 @@ public class RestaurantDAO {
 			}
 		}
 		
-		if(type.equals("0")) {
+		if(type.equals("Tip restorana")) {
 			for(int i = 0; i < restaurantsByNameLocationAndGrade.size(); i++) {
 				restaurantsByNameLocationGradeAndType.add(restaurantsByNameLocationAndGrade.get(i));
 			}
@@ -150,6 +147,10 @@ public class RestaurantDAO {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        
+        for(int i = 0; i < allRestaurants.size(); i++) {
+        	filteredRestaurants.add(allRestaurants.get(i));
+		}
 	}
 	
 	private Restaurant parseRestaurant(JSONObject restaurant) 

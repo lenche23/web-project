@@ -15,13 +15,6 @@ $(document).ready(function(){
 		window.location.href='login.html';
 	});
 	
-	$("#tableBody tr").click(function() {
-	    var selected = $(this).hasClass("selected");
-	    $("#tableBody tr").removeClass("selected");
-	    if(!selected)
-	            $(this).addClass("selected");
-	});
-	
 	$("#filterType").change(function() {
 		filter();
 	});
@@ -34,6 +27,13 @@ $(document).ready(function(){
 		search();
 	});
 });
+
+function selectedRow() {
+	return function() {
+		$('tr.selected').removeClass('selected');
+		$(this).addClass('selected');
+	};
+}
 
 function loadRestaurants() {
 	$.get({
@@ -63,6 +63,7 @@ function addRestaurantToTable(restaurant){
 		status = $('<td>').text('Ne');
 	
 	newRow.append(logoTd).append(name).append(address).append(type).append(grade).append(status);
+	newRow.click(selectedRow());
 	tableBody.append(newRow);
 }
 
@@ -141,5 +142,9 @@ function search() {
 					addRestaurantToTable(restaurant);
 			}
 		})
+		$('#searchName').val("");
+		$('#searchLocation').val("");
+		$('#searchGrade').val("");
+		$('#searchType').val("Tip restorana");
 	}
 }

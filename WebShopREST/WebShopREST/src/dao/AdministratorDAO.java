@@ -3,11 +3,13 @@ package dao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import beans.Administrator;
+import beans.Manager;
 import beans.Sex;
 
 public class AdministratorDAO { 
@@ -20,7 +22,7 @@ public class AdministratorDAO {
 		loadAdministrators(); 
 	}
 
-//	  Vraæa administratora za prosleðeno korisnièko ime i šifru. Vraæa null ako administratora
+//	  Vraï¿½a administratora za prosleï¿½eno korisniï¿½ko ime i ï¿½ifru. Vraï¿½a null ako administratora
 //	  ne postoji
 //	  
 //	  @param username
@@ -44,8 +46,8 @@ public class AdministratorDAO {
 	  }
   
  
-//	  Uèitava korisnike iz WebContent/adminstrators.txt fajla i dodaje ih u mapu
-//	  {@link #administrators}. Kljuè je korisnièko ime korisnika.
+//	  Uï¿½itava korisnike iz WebContent/adminstrators.txt fajla i dodaje ih u mapu
+//	  {@link #administrators}. Kljuï¿½ je korisniï¿½ko ime korisnika.
 //	  
 //	  @param contextPath Putanja do aplikacije u Tomcatu
 	 
@@ -87,6 +89,49 @@ public class AdministratorDAO {
 					 try { in.close(); } catch (Exception e) { } } 
 			 } 
 	 }
-		  
+	  
+	  public ArrayList<Administrator> getSearchedAdministrators(String name, String surname, String username) { 
+		  	ArrayList<Administrator> administratorsByName = new ArrayList<Administrator>();
+		  	ArrayList<Administrator> administratorsByNameAndSurname = new ArrayList<Administrator>();
+		  	ArrayList<Administrator> administratorsByNameSurnameAndUsername = new ArrayList<Administrator>();
+			
+			if(name.equals("")) {
+				for(Administrator admin : administrators.values()) {
+					administratorsByName.add(admin);
+				}
+			}
+			else {
+				for(Administrator admin : administrators.values()) {
+					if(admin.getFirstName().toLowerCase().contains(name.toLowerCase()))
+						administratorsByName.add(admin);
+				}
+			}
+			
+			if(surname.equals("")) {
+				for(int i = 0; i < administratorsByName.size(); i++) {
+					administratorsByNameAndSurname.add(administratorsByName.get(i));
+				}
+			}
+			else {
+				for(int i = 0; i < administratorsByName.size(); i++) {
+					if(administratorsByName.get(i).getLastName().toLowerCase().contains(surname.toLowerCase()))
+						administratorsByNameAndSurname.add(administratorsByName.get(i));
+				}
+			}
+			
+			if(username.equals("")) {
+				for(int i = 0; i < administratorsByNameAndSurname.size(); i++) {
+					administratorsByNameSurnameAndUsername.add(administratorsByNameAndSurname.get(i));
+				}
+			}
+			else {
+				for(int i = 0; i < administratorsByNameAndSurname.size(); i++) {
+					if(administratorsByNameAndSurname.get(i).getUsername().toLowerCase().contains(username.toLowerCase()))
+						administratorsByNameSurnameAndUsername.add(administratorsByNameAndSurname.get(i));
+				}
+			}
+			
+			return administratorsByNameSurnameAndUsername;
+		}
 }
 		 

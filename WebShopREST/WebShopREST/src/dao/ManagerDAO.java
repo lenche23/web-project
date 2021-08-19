@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Buyer;
 import beans.Manager;
 import beans.Sex;
 
@@ -95,5 +96,49 @@ public class ManagerDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	public ArrayList<Manager> getSearchedManagers(String name, String surname, String username) { 
+		ArrayList<Manager> managersByName = new ArrayList<Manager>();
+		ArrayList<Manager> managersByNameAndSurname = new ArrayList<Manager>();
+		ArrayList<Manager> managersByNameSurnameAndUsername = new ArrayList<Manager>();
+		
+		if(name.equals("")) {
+			for(int i = 0; i < allManagers.size(); i++) {
+				managersByName.add(allManagers.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < allManagers.size(); i++) {
+				if(allManagers.get(i).getFirstName().toLowerCase().contains(name.toLowerCase()))
+					managersByName.add(allManagers.get(i));
+			}
+		}
+		
+		if(surname.equals("")) {
+			for(int i = 0; i < managersByName.size(); i++) {
+				managersByNameAndSurname.add(managersByName.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < managersByName.size(); i++) {
+				if(managersByName.get(i).getLastName().toLowerCase().contains(surname.toLowerCase()))
+					managersByNameAndSurname.add(managersByName.get(i));
+			}
+		}
+		
+		if(username.equals("")) {
+			for(int i = 0; i < managersByNameAndSurname.size(); i++) {
+				managersByNameSurnameAndUsername.add(managersByNameAndSurname.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < managersByNameAndSurname.size(); i++) {
+				if(managersByNameAndSurname.get(i).getUsername().toLowerCase().contains(username.toLowerCase()))
+					managersByNameSurnameAndUsername.add(managersByNameAndSurname.get(i));
+			}
+		}
+		
+		return managersByNameSurnameAndUsername;
 	}
 }

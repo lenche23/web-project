@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -36,20 +37,36 @@ public class BuyerService {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Buyer> getBuyers() {
-		BuyerDAO userDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
-		return userDAO.getBuyers();
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		return buyerDAO.getBuyers();
 	}
 	
 	@POST
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addBuyer(Buyer buyer) {
-		BuyerDAO userDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
 		
 		try {
-			userDAO.saveBuyer(buyer);
+			buyerDAO.saveBuyer(buyer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@GET
+	@Path("/filter")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Buyer> getFilteredBuyers(@QueryParam("buyerType") String type) {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		return buyerDAO.getFilteredBuyers(type);
+	}
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Buyer> getSearchedBuyers(@QueryParam("searchName") String name, @QueryParam("searchSurname") String surname, @QueryParam("searchUsername") String username) {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		return buyerDAO.getSearchedBuyers(name, surname, username);
 	}
 }

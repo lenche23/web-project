@@ -10,10 +10,13 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.Buyer;
 import beans.Deliverer;
+import dao.BuyerDAO;
 import dao.DelivererDAO;
 
 @Path("/deliverers")
@@ -51,5 +54,13 @@ public class DelivererService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Deliverer> getSearchedDeliverers(@QueryParam("searchName") String name, @QueryParam("searchSurname") String surname, @QueryParam("searchUsername") String username) {
+		DelivererDAO delivererDAO = (DelivererDAO) ctx.getAttribute("delivererDAO");
+		return delivererDAO.getSearchedDeliverers(name, surname, username);
 	}
 }

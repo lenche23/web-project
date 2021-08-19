@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import beans.Deliverer;
+import beans.Manager;
 import beans.Sex;
 
 public class DelivererDAO {
@@ -95,5 +96,49 @@ public class DelivererDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	public ArrayList<Deliverer> getSearchedDeliverers(String name, String surname, String username) { 
+		ArrayList<Deliverer> deliverersByName = new ArrayList<Deliverer>();
+		ArrayList<Deliverer> deliverersByNameAndSurname = new ArrayList<Deliverer>();
+		ArrayList<Deliverer> deliverersByNameSurnameAndUsername = new ArrayList<Deliverer>();
+		
+		if(name.equals("")) {
+			for(int i = 0; i < allDeliverers.size(); i++) {
+				deliverersByName.add(allDeliverers.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < allDeliverers.size(); i++) {
+				if(allDeliverers.get(i).getFirstName().toLowerCase().contains(name.toLowerCase()))
+					deliverersByName.add(allDeliverers.get(i));
+			}
+		}
+		
+		if(surname.equals("")) {
+			for(int i = 0; i < deliverersByName.size(); i++) {
+				deliverersByNameAndSurname.add(deliverersByName.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < deliverersByName.size(); i++) {
+				if(deliverersByName.get(i).getLastName().toLowerCase().contains(surname.toLowerCase()))
+					deliverersByNameAndSurname.add(deliverersByName.get(i));
+			}
+		}
+		
+		if(username.equals("")) {
+			for(int i = 0; i < deliverersByNameAndSurname.size(); i++) {
+				deliverersByNameSurnameAndUsername.add(deliverersByNameAndSurname.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < deliverersByNameAndSurname.size(); i++) {
+				if(deliverersByNameAndSurname.get(i).getUsername().toLowerCase().contains(username.toLowerCase()))
+					deliverersByNameSurnameAndUsername.add(deliverersByNameAndSurname.get(i));
+			}
+		}
+		
+		return deliverersByNameSurnameAndUsername;
 	}
 }

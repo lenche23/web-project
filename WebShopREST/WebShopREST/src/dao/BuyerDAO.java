@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,10 +19,12 @@ import beans.TypeName;
 
 public class BuyerDAO {
 	private ArrayList<Buyer> allBuyers;
+	private ArrayList<Buyer> filteredBuyers;
 	private String pathToRepository;
 	
 	public BuyerDAO() {
 		allBuyers = new ArrayList<Buyer>();
+		filteredBuyers = new ArrayList<Buyer>();
 		pathToRepository = "WebContent/Repository/";
 		loadBuyers();
 	}
@@ -29,7 +32,7 @@ public class BuyerDAO {
 	public ArrayList<Buyer> getBuyers() {
 		return allBuyers;
 	}
-	
+
 	public void loadBuyers() {
 		JSONParser jsonParser = new JSONParser();
 
@@ -48,6 +51,10 @@ public class BuyerDAO {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        
+        for(int i = 0; i < allBuyers.size(); i++) {
+        	filteredBuyers.add(allBuyers.get(i));
+		}
 	}
 	
 	private Buyer parseBuyer(JSONObject buyer) 
@@ -108,5 +115,68 @@ public class BuyerDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	public ArrayList<Buyer> getFilteredBuyers(String type) {
+		filteredBuyers.clear();
+		for(int i = 0; i < allBuyers.size(); i++) {
+        	filteredBuyers.add(allBuyers.get(i));
+		}
+		
+		if(type.equals("Tip kupca"))
+			return allBuyers;
+		else {
+			Iterator<Buyer> i = filteredBuyers.iterator();
+			while(i.hasNext()) {
+				Buyer buyer = i.next();
+				if(!buyer.getType().getName().toString().equals(type))
+					i.remove();
+			}
+			return filteredBuyers;
+		}
+	}
+	
+	public ArrayList<Buyer> getSearchedBuyers(String name, String surname, String username) { 
+		ArrayList<Buyer> buyersByName = new ArrayList<Buyer>();
+		ArrayList<Buyer> buyersByNameAndSurname = new ArrayList<Buyer>();
+		ArrayList<Buyer> buyersByNameSurnameAndUsername = new ArrayList<Buyer>();
+		
+		if(name.equals("")) {
+			for(int i = 0; i < filteredBuyers.size(); i++) {
+				buyersByName.add(filteredBuyers.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < filteredBuyers.size(); i++) {
+				if(filteredBuyers.get(i).getFirstName().toLowerCase().contains(name.toLowerCase()))
+					buyersByName.add(filteredBuyers.get(i));
+			}
+		}
+		
+		if(surname.equals("")) {
+			for(int i = 0; i < buyersByName.size(); i++) {
+				buyersByNameAndSurname.add(buyersByName.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < buyersByName.size(); i++) {
+				if(buyersByName.get(i).getLastName().toLowerCase().contains(surname.toLowerCase()))
+					buyersByNameAndSurname.add(buyersByName.get(i));
+			}
+		}
+		
+		if(username.equals("")) {
+			for(int i = 0; i < buyersByNameAndSurname.size(); i++) {
+				buyersByNameSurnameAndUsername.add(buyersByNameAndSurname.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < buyersByNameAndSurname.size(); i++) {
+				if(buyersByNameAndSurname.get(i).getUsername().toLowerCase().contains(username.toLowerCase()))
+					buyersByNameSurnameAndUsername.add(buyersByNameAndSurname.get(i));
+			}
+		}
+		
+		return buyersByNameSurnameAndUsername;
 	}
 }
