@@ -1,6 +1,10 @@
 $(document).ready(function(){
 	loadRestaurants();
 
+	$('#restaurantAdd').click(function(){
+		window.location.href='restaurantAdd.html';
+	});
+
 	$('#profileBtn').click(function(){
 		// if (korisnik ulogovan) {
 			window.location.href='userProfile.html';
@@ -26,7 +30,15 @@ $(document).ready(function(){
 	$("#searchIcon").click(function() {
 		search();
 	});
+	
+	$("#removeRestaurant").click(function() {
+		removeRestaurant();
+	})
 });
+
+function removeRestaurant() {
+	$('tr.selected').remove();
+}
 
 function selectedRow() {
 	return function() {

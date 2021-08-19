@@ -16,9 +16,6 @@ $(document).ready(function(){
 	$('#managerAdd').click(function(){
 		window.location.href='managerRegister.html';
 	});
-	$('#restaurantAdd').click(function(){
-		window.location.href='restaurantAdd.html';
-	});
 	
 	$('#buyers').click(function(){
 		loadBuyers();
@@ -43,8 +40,15 @@ $(document).ready(function(){
 	$("#searchIcon").click(function() {
 		search();
 	});
+	
+	$("#removeUser").click(function() {
+		removeUser();
+	})
 });
 
+function removeUser() {
+	$('tr.selected').remove();
+}
 
 function selectedRow() {
 	return function() {

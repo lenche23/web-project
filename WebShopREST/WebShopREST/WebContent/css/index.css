@@ -148,3 +148,21 @@ div button {
 .red {
 	border-color: red;
 }
+
+.actionBtns {
+	cursor: pointer;
+	color: black;
+	font-weight: 200;
+	background-color: rgb(241, 190, 72);
+	width: 180px;
+	height: 40px;
+	font-size: 15px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-weight: bold;
+	float: right;
+	margin-top: 0.5%;
+	margin-right: 1%;
+}
