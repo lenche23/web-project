@@ -117,6 +117,42 @@ public class BuyerDAO {
         }
 	}
 	
+	public void deleteBuyer(String username) throws IOException {
+		for(int i = 0; i < allBuyers.size(); i++)
+			if(allBuyers.get(i).getUsername().equals(username))
+				allBuyers.get(i).setDeleted(true);
+		
+		JSONArray buyers = new JSONArray();
+		for (Buyer b : allBuyers) {
+			JSONObject buyerObject = new JSONObject();
+			
+			buyerObject.put("firstName", b.getFirstName());
+			buyerObject.put("lastName", b.getLastName());
+			buyerObject.put("email", b.getEmail());
+			buyerObject.put("username", b.getUsername());
+			buyerObject.put("password", b.getPassword());
+			buyerObject.put("gender", b.getGender().toString());
+			buyerObject.put("dateOfBirth", b.getDateOfBirth());
+			buyerObject.put("deleted", b.isDeleted());
+			buyerObject.put("points", Integer.toString(b.getPoints()));
+			buyerObject.put("name", b.getType().getName().toString());
+			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
+			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
+			
+			JSONObject buyerObject2 = new JSONObject(); 
+	        buyerObject2.put("buyer", buyerObject);
+			
+	        buyers.add(buyerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "buyers.json")) {
+            file.write(buyers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
 	public ArrayList<Buyer> getFilteredBuyers(String type) {
 		filteredBuyers.clear();
 		for(int i = 0; i < allBuyers.size(); i++) {

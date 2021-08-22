@@ -8,13 +8,16 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import beans.Restaurant;
+import dao.BuyerDAO;
 import dao.RestaurantDAO;
 
 @Path("/restaurants")
@@ -68,5 +71,17 @@ public class RestaurantService {
 	public ArrayList<Restaurant> getSearchedRestaurants(@QueryParam("searchName") String name, @QueryParam("searchLocation") String location, @QueryParam("searchGrade") String grade, @QueryParam("searchType") String type) {
 		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		return restaurantDAO.getSearchedRestaurants(name, location, grade, type);
+	}
+	
+	@PUT
+	@Path("/delete/{name}")
+	public void deleteRestaurant(@PathParam("name") String name) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		
+		try {
+			restaurantDAO.deleteRestaurant(name);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

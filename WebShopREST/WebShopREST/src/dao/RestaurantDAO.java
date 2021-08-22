@@ -203,4 +203,36 @@ public class RestaurantDAO {
             e.printStackTrace();
         }
 	}
+	
+	public void deleteRestaurant(String name) throws IOException {
+		for(int i = 0; i < allRestaurants.size(); i++)
+			if(allRestaurants.get(i).getName().equals(name))
+				allRestaurants.get(i).setDeleted(true);
+		
+		JSONArray restaurants = new JSONArray();
+		for (Restaurant r : allRestaurants) {
+			JSONObject restaurantObject = new JSONObject();
+			
+			restaurantObject.put("name", r.getName());
+			restaurantObject.put("type", r.getType());
+			restaurantObject.put("status", r.getStatus().toString());
+			restaurantObject.put("length", r.getLocation().getLength());
+			restaurantObject.put("width", r.getLocation().getWidth());
+			restaurantObject.put("address", r.getLocation().getAddress());
+			restaurantObject.put("logo", r.getLogo());
+			restaurantObject.put("deleted", r.isDeleted());
+			
+			JSONObject restoranObject2 = new JSONObject(); 
+	        restoranObject2.put("restaurant", restaurantObject);
+			
+	        restaurants.add(restoranObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "restaurants.json")) {
+            file.write(restaurants.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 }

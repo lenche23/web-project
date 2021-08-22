@@ -98,6 +98,38 @@ public class ManagerDAO {
         }
 	}
 	
+	public void deleteManager(String username) throws IOException {
+		for(int i = 0; i < allManagers.size(); i++)
+			if(allManagers.get(i).getUsername().equals(username))
+				allManagers.get(i).setDeleted(true);
+		
+		JSONArray managers = new JSONArray();
+		for (Manager m : allManagers) {
+			JSONObject managerObject = new JSONObject();
+			
+			managerObject.put("firstName", m.getFirstName());
+			managerObject.put("lastName", m.getLastName());
+			managerObject.put("email", m.getEmail());
+			managerObject.put("username", m.getUsername());
+			managerObject.put("password", m.getPassword());
+			managerObject.put("gender", m.getGender().toString());
+			managerObject.put("dateOfBirth", m.getDateOfBirth());
+			managerObject.put("deleted", m.isDeleted());
+			
+			JSONObject managerObject2 = new JSONObject(); 
+	        managerObject2.put("manager", managerObject);
+			
+	        managers.add(managerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "managers.json")) {
+            file.write(managers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
 	public ArrayList<Manager> getSearchedManagers(String name, String surname, String username) { 
 		ArrayList<Manager> managersByName = new ArrayList<Manager>();
 		ArrayList<Manager> managersByNameAndSurname = new ArrayList<Manager>();

@@ -43,11 +43,37 @@ $(document).ready(function(){
 	
 	$("#removeUser").click(function() {
 		removeUser();
-	})
+	});
 });
 
 function removeUser() {
+	let username = $('tr.selected').children(':first').text();
 	$('tr.selected').remove();
+	
+	if ($('#buyers').attr('style') == 'background-color: rgb(140, 140, 140)') {
+		$.ajax({
+				type: 'PUT',
+				url: '../rest/buyers/delete/' + username,
+				contentType: 'application/json',
+				dataType: 'json'
+		});	
+	}
+	else if ($('#managers').attr('style') == 'background-color: rgb(140, 140, 140)') {
+		$.ajax({
+				type: 'PUT',
+				url: '../rest/managers/delete/' + username,
+				contentType: 'application/json',
+				dataType: 'json'
+		});	
+	}
+	else if ($('#deliverers').attr('style') == 'background-color: rgb(140, 140, 140)') {
+		$.ajax({
+				type: 'PUT',
+				url: '../rest/deliverers/delete/' + username,
+				contentType: 'application/json',
+				dataType: 'json'
+		});	
+	}
 }
 
 function selectedRow() {
@@ -61,6 +87,8 @@ function loadBuyers() {
 	$.get({
 		url: '../rest/buyers/',
 		success: function(buyers){
+			$('#removeUser').show();
+			$('#actionBtnsDiv').attr('style', 'width: 950px');
 			$('#searchName').val("");
 			$('#searchSurname').val("");
 			$('#searchUsername').val("");
@@ -94,7 +122,8 @@ function loadBuyers() {
 			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh).append(typeTh).append(pointsTh);
 			tableHeader.append(newRow);
 			for(let buyer of buyers)
-				addBuyerToTable(buyer);
+				if(!buyer.deleted)
+					addBuyerToTable(buyer);
 		}
 	})
 }
@@ -135,6 +164,8 @@ function loadManagers() {
 	$.get({
 		url: '../rest/managers/',
 		success: function(managers){
+			$('#removeUser').show();
+			$('#actionBtnsDiv').attr('style', 'width: 950px');
 			$('#searchName').val("");
 			$('#searchSurname').val("");
 			$('#searchUsername').val("");
@@ -165,7 +196,8 @@ function loadManagers() {
 			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh);
 			tableHeader.append(newRow);
 			for(let manager of managers)
-				addManagerToTable(manager);
+				if(!manager.deleted)
+					addManagerToTable(manager);
 		}
 	})
 }
@@ -198,6 +230,8 @@ function loadDeliverers() {
 	$.get({
 		url: '../rest/deliverers/',
 		success: function(deliverers){
+			$('#removeUser').show();
+			$('#actionBtnsDiv').attr('style', 'width: 950px');
 			$('#searchName').val("");
 			$('#searchSurname').val("");
 			$('#searchUsername').val("");
@@ -228,6 +262,7 @@ function loadDeliverers() {
 			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh);
 			tableHeader.append(newRow);
 			for(let deliverer of deliverers)
+				if(!deliverer.deleted)
 				addDelivererToTable(deliverer);
 		}
 	})
@@ -261,6 +296,8 @@ function loadAdministrators() {
 	$.get({
 		url: '../rest/administrators/',
 		success: function(administrators){
+			$('#removeUser').hide();
+			$('#actionBtnsDiv').attr('style', 'width: 850px');
 			$('#searchName').val("");
 			$('#searchSurname').val("");
 			$('#searchUsername').val("");
@@ -291,7 +328,8 @@ function loadAdministrators() {
 			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh);
 			tableHeader.append(newRow);
 			for(let administrator of administrators)
-				addAdministratorToTable(administrator);
+				if(!administrator.deleted)
+					addAdministratorToTable(administrator);
 		}
 	})
 }
@@ -327,7 +365,8 @@ function filter() {
 		success: function(buyers){
 			$('#tableBody').empty();
 			for(let buyer of buyers)
-				addBuyerToTable(buyer);
+				if(!buyer.deleted)
+					addBuyerToTable(buyer);
 		}
 	})
 }
@@ -343,7 +382,8 @@ function search() {
 			success: function(buyers){
 				$('#tableBody').empty();
 				for(let buyer of buyers)
-					addBuyerToTable(buyer);
+					if(!buyer.deleted)
+						addBuyerToTable(buyer);
 			}
 		})
 	}
@@ -353,7 +393,8 @@ function search() {
 			success: function(managers){
 				$('#tableBody').empty();
 				for(let manager of managers)
-					addManagerToTable(manager);
+					if(!manager.deleted)
+						addManagerToTable(manager);
 			}
 		})
 	}
@@ -363,7 +404,8 @@ function search() {
 			success: function(deliverers){
 				$('#tableBody').empty();
 				for(let deliverer of deliverers)
-					addDelivererToTable(deliverer);
+					if(!deliverer.deleted)
+						addDelivererToTable(deliverer);
 			}
 		})
 	}
@@ -373,7 +415,8 @@ function search() {
 			success: function(administrators){
 				$('#tableBody').empty();
 				for(let administrator of administrators)
-					addAdministratorToTable(administrator);
+					if(!administrator.deleted)
+						addAdministratorToTable(administrator);
 			}
 		})
 	}

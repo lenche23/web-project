@@ -33,11 +33,19 @@ $(document).ready(function(){
 	
 	$("#removeRestaurant").click(function() {
 		removeRestaurant();
-	})
+	});
 });
 
 function removeRestaurant() {
+	let name = $('tr.selected').find('td:eq(1)').text();
 	$('tr.selected').remove();
+	
+	$.ajax({
+			type: 'PUT',
+			url: '../rest/restaurants/delete/' + name,
+			contentType: 'application/json',
+			dataType: 'json'
+	});	
 }
 
 function selectedRow() {
@@ -52,7 +60,8 @@ function loadRestaurants() {
 		url: '../rest/restaurants/',
 		success: function(restaurants){
 			for(let restaurant of restaurants)
-				addRestaurantToTable(restaurant);
+				if(!restaurant.deleted)
+					addRestaurantToTable(restaurant);
 		}
 	})
 }
@@ -125,7 +134,8 @@ function filter() {
 		success: function(restaurants){
 			removeRestaurantsFromTable();
 			for(let restaurant of restaurants)
-				addRestaurantToTable(restaurant);
+				if(!restaurant.deleted)
+					addRestaurantToTable(restaurant);
 		}
 	})
 }
@@ -151,7 +161,8 @@ function search() {
 			success: function(restaurants){
 				removeRestaurantsFromTable();
 				for(let restaurant of restaurants)
-					addRestaurantToTable(restaurant);
+					if(!restaurant.deleted)
+						addRestaurantToTable(restaurant);
 			}
 		})
 		$('#searchName').val("");
