@@ -44,9 +44,16 @@ body {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-.container .text {
+.container .textTop {
     font-size: 35px;
     font-weight: 600;
+    text-align: center;
+    color: black;
+}
+
+.container .textBottom {
+    font-size: 28px;
+    font-weight: 450;
     text-align: center;
     color: black;
 }
@@ -134,4 +141,41 @@ form .btn button {
 
 .red {
 	border: 1px solid red !important;
+}
+
+.container form .dataManager {
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+    color: black;
+}
+
+form .dataManager label {
+    font-size: 18px;
+}
+
+form .dataManager input {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
+}
+
+form .dataManager input:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
+}
+
+form .dataManager select {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid silver;
+}
+
+form .dataManager select:focus {
+    border-color: silver;
+    border-bottom-width: 2px;
 }

@@ -47,13 +47,15 @@ public class RestaurantService {
 	@POST
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addRestaurant(Restaurant restaurant) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Restaurant addRestaurant(Restaurant restaurant) {
 		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		
 		try {
-			restaurantDAO.saveRestaurant(restaurant);
+			return restaurantDAO.saveRestaurant(restaurant);
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	

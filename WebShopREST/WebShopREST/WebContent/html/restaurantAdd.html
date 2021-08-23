@@ -11,7 +11,7 @@
 		<h1 id="titleText">WebShop</h1>
 	</header>
 	<div class="container">
-        <div class="text">Kreiranje Restorana</div>
+        <div class="textTop">Kreiranje Restorana</div>
         <form id="forma" action="#">
             <div class="data">
                 <label>Naziv *</label>
@@ -42,14 +42,45 @@
                 <label>Logo *</label>
                 <input id="logo" type='file'/>
             </div>
-            <div class="data">
+            <div id="managerDiv" class="data">
                 <label>Menadžer *</label>
                 <select id="manager" style="cursor: pointer;">
                     <option value="">Izaberi menadžera</option>
-                    <option value="1">pero</option>
-                    <option value="2">marija</option>
-                	<option value="3">lazo</option>
                 </select>
+            </div>
+            <div id="spaceDiv" style="min-height: 40px;"></div>
+            <div class="textBottom">Registracija Menadžera</div>
+            <div class="dataManager">
+                <label>Korisničko ime *</label>
+                <input id="username" type="text"/>
+            </div>
+            <div class="dataManager">
+                <label>Email *</label>
+                <input id="email" type="text"/>
+            </div>
+            <div class="dataManager">
+                <label>Lozinka *</label>
+                <input id="password" type="password"/>
+            </div>
+            <div class="dataManager">
+                <label>Ime *</label>
+                <input id="firstName" type="text"/>
+            </div>
+            <div class="dataManager">
+                <label>Prezime *</label>
+                <input id="lastName" type="text"/>
+            </div>
+            <div class="dataManager">
+                <label>Pol *</label>
+                <select id="gender" style="cursor: pointer;">
+                	<option value="">Izaberi pol</option>
+                    <option value="MALE">Muški</option>
+                    <option value="FEMALE">Ženski</option>
+                </select>
+            </div>
+            <div class="dataManager">
+                <label>Datum rođenja *</label>
+                <input id="dateOfBirth" style="cursor: pointer;" type="date"/>
             </div>
             <div class="btn">
                 <div class="inner"></div>

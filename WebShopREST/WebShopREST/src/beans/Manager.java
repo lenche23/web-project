@@ -57,5 +57,6 @@ public class Manager extends User{
 	public Manager(String firstName, String lastName, String email, String username, String password, Sex gender,
 			String dateOfBirth, boolean deleted) {
 		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted);
+		this.restaurant = new Restaurant();
 	}
 }

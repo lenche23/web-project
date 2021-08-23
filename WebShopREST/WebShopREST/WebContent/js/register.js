@@ -126,7 +126,7 @@ $(document).ready(function(){
 		
 		let date = new Date($('#dateOfBirth').val());
 	    let day = date.getDate();
-	    let month = date.getMonth();
+	    let month = date.getMonth() + 1;
 	    let year = date.getFullYear();
 	    let now = new Date();
   		now.setHours(0,0,0,0);

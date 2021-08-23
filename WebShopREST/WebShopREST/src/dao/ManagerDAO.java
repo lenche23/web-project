@@ -19,17 +19,17 @@ public class ManagerDAO {
 	private ArrayList<Manager> allManagers;
 	private String pathToRepository;
 	
-	public ManagerDAO() {
+	public ManagerDAO(RestaurantDAO restaurantDAO) {
 		allManagers = new ArrayList<Manager>();
 		pathToRepository = "WebContent/Repository/";
-		loadManagers();
+		loadManagers(restaurantDAO);
 	}
 	
 	public ArrayList<Manager> getManagers() {
 		return allManagers;
 	}
 	
-	public void loadManagers() {
+	public void loadManagers(RestaurantDAO restaurantDAO) {
 		JSONParser jsonParser = new JSONParser();
 
         try (FileReader reader = new FileReader(pathToRepository + "managers.json"))
@@ -38,7 +38,7 @@ public class ManagerDAO {
 
             JSONArray managers = (JSONArray) object;
 
-            managers.forEach( manager -> allManagers.add(parseManager( (JSONObject) manager ) ));
+            managers.forEach( manager -> allManagers.add(parseManager( (JSONObject) manager, restaurantDAO ) ));
  
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -49,7 +49,7 @@ public class ManagerDAO {
         }
 	}
 	
-	private Manager parseManager(JSONObject manager) 
+	private Manager parseManager(JSONObject manager, RestaurantDAO restaurantDAO) 
     {
         JSONObject managerObject = (JSONObject) manager.get("manager");
 
@@ -63,6 +63,13 @@ public class ManagerDAO {
         boolean deleted = (boolean) managerObject.get("deleted");
         
         Manager newManager = new Manager(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted);
+        
+        if(managerObject.get("restaurant") != null) {
+        	String name = (String) managerObject.get("restaurant");
+        	for(int i = 0; i < restaurantDAO.getAllRestaurants().size(); i++)
+        		if(restaurantDAO.getAllRestaurants().get(i).getName().equals(name))
+        			newManager.setRestaurant(restaurantDAO.getAllRestaurants().get(i));
+        }
         
 		return newManager;
     }
@@ -83,7 +90,48 @@ public class ManagerDAO {
 			managerObject.put("gender", m.getGender().toString());
 			managerObject.put("dateOfBirth", m.getDateOfBirth());
 			managerObject.put("deleted", m.isDeleted());
+			if(m.getRestaurant().getName() != "")
+				managerObject.put("restaurant", m.getRestaurant().getName());
+			else
+				managerObject.put("restaurant", null);
 			
+			JSONObject managerObject2 = new JSONObject(); 
+	        managerObject2.put("manager", managerObject);
+			
+	        managers.add(managerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "managers.json")) {
+            file.write(managers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void addManagerToRestaurant(String username, String name, RestaurantDAO restaurantDAO) throws IOException {
+		for(int i = 0; i < allManagers.size(); i++)
+			if(allManagers.get(i).getUsername().equals(username))
+				for(int j = 0; j < restaurantDAO.getAllRestaurants().size(); j++)
+					if(restaurantDAO.getAllRestaurants().get(j).getName().equals(name))
+						allManagers.get(i).setRestaurant(restaurantDAO.getAllRestaurants().get(j));
+
+		JSONArray managers = new JSONArray();
+		for (Manager m : allManagers) {
+			JSONObject managerObject = new JSONObject();
+			
+			managerObject.put("firstName", m.getFirstName());
+			managerObject.put("lastName", m.getLastName());
+			managerObject.put("email", m.getEmail());
+			managerObject.put("username", m.getUsername());
+			managerObject.put("password", m.getPassword());
+			managerObject.put("gender", m.getGender().toString());
+			managerObject.put("dateOfBirth", m.getDateOfBirth());
+			managerObject.put("deleted", m.isDeleted());
+			if(m.getRestaurant().getName() != "")
+				managerObject.put("restaurant", m.getRestaurant().getName());
+			else
+				managerObject.put("restaurant", null);
 			JSONObject managerObject2 = new JSONObject(); 
 	        managerObject2.put("manager", managerObject);
 			

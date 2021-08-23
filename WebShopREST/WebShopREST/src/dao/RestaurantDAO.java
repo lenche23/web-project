@@ -172,7 +172,7 @@ public class RestaurantDAO {
 		return newRestaurant;
     }
 	
-	public void saveRestaurant(Restaurant restaurant) throws IOException {
+	public Restaurant saveRestaurant(Restaurant restaurant) throws IOException {
 		restaurant.setStatus(RestaurantStatus.OPEN);
 		restaurant.setDeleted(false);
 		allRestaurants.add(restaurant);
@@ -202,6 +202,8 @@ public class RestaurantDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        return restaurant;
 	}
 	
 	public void deleteRestaurant(String name) throws IOException {

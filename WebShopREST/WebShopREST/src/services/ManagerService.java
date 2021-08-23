@@ -20,6 +20,7 @@ import beans.Buyer;
 import beans.Manager;
 import dao.BuyerDAO;
 import dao.ManagerDAO;
+import dao.RestaurantDAO;
 
 @Path("/managers")
 public class ManagerService {
@@ -33,7 +34,7 @@ public class ManagerService {
 	@PostConstruct
 	public void init() {
 		if (ctx.getAttribute("managerDAO") == null) {
-	    	ctx.setAttribute("managerDAO", new ManagerDAO());
+	    	ctx.setAttribute("managerDAO", new ManagerDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
 		}
 	}
 	
@@ -73,6 +74,19 @@ public class ManagerService {
 		
 		try {
 			managerDAO.deleteManager(username);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
+	@Path("/addManager/{managerUsername}/toRestaurant/{restaurantName}")
+	public void addManagerToRestaurant(@PathParam("managerUsername") String username, @PathParam("restaurantName") String name) {
+		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		
+		try {
+			managerDAO.addManagerToRestaurant(username, name, restaurantDAO);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
