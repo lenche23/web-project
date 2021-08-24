@@ -1,5 +1,5 @@
-Pera;Peric;pera@gmail.com;pera;pera;M;12.12.1976;
-Jovana;Jovanovic;jaca@uns.ac.rs;jaca;jaca;Z;11.11.1975;
-Stojanka;Novakovic;stoja@gmail.com;stoja;stoja;Z;10.10.1974;
-Jovan;Jovic;joca@yahoo.com;joca;joca;M;09.09.1973;
-Milica;Milicevic;mica@gmail.com;mica;mica;Z;08.08.1972;
+Pera;Perić;pera@gmail.com;pera;pera;M;12.12.1976;
+Jovana;Jovanović;jaca@uns.ac.rs;jaca;jaca;Z;11.11.1975;
+Stojanka;Novaković;stoja@gmail.com;stoja;stoja;Z;10.10.1974;
+Jovan;Jović;joca@yahoo.com;joca;joca;M;09.09.1973;
+Milica;Milićević;mica@gmail.com;mica;mica;Z;08.08.1972;

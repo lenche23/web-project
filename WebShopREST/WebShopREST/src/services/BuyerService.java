@@ -18,7 +18,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import beans.Buyer;
+import dao.AdministratorDAO;
 import dao.BuyerDAO;
+import dao.DelivererDAO;
+import dao.ManagerDAO;
+import dao.RestaurantDAO;
 
 @Path("/buyers")
 public class BuyerService {
@@ -42,6 +46,14 @@ public class BuyerService {
 	public ArrayList<Buyer> getBuyers() {
 		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
 		return buyerDAO.getBuyers();
+	}
+	
+	@GET
+	@Path("/loggedInBuyer")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Buyer getLoggedInBuyer() {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		return buyerDAO.getLoggedInBuyer();
 	}
 	
 	@POST
@@ -71,6 +83,25 @@ public class BuyerService {
 	public ArrayList<Buyer> getSearchedBuyers(@QueryParam("searchName") String name, @QueryParam("searchSurname") String surname, @QueryParam("searchUsername") String username) {
 		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
 		return buyerDAO.getSearchedBuyers(name, surname, username);
+	}
+	
+	@GET
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Buyer login(@QueryParam("username") String username, @QueryParam("password") String password) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		if (ctx.getAttribute("administratorDAO") == null) {
+	    	ctx.setAttribute("administratorDAO", new AdministratorDAO());
+		}
+		if (ctx.getAttribute("delivererDAO") == null) {
+	    	ctx.setAttribute("delivererDAO", new DelivererDAO());
+		}
+		if (ctx.getAttribute("managerDAO") == null) {
+	    	ctx.setAttribute("managerDAO", new ManagerDAO(restaurantDAO));
+		}
+		
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		return buyerDAO.login(username, password);
 	}
 	
 	@PUT

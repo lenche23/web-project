@@ -18,8 +18,11 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Buyer;
 import beans.Deliverer;
+import dao.AdministratorDAO;
 import dao.BuyerDAO;
 import dao.DelivererDAO;
+import dao.ManagerDAO;
+import dao.RestaurantDAO;
 
 @Path("/deliverers")
 public class DelivererService {
@@ -45,6 +48,14 @@ public class DelivererService {
 		return delivererDAO.getDeliverers();
 	}
 	
+	@GET
+	@Path("/loggedInDeliverer")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Deliverer getLoggedInDeliverer() {
+		DelivererDAO delivererDAO = (DelivererDAO) ctx.getAttribute("delivererDAO");
+		return delivererDAO.getLoggedInDeliverer();
+	}
+	
 	@POST
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -56,6 +67,25 @@ public class DelivererService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@GET
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Deliverer login(@QueryParam("username") String username, @QueryParam("password") String password) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		if (ctx.getAttribute("administratorDAO") == null) {
+	    	ctx.setAttribute("administratorDAO", new AdministratorDAO());
+		}
+		if (ctx.getAttribute("buyerDAO") == null) {
+	    	ctx.setAttribute("buyerDAO", new BuyerDAO());
+		}
+		if (ctx.getAttribute("managerDAO") == null) {
+	    	ctx.setAttribute("managerDAO", new ManagerDAO(restaurantDAO));
+		}
+		
+		DelivererDAO delivererDAO = (DelivererDAO) ctx.getAttribute("delivererDAO");
+		return delivererDAO.login(username, password);
 	}
 	
 	@GET

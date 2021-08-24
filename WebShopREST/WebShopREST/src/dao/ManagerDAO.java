@@ -17,14 +17,20 @@ import beans.Sex;
 
 public class ManagerDAO {
 	private ArrayList<Manager> allManagers;
+	private Manager loggedInManager;
 	private String pathToRepository;
 	
 	public ManagerDAO(RestaurantDAO restaurantDAO) {
 		allManagers = new ArrayList<Manager>();
+		loggedInManager = new Manager();
 		pathToRepository = "WebContent/Repository/";
 		loadManagers(restaurantDAO);
 	}
 	
+	public Manager getLoggedInManager() {
+		return loggedInManager;
+	}
+
 	public ArrayList<Manager> getManagers() {
 		return allManagers;
 	}
@@ -47,6 +53,15 @@ public class ManagerDAO {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+	}
+	
+	public Manager login(String username, String password) {
+		for(int i = 0; i < allManagers.size(); i++)
+			if(allManagers.get(i).getUsername().equals(username) && allManagers.get(i).getPassword().equals(password)) {
+				loggedInManager = allManagers.get(i);
+				return loggedInManager;
+			}
+		return null;
 	}
 	
 	private Manager parseManager(JSONObject manager, RestaurantDAO restaurantDAO) 

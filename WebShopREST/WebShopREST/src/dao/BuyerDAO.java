@@ -19,18 +19,24 @@ import beans.TypeName;
 
 public class BuyerDAO {
 	private ArrayList<Buyer> allBuyers;
+	private Buyer loggedInBuyer;
 	private ArrayList<Buyer> filteredBuyers;
 	private String pathToRepository;
 	
 	public BuyerDAO() {
 		allBuyers = new ArrayList<Buyer>();
 		filteredBuyers = new ArrayList<Buyer>();
+		loggedInBuyer = new Buyer();
 		pathToRepository = "WebContent/Repository/";
 		loadBuyers();
 	}
 
 	public ArrayList<Buyer> getBuyers() {
 		return allBuyers;
+	}
+
+	public Buyer getLoggedInBuyer() {
+		return loggedInBuyer;
 	}
 
 	public void loadBuyers() {
@@ -55,6 +61,15 @@ public class BuyerDAO {
         for(int i = 0; i < allBuyers.size(); i++) {
         	filteredBuyers.add(allBuyers.get(i));
 		}
+	}
+	
+	public Buyer login(String username, String password) {
+		for(int i = 0; i < allBuyers.size(); i++)
+			if(allBuyers.get(i).getUsername().equals(username) && allBuyers.get(i).getPassword().equals(password)) {
+				loggedInBuyer = allBuyers.get(i);
+				return loggedInBuyer;
+			}
+		return null;
 	}
 	
 	private Buyer parseBuyer(JSONObject buyer) 

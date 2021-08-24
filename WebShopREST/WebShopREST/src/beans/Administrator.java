@@ -9,13 +9,9 @@ public class Administrator extends User{
 	}
 
 	public Administrator(String firstName, String lastName, String email, String username, String password, Sex gender,
-			String birth) {
-		super.setFirstName(firstName);
-		super.setLastName(lastName);
-		super.setEmail(email);
-		super.setUsername(username);
-		super.setPassword(password);
-		super.setGender(gender);
-		super.setDateOfBirth(birth);
+			String dateOfBirth, boolean deleted) {
+		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted);
 	}
+
+	
 }

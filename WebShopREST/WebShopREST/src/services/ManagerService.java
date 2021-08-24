@@ -18,7 +18,9 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Buyer;
 import beans.Manager;
+import dao.AdministratorDAO;
 import dao.BuyerDAO;
+import dao.DelivererDAO;
 import dao.ManagerDAO;
 import dao.RestaurantDAO;
 
@@ -46,6 +48,14 @@ public class ManagerService {
 		return managerDAO.getManagers();
 	}
 	
+	@GET
+	@Path("/loggedInManager")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Manager getLoggedInManager() {
+		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");
+		return managerDAO.getLoggedInManager();
+	}
+	
 	@POST
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -65,6 +75,24 @@ public class ManagerService {
 	public ArrayList<Manager> getSearchedManagers(@QueryParam("searchName") String name, @QueryParam("searchSurname") String surname, @QueryParam("searchUsername") String username) {
 		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");
 		return managerDAO.getSearchedManagers(name, surname, username);
+	}
+	
+	@GET
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Manager login(@QueryParam("username") String username, @QueryParam("password") String password) {
+		if (ctx.getAttribute("administratorDAO") == null) {
+	    	ctx.setAttribute("administratorDAO", new AdministratorDAO());
+		}
+		if (ctx.getAttribute("delivererDAO") == null) {
+	    	ctx.setAttribute("delivererDAO", new DelivererDAO());
+		}
+		if (ctx.getAttribute("buyerDAO") == null) {
+	    	ctx.setAttribute("buyerDAO", new BuyerDAO());
+		}
+		
+		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");
+		return managerDAO.login(username, password);
 	}
 	
 	@PUT

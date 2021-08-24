@@ -11,16 +11,19 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Buyer;
 import beans.Deliverer;
 import beans.Manager;
 import beans.Sex;
 
 public class DelivererDAO {
 	private ArrayList<Deliverer> allDeliverers;
+	private Deliverer loggedInDeliverer;
 	private String pathToRepository;
 	
 	public DelivererDAO() {
 		allDeliverers = new ArrayList<Deliverer>();
+		loggedInDeliverer = new Deliverer();
 		pathToRepository = "WebContent/Repository/";
 		loadDeliverers();
 	}
@@ -29,6 +32,10 @@ public class DelivererDAO {
 		return allDeliverers;
 	}
 	
+	public Deliverer getLoggedInDeliverer() {
+		return loggedInDeliverer;
+	}
+
 	public void loadDeliverers() {
 		JSONParser jsonParser = new JSONParser();
 
@@ -47,6 +54,15 @@ public class DelivererDAO {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+	}
+	
+	public Deliverer login(String username, String password) {
+		for(int i = 0; i < allDeliverers.size(); i++)
+			if(allDeliverers.get(i).getUsername().equals(username) && allDeliverers.get(i).getPassword().equals(password)) {
+				loggedInDeliverer = allDeliverers.get(i);
+				return loggedInDeliverer;
+			}
+		return null;
 	}
 	
 	private Deliverer parseDeliverer(JSONObject deliverer) 

@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/articleAdd.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/updateProfile.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -14,35 +15,39 @@
         <form action="#">
             <div class="data">
                 <label>Korisničko ime *</label>
-                <input type="text" value="petar" required/>
+                <input id="username" type="text"/>
+            </div>
+            <div class="data">
+                <label>Email *</label>
+                <input id="email" type="text"/>
             </div>
             <div class="data">
                 <label>Ime *</label>
-                <input type="text" value="Petar" required/>
+                <input id="firstName" type="text"/>
             </div>
             <div class="data">
                 <label>Prezime *</label>
-                <input type="text" value="Petrović" required/>
+                <input id="lastName" type="text"/>
             </div>
             <div class="data">
                 <label>Pol *</label>
-                <select style="cursor: pointer;" required>
+                <select id="gender" style="cursor: pointer;">
 					<option value="">Izaberi pol</option>
-					<option value="1" selected>Muško</option>
-					<option value="2">Žensko</option>
+					<option>Muško</option>
+					<option>Žensko</option>
 				</select>
             </div>
             <div class="data">
                 <label>Datum rođenja *</label>
-                <input type='date' value="15/02/1993" required/>
+                <input id="dateOfBirth" type='date'/>
             </div>
             <div class="data">
                 <label>Lozinka</label>
-                <input type="password" value="petar"/>
+                <input id="password" type="password"/>
             </div>      
             <div class="btn">
                 <div class="inner"></div>
-                <button type="submit">Sačuvaj izmene</button>
+                <button id="submit" type="button">Sačuvaj izmene</button>
             </div>
         </form>
     </div>

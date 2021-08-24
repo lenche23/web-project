@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/login.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/login.js"></script>
 </head>
 <body>
     <div class="center">
@@ -12,16 +13,17 @@
             <form action="#">
                 <div class="data">
                     <label>Korisničko ime *</label>
-                    <input type="text" required/>
+                    <input id="username" type="text"/>
                 </div>
                 <div class="data">
                     <label>Lozinka *</label>
-                    <input type="password" required/>
+                    <input id="password" type="password"/>
                 </div>
+                <div id="errorDiv" style="color: red; margin-bottom: 20px;">Korisničko ime i lozinka se ne poklapaju</div>
                 <div class="forgot-pass"><a href="#">Zaboravili ste lozinku?</a></div>
                 <div class="btn">
                     <div class="inner"></div>
-                    <button type="submit">Prijavi se</button>
+                    <button id="submit" type="button">Prijavi se</button>
                 </div>
                 <div class="signUp-link">Nemate nalog? <a href="register.html">Registrujte se sada.</a></div>
             </form>

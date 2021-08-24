@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/userProfile.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/userProfile.js"></script>
 </head>
 <body>
     <header id="titleRectangle">
@@ -13,7 +14,7 @@
         <div>
 			<br>
             <button id="changeBtn">Izmeni profil</button>
-			<label id="promoText">&nbspPetar Petrović</label>
+			<label id="promoText"></label>
 		</div>
         <table class="container">
             <thead>
@@ -39,6 +40,8 @@
                             <br>
                             <label class="label">Korisničko<nobr> ime:</label>
                             <br>
+                            <label class="label">Email:</label>
+                            <br>
                             <label class="label">Datum rođenja:</label>
                             <br>
                             <label class="label">Pol:</label>
@@ -46,27 +49,29 @@
                     </td>
                     <td>
                         <div class="container-data-data">
-                            <input class="inputBoxes" type="text" value="Petar" disabled />
+                            <input id="firstName" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="Petrović" disabled />
+                            <input id="lastName" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="petar" disabled />
+                            <input id="username" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="15.2.1993." disabled />
+                            <input id="email" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="Muško" disabled />
+                            <input id="dateOfBirth" class="inputBoxes" type="text" disabled />
+                            <br>
+                            <input id="gender" class="inputBoxes" type="text" disabled />
                         </div>
                     </td>  
                 </th>
             </tbody>
         </table>
-        <div>
+        <div id="mojePorudzbineTitleDiv">
             <br>
 			<label id="promoText">&nbspMoje porudžbine</label>
             <br>
             <br>
         </div>
-        <div style="padding-left: 3%; padding-top: 15px;">
+        <div id="filterDiv" style="padding-left: 3%; padding-top: 15px;">
 			<label style="padding-right: 40px"  class="searchText">Filter:</label>
 			<input type="checkbox" style="margin-left: 18px; cursor: pointer;"/>
 			<label style="color: black; font-weight: bold; font-size: 13pt;">Nedostavljene porudžbine</label>
