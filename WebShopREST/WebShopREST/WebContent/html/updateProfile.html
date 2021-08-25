@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="../css/articleAdd.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/updateProfile.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
 	<script src="../js/updateProfile.js"></script>
 </head>
@@ -15,7 +15,7 @@
         <form action="#">
             <div class="data">
                 <label>Korisničko ime *</label>
-                <input id="username" type="text"/>
+                <input id="username" type="text" disabled/>
             </div>
             <div class="data">
                 <label>Email *</label>
@@ -33,8 +33,8 @@
                 <label>Pol *</label>
                 <select id="gender" style="cursor: pointer;">
 					<option value="">Izaberi pol</option>
-					<option>Muško</option>
-					<option>Žensko</option>
+					<option value="Muško">Muško</option>
+					<option value="Žensko">Žensko</option>
 				</select>
             </div>
             <div class="data">

@@ -35,6 +35,9 @@ public class ManagerService {
 	
 	@PostConstruct
 	public void init() {
+		if (ctx.getAttribute("restaurantDAO") == null) {
+	    	ctx.setAttribute("restaurantDAO", new RestaurantDAO());
+		}
 		if (ctx.getAttribute("managerDAO") == null) {
 	    	ctx.setAttribute("managerDAO", new ManagerDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
 		}

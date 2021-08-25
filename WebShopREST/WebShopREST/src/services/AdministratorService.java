@@ -1,20 +1,21 @@
 package services;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import beans.Administrator;
-import beans.Buyer;
-import beans.Manager;
 import dao.AdministratorDAO;
 import dao.BuyerDAO;
 import dao.DelivererDAO;
@@ -65,6 +66,9 @@ public class AdministratorService {
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Administrator login(@QueryParam("username") String username, @QueryParam("password") String password) {
+		if (ctx.getAttribute("restaurantDAO") == null) {
+	    	ctx.setAttribute("restaurantDAO", new RestaurantDAO());
+		}
 		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		if (ctx.getAttribute("buyerDAO") == null) {
 	    	ctx.setAttribute("buyerDAO", new BuyerDAO());
@@ -78,5 +82,18 @@ public class AdministratorService {
 		
 		AdministratorDAO administratorDAO = (AdministratorDAO) ctx.getAttribute("administratorDAO");
 		return administratorDAO.login(username, password);
+	}
+	
+	@PUT
+	@Path("/saveProfileChanges/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void saveProfileChanges(@PathParam("id") String username, Administrator admin) {
+		AdministratorDAO administratorDAO = (AdministratorDAO) ctx.getAttribute("administratorDAO");
+		
+		try {
+			administratorDAO.saveProfileChanges(username, admin);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

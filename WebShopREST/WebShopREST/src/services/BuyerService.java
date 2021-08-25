@@ -89,6 +89,9 @@ public class BuyerService {
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Buyer login(@QueryParam("username") String username, @QueryParam("password") String password) {
+		if (ctx.getAttribute("restaurantDAO") == null) {
+	    	ctx.setAttribute("restaurantDAO", new RestaurantDAO());
+		}
 		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		if (ctx.getAttribute("administratorDAO") == null) {
 	    	ctx.setAttribute("administratorDAO", new AdministratorDAO());

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +18,7 @@ import org.json.simple.parser.ParseException;
 
 import beans.Administrator;
 import beans.Buyer;
+import beans.Deliverer;
 import beans.Manager;
 import beans.Sex;
 
@@ -68,6 +70,45 @@ public class AdministratorDAO {
         Administrator newAdministrator = new Administrator(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted);
 		return newAdministrator;
     }
+	
+	public void saveProfileChanges(String username, Administrator admin) throws IOException {
+		for(Administrator a : allAdministrators) {
+			if(a.getUsername().equals(username)) {
+				a.setPassword(admin.getPassword());
+				a.setDateOfBirth(admin.getDateOfBirth());
+				a.setEmail(admin.getEmail());
+				a.setFirstName(admin.getFirstName());
+				a.setGender(admin.getGender());
+				a.setLastName(admin.getLastName());
+			}
+		}
+		
+		JSONArray administrators = new JSONArray();
+		for (Administrator a : allAdministrators) {
+			JSONObject administratorObject = new JSONObject();
+			
+			administratorObject.put("firstName", a.getFirstName());
+			administratorObject.put("lastName", a.getLastName());
+			administratorObject.put("email", a.getEmail());
+			administratorObject.put("username", a.getUsername());
+			administratorObject.put("password", a.getPassword());
+			administratorObject.put("gender", a.getGender().toString());
+			administratorObject.put("dateOfBirth", a.getDateOfBirth());
+			administratorObject.put("deleted", a.isDeleted());
+			
+			JSONObject administratorObject2 = new JSONObject(); 
+	        administratorObject2.put("administrator", administratorObject);
+			
+	        administrators.add(administratorObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "administrators.json")) {
+            file.write(administrators.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 
 	public Administrator getLoggedInAdministrator() {
 		return loggedInAdministrator;
