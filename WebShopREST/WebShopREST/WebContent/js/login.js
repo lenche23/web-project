@@ -11,8 +11,10 @@ $(document).ready(function(){
 		$.get({
 			url: "../rest/buyers/login?username=" + username + "&password=" + password,
 			success: function(buyer){
-				if(buyer)
+				if(buyer) {
 					userFound = true;
+					window.location.replace("../html/index.html");
+				}
 				else {
 					$.get({
 						url: "../rest/managers/login?username=" + username + "&password=" + password,

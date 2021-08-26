@@ -153,6 +153,33 @@ body {
 	cursor: pointer;
 }
 
+#commentsTable {
+	border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-family: Georgia, serif;
+	text-align: center;
+	background-color: rgba(199, 207, 199, 0.76);
+	color: black;
+	font-size: 12pt;
+	margin: 10px;
+}
+
+#commentsTable td, #commentsTable th {
+	padding: 15px;
+	border-bottom: 1px solid rgb(177, 135, 38);
+}
+
+#commentsTable tr.selected {
+	background: lightblue;
+}
+
+#commentsTable tr {
+	cursor: pointer;
+}
+
 .inputBoxes {
 	border-radius: 15px;
 	text-align: left;

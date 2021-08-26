@@ -16,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.Administrator;
 import beans.Buyer;
 import beans.Manager;
 import dao.AdministratorDAO;
@@ -118,6 +119,19 @@ public class ManagerService {
 		
 		try {
 			managerDAO.addManagerToRestaurant(username, name, restaurantDAO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
+	@Path("/saveProfileChanges/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void saveProfileChanges(@PathParam("id") String username, Manager manager) {
+		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");
+		
+		try {
+			managerDAO.saveProfileChanges(username, manager);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Administrator;
 import beans.Buyer;
 import beans.Manager;
 import beans.Sex;
@@ -109,6 +110,45 @@ public class ManagerDAO {
 				managerObject.put("restaurant", m.getRestaurant().getName());
 			else
 				managerObject.put("restaurant", null);
+			
+			JSONObject managerObject2 = new JSONObject(); 
+	        managerObject2.put("manager", managerObject);
+			
+	        managers.add(managerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "managers.json")) {
+            file.write(managers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void saveProfileChanges(String username, Manager manager) throws IOException {
+		for(Manager m : allManagers) {
+			if(m.getUsername().equals(username)) {
+				m.setPassword(manager.getPassword());
+				m.setDateOfBirth(manager.getDateOfBirth());
+				m.setEmail(manager.getEmail());
+				m.setFirstName(manager.getFirstName());
+				m.setGender(manager.getGender());
+				m.setLastName(manager.getLastName());
+			}
+		}
+		
+		JSONArray managers = new JSONArray();
+		for (Manager m : allManagers) {
+			JSONObject managerObject = new JSONObject();
+			
+			managerObject.put("firstName", m.getFirstName());
+			managerObject.put("lastName", m.getLastName());
+			managerObject.put("email", m.getEmail());
+			managerObject.put("username", m.getUsername());
+			managerObject.put("password", m.getPassword());
+			managerObject.put("gender", m.getGender().toString());
+			managerObject.put("dateOfBirth", m.getDateOfBirth());
+			managerObject.put("deleted", m.isDeleted());
 			
 			JSONObject managerObject2 = new JSONObject(); 
 	        managerObject2.put("manager", managerObject);

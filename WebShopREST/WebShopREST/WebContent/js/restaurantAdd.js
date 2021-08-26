@@ -265,7 +265,10 @@ function createRestaurantWithNewManager() {
 					url: "../rest/managers/save",
 					data: JSON.stringify({"firstName": firstName, "lastName": lastName, "email": email, "username": username, "password": password, "gender": gender, "dateOfBirth": dateOfBirth, "restaurant": restaurant}),
 					contentType: 'application/json',
-					dataType: 'json'
+					dataType: 'json',
+					success: function(){
+						window.location.href='index.html';
+					}
 				});
 			}
 		});
@@ -400,7 +403,10 @@ function createRestaurantWithExistingManager() {
 					type: 'PUT',
 					url: "../rest/managers/addManager/" + manager + "/toRestaurant/" + name,
 					contentType: 'application/json',
-					dataType: 'json'
+					dataType: 'json',
+					success: function(){
+						window.location.href='index.html';
+					}
 				});
 			}
 		});

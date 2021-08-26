@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/manager.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/manager.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -13,9 +14,10 @@
 	<div id="articlesRectangle">
 		<div>
 			<br />
-			<label id="buyersText">&nbspPero Perić</label>
+			<label id="buyersText"></label>
 			<button class="menuBtns" id="profile">Moj profil</button>
 			<button class="menuBtns" id="ordersAndBuyers">Porudžbine i kupci</button>
+			<button class="menuBtns" id="restaurantsBtn">Restorani</button>
 		</div>
 		<table class="container">
             <thead>
@@ -28,7 +30,7 @@
                 <th>
                     <td>
                         <div class="container-pic">
-                            <img src="../images/italian.png" style="width: 210px;"/>
+                            <img id="logo" src="../images/italian.png" style="width: 210px;"/>
                         </div>
                     </td>
                 </th>
@@ -48,15 +50,15 @@
                     </td>
                     <td>
                         <div class="container-data-data">
-                            <input class="inputBoxes" type="text" value="Italian wonderland" disabled />
+                            <input id="name" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="Cara Dušana 2, Novi Sad, Srbija" disabled />
+                            <input id="address" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="italijanski" disabled />
+                            <input id="type" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="4.0" disabled />
+                            <input id="grade" class="inputBoxes" type="text" disabled />
                             <br>
-                            <input class="inputBoxes" type="text" value="radi" disabled />
+                            <input id="status" class="inputBoxes" type="text" disabled />
                         </div>
                     </td>  
                 </th>
@@ -70,14 +72,6 @@
 			<label class="searchText">Pretraga:</label>
 			<input id="inputBox" type="text" placeholder="Naziv artikla" />
 			<input id="searchIcon" type="image" src="../images/searchIcon.png" />
-		</div>
-        <div style="padding-left: 3%; padding-top: 15px;">
-			<label style="padding-right: 40px"  class="searchText">Filter:</label>
-			<select class="dropdownBoxes">
-				<option>Tip artikla</option>
-				<option>Jelo</option>
-				<option>Piće</option>
-			</select>
 		</div>
         <br>
 		<table id="articlesTable">
@@ -140,6 +134,9 @@
 		$(document).ready(function(){
 			$('#ordersAndBuyers').click(function(){
 				window.location.href='orders_and_buyers_of_restaurant.html';
+			});
+			$('#restaurantsBtn').click(function(){
+				window.location.href='index.html';
 			});
 			$('#profile').click(function(){
 				window.location.href='userProfile.html';

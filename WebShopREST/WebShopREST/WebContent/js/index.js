@@ -1,16 +1,26 @@
 $(document).ready(function(){
 	loadRestaurants();
+	loadPageForAdministrator();
+	loadPageForManager();
 
 	$('#restaurantAdd').click(function(){
 		window.location.href='restaurantAdd.html';
 	});
+	
+	$('#managerBtn').click(function(){
+		window.location.href='manager.html';
+	});
+	
+	$('#restaurantsBtn').click(function(){
+		window.location.href='index.html';
+	});
+	
+	$('#usersBtn').click(function(){
+		window.location.href='administrator.html';
+	});
 
 	$('#profileBtn').click(function(){
-		// if (korisnik ulogovan) {
-			window.location.href='userProfile.html';
-		// } else {
-		// 	window.location.href='login.html';
-		// }
+		window.location.href='userProfile.html';
 	});
 	$('#registerBtn').click(function(){
 		window.location.href='register.html';
@@ -34,7 +44,42 @@ $(document).ready(function(){
 	$("#removeRestaurant").click(function() {
 		removeRestaurant();
 	});
+	
+	$("#restaurantOverview").click(function() {
+		viewRestaurant();
+	});
 });
+
+function loadPageForAdministrator() {
+	$.get({
+			url: '../rest/administrators/loggedInAdministrator',
+			success: function(administrator){
+				if(administrator.username !== "") {
+					$('#actionBtnsDiv').css("width", "600px");
+					$('#usersBtn').show();
+					$('#profileBtn').show();
+					$('#removeRestaurant').show();
+					$('#restaurantAdd').show();
+					$('#registerBtn').hide();
+					$('#loginBtn').hide();
+				}
+			}
+	})
+}
+
+function loadPageForManager() {
+	$.get({
+			url: '../rest/managers/loggedInManager',
+			success: function(administrator){
+				if(administrator.username !== "") {
+					$('#profileBtn').show();
+					$('#managerBtn').show();
+					$('#registerBtn').hide();
+					$('#loginBtn').hide();
+				}
+			}
+	})
+}
 
 function removeRestaurant() {
 	let name = $('tr.selected').find('td:eq(1)').text();
@@ -48,6 +93,19 @@ function removeRestaurant() {
 	});	
 }
 
+function viewRestaurant() {
+	let name = $('tr.selected').find('td:eq(1)').text();
+	
+	$.get({
+			url: '../rest/restaurants/setViewedRestaurant/' + name,
+			contentType: 'application/json',
+			dataType: 'json'
+	});	
+	
+	if(name !== "")
+		window.location.href='restaurant.html';
+}
+
 function selectedRow() {
 	return function() {
 		$('tr.selected').removeClass('selected');
@@ -56,6 +114,11 @@ function selectedRow() {
 }
 
 function loadRestaurants() {
+	$('#usersBtn').hide();
+	$('#profileBtn').hide();
+	$('#removeRestaurant').hide();
+	$('#restaurantAdd').hide();
+	$('#managerBtn').hide();
 	$.get({
 		url: '../rest/restaurants/',
 		success: function(restaurants){
@@ -76,12 +139,12 @@ function addRestaurantToTable(restaurant){
 	let name = $('<td>').text(restaurant.name);
 	let address = $('<td>').text(restaurant.location.address);
 	let type = $('<td>').text(restaurant.type);
-	let grade = $('<td>').text(4.5);
+	let grade = $('<td>').text('-');
 	let status = '';
 	if(restaurant.status == "OPEN")
-		status = $('<td>').text('Da');
+		status = $('<td>').text('Otvoren');
 	else
-		status = $('<td>').text('Ne');
+		status = $('<td>').text('Zatvoren');
 	
 	newRow.append(logoTd).append(name).append(address).append(type).append(grade).append(status);
 	newRow.click(selectedRow());

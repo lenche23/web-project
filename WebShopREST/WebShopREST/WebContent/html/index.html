@@ -17,6 +17,9 @@
 			<button class="navBtns" id="loginBtn">Prijava</button>
 			<button class="navBtns" id="registerBtn">Registracija</button>
 			<button class="navBtns" id="profileBtn">Moj profil</button>
+			<button class="navBtns" id="managerBtn">Moj restoran</button>
+			<button class="navBtns" id="restaurantsBtn">Restorani</button>
+			<button class="navBtns" id="usersBtn">Korisnici</button>
 			<label class="promoText"><br>&nbsp&nbsp&nbsp&nbspgde i bake kupuju!</label>
 		</div>
 		<br>
@@ -45,9 +48,10 @@
 			<input type="checkbox" name="filterOpen" id="filterOpen" style="margin-left: 18px; cursor: pointer;"/>
 			<label style="color: black; font-weight: bold; font-size: 13pt;" >Otvoren</label>
 		</div>
-		<div style="height: 50px;"></div>
-		<div style="text-align: center; margin: 0 auto; width: 400px;">
+		<div id="divBetweenRestaurantsAndFilters" style="height: 50px;"></div>
+		<div id="actionBtnsDiv" style="text-align: center; margin: 0 auto;">
 			<button class="actionBtns" id="removeRestaurant">Obriši restoran</button>
+			<button class="actionBtns" id="restaurantOverview">Pregledaj restoran</button>
 			<button class="actionBtns" id="restaurantAdd">Dodaj restoran</button>
 		</div>
 		<div style="height: 50px;"></div>
@@ -59,7 +63,7 @@
 					<th onclick="sortTable(2)">Lokacija</th>
 					<th>Tip</th>
 					<th onclick="sortTable(4)">Ocena</th>
-					<th>Otvoren</th>
+					<th>Status</th>
 				</tr>
 			</thead>
 

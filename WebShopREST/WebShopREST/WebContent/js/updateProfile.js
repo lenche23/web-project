@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	loadPageForAdministrator();
+	loadPageForManager();
 
 	$('#submit').click(function(){
 		let username = $('#username').val();
@@ -101,6 +102,25 @@ $(document).ready(function(){
 							contentType: 'application/json',
 							dataType: 'json'
 						});
+						window.location.href='userProfile.html';
+					}
+				}
+			})
+			
+			$.get({
+				url: '../rest/managers/loggedInManager',
+				success: function(manager){
+					if(manager.username !== "") {
+						$.ajax({
+							type: 'PUT',
+							url: "../rest/managers/saveProfileChanges/" + username,
+							data: JSON.stringify({"username": username, "firstName": firstName, "lastName": lastName, "email": email, "password": password, "gender": genderForPut, "dateOfBirth": dateOfBirth}),
+							contentType: 'application/json',
+							dataType: 'json',
+							success: function(){
+								window.location.href='userProfile.html';
+							}
+						});
 					}
 				}
 			})
@@ -126,6 +146,32 @@ function loadPageForAdministrator() {
 					
 					$('#password').val(administrator.password);
 					if(administrator.gender === "MALE")
+						$('#gender').val("Muško");
+					else
+						$('#gender').val("Žensko");
+				}
+			}
+	})
+}
+
+function loadPageForManager() {
+	$.get({
+			url: '../rest/managers/loggedInManager',
+			success: function(manager){
+				if(manager.username !== "") {
+					$('#firstName').val(manager.firstName);
+					$('#lastName').val(manager.lastName);
+					$('#username').val(manager.username);
+					$('#email').val(manager.email);
+					
+					let date = new Date(manager.dateOfBirth);
+					var day = ("0" + date.getDate()).slice(-2);
+					var month = ("0" + (date.getMonth() + 1)).slice(-2);
+					var dateFormat = date.getFullYear()+"-"+(month)+"-"+(day) ;
+					$('#dateOfBirth').val(dateFormat);
+					
+					$('#password').val(manager.password);
+					if(manager.gender === "MALE")
 						$('#gender').val("Muško");
 					else
 						$('#gender').val("Žensko");

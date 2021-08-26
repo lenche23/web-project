@@ -142,7 +142,10 @@ $(document).ready(function(){
 				url: "../rest/buyers/save",
 				data: JSON.stringify({"firstName": firstName, "lastName": lastName, "email": email, "username": username, "password": password, "gender": gender, "dateOfBirth": dateOfBirth}),
 				contentType: 'application/json',
-				dataType: 'json'
+				dataType: 'json',
+				success: function(){
+					window.location.replace("../html/index.html");
+				}
 			});
 		}
 	});

@@ -20,11 +20,13 @@ import beans.RestaurantStatus;
 public class RestaurantDAO {
 	private ArrayList<Restaurant> allRestaurants;
 	private ArrayList<Restaurant> filteredRestaurants;
+	private Restaurant viewedRestaurant;
 	private String pathToRepository;
 	
 	public RestaurantDAO() {
 		allRestaurants = new ArrayList<Restaurant>();
 		filteredRestaurants = new ArrayList<Restaurant>();
+		viewedRestaurant = new Restaurant();
 		pathToRepository = "WebContent/Repository/";
 		loadRestaurants();
 	}
@@ -33,6 +35,10 @@ public class RestaurantDAO {
 		return allRestaurants;
 	}
 	
+	public Restaurant getViewedRestaurant() {
+		return viewedRestaurant;
+	}
+
 	public ArrayList<Restaurant> getFilteredRestaurants(String type, String open) {
 		filteredRestaurants.clear();
 		for(int i = 0; i < allRestaurants.size(); i++) {
@@ -236,5 +242,11 @@ public class RestaurantDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	public void setViewedRestaurant(String name) throws IOException {
+		for(int i = 0; i < allRestaurants.size(); i++)
+			if(allRestaurants.get(i).getName().equals(name))
+				viewedRestaurant = allRestaurants.get(i);
 	}
 }

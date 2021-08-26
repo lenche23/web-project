@@ -86,4 +86,24 @@ public class RestaurantService {
 			e.printStackTrace();
 		}
 	}
+	
+	@GET
+	@Path("/setViewedRestaurant/{name}")
+	public void setViewedRestaurant(@PathParam("name") String name) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		
+		try {
+			restaurantDAO.setViewedRestaurant(name);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@GET
+	@Path("/getViewedRestaurant")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Restaurant getViewedRestaurant() {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		return restaurantDAO.getViewedRestaurant();
+	}
 }
