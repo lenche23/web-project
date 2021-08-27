@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/articleAdd.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/articleAdd.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -14,35 +15,35 @@
         <form action="#">
             <div class="data">
                 <label>Naziv *</label>
-                <input type="text" required/>
+                <input id="name" type="text"/>
             </div>
             <div class="data">
                 <label>Cena *</label>
-                <input type="text" required/>
+                <input type="text" id="price"/>
             </div>
             <div class="data">
                 <label>Tip *</label>
-                <select style="cursor: pointer;" required>
+                <select style="cursor: pointer;" id="type">
 					<option value="">Izaberi tip artikla</option>
-					<option value="1">Jelo</option>
-					<option value="2">Piće</option>
+					<option value="FOOD">Jelo</option>
+					<option value="DRINK">Piće</option>
 				</select>
             </div>
             <div class="data">
                 <label>Logo *</label>
-                <input type='file' required/>
+                <input id="logo" type='file'/>
             </div>
             <div class="data">
                 <label>Opis</label>
-                <input type="text"/>
+                <input id="description" type="text"/>
             </div>      
             <div class="data">
                 <label>Količina</label>
-                <input type="text"/>
+                <input id="quantity" type="text"/>
             </div>
             <div class="btn">
                 <div class="inner"></div>
-                <button type="submit">Kreiraj</button>
+                <button id="submit" type="button">Kreiraj</button>
             </div>
         </form>
     </div>

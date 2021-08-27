@@ -70,10 +70,11 @@ function loadPageForAdministrator() {
 function loadPageForManager() {
 	$.get({
 			url: '../rest/managers/loggedInManager',
-			success: function(administrator){
-				if(administrator.username !== "") {
+			success: function(manager){
+				if(manager.username !== "") {
 					$('#profileBtn').show();
-					$('#managerBtn').show();
+					if(manager.restaurant.name)
+						$('#managerBtn').show();
 					$('#registerBtn').hide();
 					$('#loginBtn').hide();
 				}
@@ -122,9 +123,11 @@ function loadRestaurants() {
 	$.get({
 		url: '../rest/restaurants/',
 		success: function(restaurants){
-			for(let restaurant of restaurants)
+			for(let restaurant of restaurants){
 				if(!restaurant.deleted)
 					addRestaurantToTable(restaurant);
+			}
+			sortTable(5);
 		}
 	})
 }

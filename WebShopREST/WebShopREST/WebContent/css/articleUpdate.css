@@ -127,3 +127,11 @@ form .btn button {
     cursor: pointer;
 }
 
+.red::placeholder { 
+   color: red;
+   opacity: 0.6;
+}
+
+.red {
+	border: 1px solid red !important;
+}

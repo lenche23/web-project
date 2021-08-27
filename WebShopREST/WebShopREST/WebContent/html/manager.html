@@ -67,6 +67,7 @@
 		<div style="text-align: center; float: left;">
 			<button class="navBtn" id="addArticle">Dodaj artikal</button>
 			<button class="navBtn" id="updateArticle">Izmeni artikal</button>
+			<button class="navBtn" id="deleteArticle">Obriši artikal</button>
 		</div>
 		<div style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
@@ -87,38 +88,7 @@
 			</thead>
 		
 			<tbody id="tableBody">
-				<tr>
-					<td><img src="../images/ketchup.png" style="width: 100px;"></td>
-					<td>Kečap</td>
-					<td>89.99</td>
-					<td>Jelo</td> 
-					<td>250gr</td>
-					<td>preliv od paradajza</td>
-				</tr>
-				<tr>
-					<td><img src="../images/mayonnaise.png" style="width: 100px;"></td>
-					<td>Majonez</td>
-					<td>94.99</td>
-					<td>Jelo</td> 
-					<td>250gr</td>
-					<td>preliv od jaja</td>
-				</tr>
-				<tr>
-					<td><img src="../images/spaghetti.png" style="width: 100px;"></td>
-					<td>Špagete sa ćuftama</td>
-					<td>340</td>
-					<td>Jelo</td> 
-					<td>300gr</td>
-					<td>italijansko tradicionalno jelo sa testeninom, prelivima i mesom</td>
-				</tr>
-				<tr>
-					<td><img src="../images/cola.png" style="width: 100px;"></td>
-					<td>Coca Cola</td>
-					<td>110</td>
-					<td>Piće</td> 
-					<td>330ml</td>
-					<td>gazirano piće</td>
-				</tr>
+				
 			</tbody>
 		</table>
         <br>
@@ -143,9 +113,6 @@
 			});
 			$('#addArticle').click(function(){
 				window.location.href='articleAdd.html';
-			});
-			$('#updateArticle').click(function(){
-				window.location.href='articleUpdate.html';
 			});
 
 			$("#tableBody tr").click(function() {

@@ -21,7 +21,12 @@ $(document).ready(function(){
 						success: function(manager){
 							if(manager) {
 								userFound = true;
-								window.location.replace("../html/manager.html");
+								if(manager.restaurant.name.length > 0){
+									window.location.replace("../html/manager.html");
+								}
+								else{
+									window.location.replace("../html/index.html");
+								}
 							}
 							else {
 								$.get({

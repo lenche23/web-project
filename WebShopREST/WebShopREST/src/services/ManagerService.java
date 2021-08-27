@@ -20,6 +20,7 @@ import beans.Administrator;
 import beans.Buyer;
 import beans.Manager;
 import dao.AdministratorDAO;
+import dao.ArticleDAO;
 import dao.BuyerDAO;
 import dao.DelivererDAO;
 import dao.ManagerDAO;
@@ -41,6 +42,9 @@ public class ManagerService {
 		}
 		if (ctx.getAttribute("managerDAO") == null) {
 	    	ctx.setAttribute("managerDAO", new ManagerDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
+		}
+		if (ctx.getAttribute("articleDAO") == null) {
+	    	ctx.setAttribute("articleDAO", new ArticleDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
 		}
 	}
 	

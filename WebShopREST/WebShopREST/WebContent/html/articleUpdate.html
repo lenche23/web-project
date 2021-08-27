@@ -2,8 +2,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="../css/articleAdd.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/articleUpdate.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/articleUpdate.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -14,35 +15,35 @@
         <form action="#">
             <div class="data">
                 <label>Naziv *</label>
-                <input type="text" value="Kečap" required/>
+                <input type="text" id="name" disabled/>
             </div>
             <div class="data">
                 <label>Cena *</label>
-                <input type="text" value="89.99" required/>
+                <input type="text" id="price"/>
             </div>
             <div class="data">
                 <label>Tip *</label>
-                <select style="cursor: pointer;" required>
+                <select style="cursor: pointer;" id="type" disabled/>
 					<option value="">Izaberi tip artikla</option>
-					<option value="1" selected>Jelo</option>
-					<option value="2">Piće</option>
+					<option value="Jelo" selected>Jelo</option>
+					<option value="Piće">Piće</option>
 				</select>
             </div>
             <div class="data">
                 <label>Logo *</label>
-                <input type='file' required/>
+                <input type='file' id="logo"/>
             </div>
             <div class="data">
                 <label>Opis</label>
-                <input type="text" value="preliv od paradajza"/>
+                <input type="text" id="description"/>
             </div>      
             <div class="data">
                 <label>Količina</label>
-                <input type="text" value="250gr"/>
+                <input type="text" id="quantity"/>
             </div>
             <div class="btn">
                 <div class="inner"></div>
-                <button type="submit">Sačuvaj izmene</button>
+                <button id="submit" type="button">Sačuvaj izmene</button>
             </div>
         </form>
     </div>

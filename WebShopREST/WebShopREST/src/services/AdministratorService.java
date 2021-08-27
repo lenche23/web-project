@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Administrator;
 import dao.AdministratorDAO;
+import dao.ArticleDAO;
 import dao.BuyerDAO;
 import dao.DelivererDAO;
 import dao.ManagerDAO;
@@ -78,6 +79,9 @@ public class AdministratorService {
 		}
 		if (ctx.getAttribute("managerDAO") == null) {
 	    	ctx.setAttribute("managerDAO", new ManagerDAO(restaurantDAO));
+		}
+		if (ctx.getAttribute("articleDAO") == null) {
+	    	ctx.setAttribute("articleDAO", new ArticleDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
 		}
 		
 		AdministratorDAO administratorDAO = (AdministratorDAO) ctx.getAttribute("administratorDAO");

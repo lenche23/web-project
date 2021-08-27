@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Buyer;
 import dao.AdministratorDAO;
+import dao.ArticleDAO;
 import dao.BuyerDAO;
 import dao.DelivererDAO;
 import dao.ManagerDAO;
@@ -101,6 +102,9 @@ public class BuyerService {
 		}
 		if (ctx.getAttribute("managerDAO") == null) {
 	    	ctx.setAttribute("managerDAO", new ManagerDAO(restaurantDAO));
+		}
+		if (ctx.getAttribute("articleDAO") == null) {
+	    	ctx.setAttribute("articleDAO", new ArticleDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
 		}
 		
 		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
