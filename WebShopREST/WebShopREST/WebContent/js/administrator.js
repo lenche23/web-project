@@ -44,7 +44,20 @@ $(document).ready(function(){
 	$("#removeUser").click(function() {
 		removeUser();
 	});
+	
+	$('#logoutBtn').click(function(){
+		logout();
+	});
 });
+
+function logout() {
+	$.get({
+			url: '../rest/administrators/logout',
+			success: function(){
+				window.location.href='index.html';
+			}
+	})
+}
 
 function removeUser() {
 	let username = $('tr.selected').children(':first').text();

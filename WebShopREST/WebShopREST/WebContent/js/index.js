@@ -7,6 +7,10 @@ $(document).ready(function(){
 		window.location.href='restaurantAdd.html';
 	});
 	
+	$('#logoutBtn').click(function(){
+		logout();
+	});
+	
 	$('#managerBtn').click(function(){
 		window.location.href='manager.html';
 	});
@@ -50,6 +54,15 @@ $(document).ready(function(){
 	});
 });
 
+function logout() {
+	$.get({
+			url: '../rest/administrators/logout',
+			success: function(){
+				window.location.href='index.html';
+			}
+	})
+}
+
 function loadPageForAdministrator() {
 	$.get({
 			url: '../rest/administrators/loggedInAdministrator',
@@ -62,6 +75,7 @@ function loadPageForAdministrator() {
 					$('#restaurantAdd').show();
 					$('#registerBtn').hide();
 					$('#loginBtn').hide();
+					$('#logoutBtn').show();
 				}
 			}
 	})
@@ -77,6 +91,7 @@ function loadPageForManager() {
 						$('#managerBtn').show();
 					$('#registerBtn').hide();
 					$('#loginBtn').hide();
+					$('#logoutBtn').show();
 				}
 			}
 	})
@@ -120,6 +135,7 @@ function loadRestaurants() {
 	$('#removeRestaurant').hide();
 	$('#restaurantAdd').hide();
 	$('#managerBtn').hide();
+	$('#logoutBtn').hide();
 	$.get({
 		url: '../rest/restaurants/',
 		success: function(restaurants){

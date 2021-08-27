@@ -100,4 +100,27 @@ public class AdministratorService {
 			e.printStackTrace();
 		}
 	}
+	
+	@GET
+	@Path("/logout")
+	public void logout() {
+		if(ctx.getAttribute("administratorDAO") != null) {
+		     ctx.removeAttribute("administratorDAO");
+		}
+		if(ctx.getAttribute("articleDAO") != null) {
+		     ctx.removeAttribute("articleDAO");
+		}
+		if(ctx.getAttribute("buyerDAO") != null) {
+		     ctx.removeAttribute("buyerDAO");
+		}
+		if(ctx.getAttribute("delivererDAO") != null) {
+		     ctx.removeAttribute("delivererDAO");
+		}
+		if(ctx.getAttribute("managerDAO") != null) {
+		     ctx.removeAttribute("managerDAO");
+		}
+		if(ctx.getAttribute("restaurantDAO") != null) {
+		     ctx.removeAttribute("restaurantDAO");
+		}
+	}
 }

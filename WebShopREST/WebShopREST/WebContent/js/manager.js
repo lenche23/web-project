@@ -9,10 +9,23 @@ $(document).ready(function(){
 		search();
 	});
 	
+	$('#logoutBtn').click(function(){
+		logout();
+	});
+	
 	$("#updateArticle").click(function() {
 		updateArticle();
 	});
 });
+
+function logout() {
+	$.get({
+			url: '../rest/administrators/logout',
+			success: function(){
+				window.location.href='index.html';
+			}
+	})
+}
 
 function updateArticle() {
 	if($('tr.selected').length === 1){
