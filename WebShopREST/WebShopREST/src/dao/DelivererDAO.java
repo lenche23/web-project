@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Administrator;
 import beans.Buyer;
 import beans.Deliverer;
 import beans.Manager;
@@ -188,5 +189,44 @@ public class DelivererDAO {
 		}
 		
 		return deliverersByNameSurnameAndUsername;
+	}
+	
+	public void saveProfileChanges(String username, Deliverer deliverer) throws IOException {
+		for(Deliverer d : allDeliverers) {
+			if(d.getUsername().equals(username)) {
+				d.setPassword(deliverer.getPassword());
+				d.setDateOfBirth(deliverer.getDateOfBirth());
+				d.setEmail(deliverer.getEmail());
+				d.setFirstName(deliverer.getFirstName());
+				d.setGender(deliverer.getGender());
+				d.setLastName(deliverer.getLastName());
+			}
+		}
+		
+		JSONArray deliverers = new JSONArray();
+		for (Deliverer d : allDeliverers) {
+			JSONObject delivererObject = new JSONObject();
+			
+			delivererObject.put("firstName", d.getFirstName());
+			delivererObject.put("lastName", d.getLastName());
+			delivererObject.put("email", d.getEmail());
+			delivererObject.put("username", d.getUsername());
+			delivererObject.put("password", d.getPassword());
+			delivererObject.put("gender", d.getGender().toString());
+			delivererObject.put("dateOfBirth", d.getDateOfBirth());
+			delivererObject.put("deleted", d.isDeleted());
+			
+			JSONObject delivererObject2 = new JSONObject(); 
+	        delivererObject2.put("deliverer", delivererObject);
+			
+	        deliverers.add(delivererObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "deliverers.json")) {
+            file.write(deliverers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }

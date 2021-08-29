@@ -17,17 +17,62 @@ function loadRestaurantPage() {
 					$('#status').val("Zatvoren");
 					
 				$.get({
-					url: '../rest/articles/articlesFromRestaurant?restaurantName=' + restaurant.name,
-					success: function(articles){
-						for(let article of articles)
-							if(!article.deleted)
-								addArticleToTable(article);
-					}
-				})
+						url: '../rest/buyers/loggedInBuyer',
+						success: function(buyer){
+							if(buyer.username !== "") {
+								$.get({
+									url: '../rest/articles/articlesFromRestaurant?restaurantName=' + restaurant.name,
+									success: function(articles){
+										for(let article of articles)
+											if(!article.deleted)
+												addArticleToTableBuyer(article);
+									}
+								})
+							}
+							else{
+								$('#actionBtnsDiv').hide();
+								$('#divBetweenButtonAndMyOrders').hide();
+								$("#articlesTable th:last-child").remove();
+								$.get({
+									url: '../rest/articles/articlesFromRestaurant?restaurantName=' + restaurant.name,
+									success: function(articles){
+										for(let article of articles)
+											if(!article.deleted)
+												addArticleToTable(article);
+									}
+								})
+							}
+						}
+				})	
 					
 				$('#commentsTable').hide();
 			}
 	})
+}
+
+function addArticleToTableBuyer(article){
+	let tableBody = $('#tableBody');
+	let newRow = $('<tr>');
+	
+	let logoTd = $('<td>');
+	let logo = $('<img style="width: 100px;" src="../images/' + article.logo + '" alt="Slika">');
+	logoTd.append(logo);
+	let name = $('<td>').text(article.name);
+	let price = $('<td>').text(article.price);
+	let type = "";
+	if(article.type === "FOOD")
+		type = $('<td>').text("Jelo");
+	else
+		type = $('<td>').text("Piće");
+	let size = $('<td>').text(article.quantity);
+	let description = $('<td>').text(article.description);
+	let quantityTd = $('<td>');
+	let quantity = $('<input type="text" />');
+	quantityTd.append(quantity);
+	
+	newRow.append(logoTd).append(name).append(price).append(type).append(size).append(description).append(quantityTd);
+	newRow.click(selectedRow());
+	tableBody.append(newRow);
 }
 
 function addArticleToTable(article){
@@ -44,10 +89,10 @@ function addArticleToTable(article){
 		type = $('<td>').text("Jelo");
 	else
 		type = $('<td>').text("Piće");
-	let quantity = $('<td>').text(article.quantity);
+	let size = $('<td>').text(article.quantity);
 	let description = $('<td>').text(article.description);
 	
-	newRow.append(logoTd).append(name).append(price).append(type).append(quantity).append(description);
+	newRow.append(logoTd).append(name).append(price).append(type).append(size).append(description);
 	newRow.click(selectedRow());
 	tableBody.append(newRow);
 }

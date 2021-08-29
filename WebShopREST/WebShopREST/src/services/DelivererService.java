@@ -16,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.Administrator;
 import beans.Buyer;
 import beans.Deliverer;
 import dao.AdministratorDAO;
@@ -110,6 +111,19 @@ public class DelivererService {
 		
 		try {
 			delivererDAO.deleteDeliverer(username);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
+	@Path("/saveProfileChanges/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void saveProfileChanges(@PathParam("id") String username, Deliverer deliverer) {
+		DelivererDAO delivererDAO = (DelivererDAO) ctx.getAttribute("delivererDAO");
+		
+		try {
+			delivererDAO.saveProfileChanges(username, deliverer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -2,6 +2,7 @@ $(document).ready(function(){
 	loadRestaurants();
 	loadPageForAdministrator();
 	loadPageForManager();
+	loadPageForBuyer();
 
 	$('#restaurantAdd').click(function(){
 		window.location.href='restaurantAdd.html';
@@ -73,6 +74,20 @@ function loadPageForAdministrator() {
 					$('#profileBtn').show();
 					$('#removeRestaurant').show();
 					$('#restaurantAdd').show();
+					$('#registerBtn').hide();
+					$('#loginBtn').hide();
+					$('#logoutBtn').show();
+				}
+			}
+	})
+}
+
+function loadPageForBuyer() {
+	$.get({
+			url: '../rest/buyers/loggedInBuyer',
+			success: function(buyer){
+				if(buyer.username !== "") {
+					$('#profileBtn').show();
 					$('#registerBtn').hide();
 					$('#loginBtn').hide();
 					$('#logoutBtn').show();

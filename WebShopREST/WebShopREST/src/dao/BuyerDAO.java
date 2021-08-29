@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Administrator;
 import beans.Buyer;
 import beans.BuyerType;
 import beans.Sex;
@@ -229,5 +230,44 @@ public class BuyerDAO {
 		}
 		
 		return buyersByNameSurnameAndUsername;
+	}
+	
+	public void saveProfileChanges(String username, Buyer buyer) throws IOException {
+		for(Buyer b : allBuyers) {
+			if(b.getUsername().equals(username)) {
+				b.setPassword(buyer.getPassword());
+				b.setDateOfBirth(buyer.getDateOfBirth());
+				b.setEmail(buyer.getEmail());
+				b.setFirstName(buyer.getFirstName());
+				b.setGender(buyer.getGender());
+				b.setLastName(buyer.getLastName());
+			}
+		}
+		
+		JSONArray buyers = new JSONArray();
+		for (Buyer b : allBuyers) {
+			JSONObject buyerObject = new JSONObject();
+			
+			buyerObject.put("firstName", b.getFirstName());
+			buyerObject.put("lastName", b.getLastName());
+			buyerObject.put("email", b.getEmail());
+			buyerObject.put("username", b.getUsername());
+			buyerObject.put("password", b.getPassword());
+			buyerObject.put("gender", b.getGender().toString());
+			buyerObject.put("dateOfBirth", b.getDateOfBirth());
+			buyerObject.put("deleted", b.isDeleted());
+			
+			JSONObject buyerObject2 = new JSONObject(); 
+	        buyerObject2.put("buyer", buyerObject);
+			
+	        buyers.add(buyerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "buyers.json")) {
+            file.write(buyers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }

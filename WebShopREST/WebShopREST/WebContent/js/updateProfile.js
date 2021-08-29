@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	loadPageForAdministrator();
 	loadPageForManager();
+	loadPageForDeliverer();
+	loadPageForBuyer();
 
 	$('#submit').click(function(){
 		let username = $('#username').val();
@@ -124,6 +126,42 @@ $(document).ready(function(){
 					}
 				}
 			})
+			
+			$.get({
+				url: '../rest/deliverers/loggedInDeliverer',
+				success: function(deliverer){
+					if(deliverer.username !== "") {
+						$.ajax({
+							type: 'PUT',
+							url: "../rest/deliverers/saveProfileChanges/" + username,
+							data: JSON.stringify({"username": username, "firstName": firstName, "lastName": lastName, "email": email, "password": password, "gender": genderForPut, "dateOfBirth": dateOfBirth}),
+							contentType: 'application/json',
+							dataType: 'json',
+							success: function(){
+								window.location.href='userProfile.html';
+							}
+						});
+					}
+				}
+			})
+			
+			$.get({
+				url: '../rest/buyers/loggedInBuyer',
+				success: function(buyer){
+					if(buyer.username !== "") {
+						$.ajax({
+							type: 'PUT',
+							url: "../rest/buyers/saveProfileChanges/" + username,
+							data: JSON.stringify({"username": username, "firstName": firstName, "lastName": lastName, "email": email, "password": password, "gender": genderForPut, "dateOfBirth": dateOfBirth}),
+							contentType: 'application/json',
+							dataType: 'json',
+							success: function(){
+								window.location.href='userProfile.html';
+							}
+						});
+					}
+				}
+			})
 		}
 	});
 });
@@ -172,6 +210,58 @@ function loadPageForManager() {
 					
 					$('#password').val(manager.password);
 					if(manager.gender === "MALE")
+						$('#gender').val("Muško");
+					else
+						$('#gender').val("Žensko");
+				}
+			}
+	})
+}
+
+function loadPageForDeliverer() {
+	$.get({
+			url: '../rest/deliverers/loggedInDeliverer',
+			success: function(deliverer){
+				if(deliverer.username !== "") {
+					$('#firstName').val(deliverer.firstName);
+					$('#lastName').val(deliverer.lastName);
+					$('#username').val(deliverer.username);
+					$('#email').val(deliverer.email);
+					
+					let date = new Date(deliverer.dateOfBirth);
+					var day = ("0" + date.getDate()).slice(-2);
+					var month = ("0" + (date.getMonth() + 1)).slice(-2);
+					var dateFormat = date.getFullYear()+"-"+(month)+"-"+(day) ;
+					$('#dateOfBirth').val(dateFormat);
+					
+					$('#password').val(deliverer.password);
+					if(deliverer.gender === "MALE")
+						$('#gender').val("Muško");
+					else
+						$('#gender').val("Žensko");
+				}
+			}
+	})
+}
+
+function loadPageForBuyer() {
+	$.get({
+			url: '../rest/buyers/loggedInBuyer',
+			success: function(buyer){
+				if(buyer.username !== "") {
+					$('#firstName').val(buyer.firstName);
+					$('#lastName').val(buyer.lastName);
+					$('#username').val(buyer.username);
+					$('#email').val(buyer.email);
+					
+					let date = new Date(buyer.dateOfBirth);
+					var day = ("0" + date.getDate()).slice(-2);
+					var month = ("0" + (date.getMonth() + 1)).slice(-2);
+					var dateFormat = date.getFullYear()+"-"+(month)+"-"+(day) ;
+					$('#dateOfBirth').val(dateFormat);
+					
+					$('#password').val(buyer.password);
+					if(buyer.gender === "MALE")
 						$('#gender').val("Muško");
 					else
 						$('#gender').val("Žensko");

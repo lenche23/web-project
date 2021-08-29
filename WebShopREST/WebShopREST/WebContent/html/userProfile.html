@@ -62,35 +62,92 @@
                 </th>
             </tbody>
         </table>
+        <div id="divBetweenProfileAndOrders" style="height: 30px;"></div>
+        <div id="searchDiv" style="padding-left: 3%;">
+			<label class="searchText">Pretraga:</label>
+			<input id="searchPrice" class="inputBox" type="text" placeholder="Cena (opseg)">
+			<input id="searchDateAndTime" class="inputBox" type="text" placeholder="Datum (opseg)">
+			<select id="searchType" name="searchType" class="dropdownBoxes">
+				<option selected="selected" value="Tip restorana">Tip restorana</option>
+				<option value="Kineski">Kineski</option>
+				<option value="Italijanski">Italijanski</option>
+				<option value="Roštilj">Roštilj</option>
+			</select>
+			<input id="searchIcon" type="image" src="../images/searchIcon.png" />
+		</div>
+        <div id="filterDiv" style="padding-left: 3%; padding-top: 15px;">
+			<label style="padding-right: 40px"  class="searchText">Filter:</label>
+			<select id="restaurantTypeFilter" class="dropdownBoxes">
+				<option selected="selected" value="0">Tip restorana</option>
+				<option value="Kineski">Kineski</option>
+				<option value="Italijanski">Italijanski</option>
+				<option value="Roštilj">Roštilj</option>
+			</select>
+			<select id="orderStatusFilter" class="dropdownBoxes">
+				<option selected="selected" value="0">Status</option>
+				<option value="Obrada">Obrada</option>
+				<option value="U pripremi">U pripremi</option>
+				<option value="Čeka dostavljača">Čeka dostavljača</option>
+				<option value="U transportu">U transportu</option>
+				<option value="Dostavljena">Dostavljena</option>
+				<option value="Otkazana">Otkazana</option>
+			</select>
+		</div>
         <div id="mojePorudzbineTitleDiv">
             <br>
-			<label id="promoText">&nbspMoje porudžbine</label>
+			<label id="promoTextMyOrders">&nbspMoje porudžbine</label>
             <br>
             <br>
         </div>
-        <div id="filterDiv" style="padding-left: 3%; padding-top: 15px;">
+        <div id="filterDiv2" style="padding-left: 3%; padding-top: 15px;">
 			<label style="padding-right: 40px"  class="searchText">Filter:</label>
 			<input type="checkbox" style="margin-left: 18px; cursor: pointer;"/>
 			<label style="color: black; font-weight: bold; font-size: 13pt;">Nedostavljene porudžbine</label>
 		</div>
+		<div id="actionBtnsDiv2" style="text-align: center; margin: 0 auto;">
+			<button id="deliveredBtn" class="actionBtn">Prebaci stanje u dostavljena</button>
+		</div>
+		<div id="divBetweenButtonAndMyOrders" style="height: 20px;"></div>
         <table id="articlesTable">
 			<thead>
 				<tr>
                     <th>ID</th>
 					<th>Artikli</th>
-					<th>Datum i vreme porudžbine</th>
-					<th>Cena</th>
+					<th onclick="sortTable(2)">Restoran</th>
+					<th>Kupac</th>
+					<th onclick="sortTable(4)">Datum i vreme porudžbine</th>
+					<th onclick="sortTable(5)">Cena</th>
                     <th>Status</th>
 				</tr>
 			</thead>
-			<tbody id="tableBody">
+			<tbody id="tableBodyMyOrders">
+				
+			</tbody>
+		</table>
+		<div id="ordersOnWaitTitleDiv">
+            <br>
+			<label id="promoTextOrdersOnWait">&nbspPorudžbine na čekanju</label>
+            <br>
+            <br>
+        </div>
+        <div id="actionBtnsDiv" style="text-align: center; margin: 0 auto;">
+			<button id="requestBtn" class="actionBtn">Pošalji zahtev za dostavu</button>
+		</div>
+		<div id="divBetweenButtonAndOrders" style="height: 20px;"></div>
+        <table id="ordersOnWaitTable">
+			<thead>
 				<tr>
-					<td>1234567891</td>
-					<td>Špagete sa ćuftama, Kečap</td>
-					<td>01.01.2021. 13:30</td>
-					<td>429.99</td> 
-					<td>Dostavljena</td>
+                    <th>ID</th>
+					<th>Artikli</th>
+					<th onclick="sortTable(2)">Restoran</th>
+					<th>Kupac</th>
+					<th onclick="sortTable(4)">Datum i vreme porudžbine</th>
+					<th onclick="sortTable(5)">Cena</th>
+                    <th>Status</th>
 				</tr>
+			</thead>
+			<tbody id="tableBodyOrdersOnWait">
+				
 			</tbody>
 		</table>
     </div>

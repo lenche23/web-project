@@ -32,8 +32,10 @@ $(document).ready(function(){
 								$.get({
 									url: "../rest/deliverers/login?username=" + username + "&password=" + password,
 									success: function(deliverer){
-										if(deliverer)
+										if(deliverer) {
 											userFound = true;
+											window.location.replace("../html/userProfile.html");	
+										}
 										else {
 											$.get({
 												url: "../rest/administrators/login?username=" + username + "&password=" + password,

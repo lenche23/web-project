@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="../css/manager.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/orders_and_buyers_of_restaurant.js"></script>
 </head>
 <body>
 	<header id="titleRectangle">
@@ -12,61 +13,86 @@
 	
 	<div id="articlesRectangle">
 		<div>
+			<br>
+			<button class="menuBtns" id="logoutBtn">Odjavi se</button>
+			<button class="menuBtns" id="profile">Moj profil</button>
+			<button class="menuBtns" id="managerBtn">Moj restoran</button>
+			<button class="menuBtns" id="restaurantsBtn">Restorani</button>
+			<label id="promoText"></label>
+		</div>
+		<div>
 			<br />
 			<label id="buyersText">&nbsp&nbsp&nbspPorudžbine</label>
 		</div>
-		<div style="padding-left: 3%;">
+		<div style="height: 20px;"></div>
+		 <div id="searchDiv" style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
-			<input class="inputBoxes" type="text" placeholder="" />
+			<input id="searchPrice" class="inputBox" type="text" placeholder="Cena (opseg)">
+			<input id="searchDateAndTime" class="inputBox" type="text" placeholder="Datum (opseg)">
 			<input id="searchIcon" type="image" src="../images/searchIcon.png" />
 		</div>
+        <div id="filterDiv" style="padding-left: 3%; padding-top: 15px;">
+			<label style="padding-right: 40px"  class="searchText">Filter:</label>
+			<select id="orderStatusFilter" class="dropdownBoxes">
+				<option selected="selected" value="0">Status</option>
+				<option value="Obrada">Obrada</option>
+				<option value="U pripremi">U pripremi</option>
+				<option value="Čeka dostavljača">Čeka dostavljača</option>
+				<option value="U transportu">U transportu</option>
+				<option value="Dostavljena">Dostavljena</option>
+				<option value="Otkazana">Otkazana</option>
+			</select>
+		</div>
         <br>
+         <div id="actionBtnsDiv" style="text-align: center; margin: 0 auto; width: 600px;">
+			<button id="prepareBtn" class="actionBtn">Pređi u stanje pripreme</button>
+			<button id="waitDelivererBtn" class="actionBtn">Pređi u stanje čekanja dostavljača</button>
+			<button id="transportBtn" class="actionBtn">Pređi u stanje transporta</button>
+		</div>
+		<div style="height: 20px;"></div>
 		<table id="articlesTable">
 			<thead>
 				<tr>
                     <th>ID</th>
 					<th>Artikli</th>
-					<th>Datum i vreme porudžbine</th>
-					<th>Cena</th>
-                    <th>Kupac</th>
+					<th onclick="sortTable(2)">Restoran</th>
+					<th>Kupac</th>
+					<th>Dostavljač</th>
+					<th onclick="sortTable(5)">Datum i vreme porudžbine</th>
+					<th onclick="sortTable(6)">Cena</th>
                     <th>Status</th>
 				</tr>
 			</thead>
 			<tbody id="tableBody">
 				<tr>
-					<td>1234567891</td>
-					<td>Špagete sa ćuftama, Kečap</td>
-					<td>01.01.2021. 13:30</td>
-					<td>429.99</td> 
-					<td>Milica Tomić</td>
-					<td>Dostavljena</td>
+				
 				</tr>
 			</tbody>
 		</table>
+		<div style="height: 50px;"></div>
         <div>
 			<br />
 			<label id="buyersText">&nbsp&nbsp&nbspKupci</label>
 		</div>
+		<div style="height: 20px;"></div>
 		<div style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
-			<input class="inputBoxes" type="text" placeholder="" />
+			<input id="inputBox" type="text" placeholder="Korisničko ime" />
 			<input id="searchIcon" type="image" src="../images/searchIcon.png" />
 		</div>
         <br>
-		<table id="articlesTable">
+		<table id="usersTable">
 			<thead>
 				<tr>
                     <th>Ime</th>
 					<th>Prezime</th>
+					<th>Korisničko ime</th>
+					<th>Email</th>
 					<th>Tip kupca</th>
 				</tr>
 			</thead>
 			<tbody id="tableBody">
-				<tr>
-					<td>Milica</td>
-					<td>Tomić</td>
-					<td>Zlatni</td>
-				</tr>
+			
 			</tbody>
 		</table>
 	</div>

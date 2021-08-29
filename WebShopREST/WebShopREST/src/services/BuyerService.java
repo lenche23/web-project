@@ -17,6 +17,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.Administrator;
 import beans.Buyer;
 import dao.AdministratorDAO;
 import dao.ArticleDAO;
@@ -118,6 +119,19 @@ public class BuyerService {
 		
 		try {
 			buyerDAO.deleteBuyer(username);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
+	@Path("/saveProfileChanges/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void saveProfileChanges(@PathParam("id") String username, Buyer buyer) {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		
+		try {
+			buyerDAO.saveProfileChanges(username, buyer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
