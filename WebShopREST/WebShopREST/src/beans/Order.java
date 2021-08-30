@@ -153,5 +153,11 @@ public class Order {
 		this.status = status;
 	}
 	
-	
+	public Order(String id, String dateAndTime, double price, OrderStatus status) {
+		super();
+		this.id = id;
+		this.dateAndTime = dateAndTime;
+		this.price = price;
+		this.status = status;
+	}
 }

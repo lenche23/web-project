@@ -21,9 +21,11 @@ import beans.Buyer;
 import beans.Manager;
 import dao.AdministratorDAO;
 import dao.ArticleDAO;
+import dao.BasketDAO;
 import dao.BuyerDAO;
 import dao.DelivererDAO;
 import dao.ManagerDAO;
+import dao.OrderDAO;
 import dao.RestaurantDAO;
 
 @Path("/managers")
@@ -89,6 +91,15 @@ public class ManagerService {
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Manager login(@QueryParam("username") String username, @QueryParam("password") String password) {
+		if (ctx.getAttribute("restaurantDAO") == null) {
+	    	ctx.setAttribute("restaurantDAO", new RestaurantDAO());
+		}
+		if (ctx.getAttribute("managerDAO") == null) {
+	    	ctx.setAttribute("managerDAO", new ManagerDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
+		}
+		if (ctx.getAttribute("articleDAO") == null) {
+	    	ctx.setAttribute("articleDAO", new ArticleDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
+		}
 		if (ctx.getAttribute("administratorDAO") == null) {
 	    	ctx.setAttribute("administratorDAO", new AdministratorDAO());
 		}
@@ -97,6 +108,12 @@ public class ManagerService {
 		}
 		if (ctx.getAttribute("buyerDAO") == null) {
 	    	ctx.setAttribute("buyerDAO", new BuyerDAO());
+		}
+		if (ctx.getAttribute("basketDAO") == null) {
+	    	ctx.setAttribute("basketDAO", new BasketDAO());
+		}
+		if (ctx.getAttribute("orderDAO") == null) {
+	    	ctx.setAttribute("orderDAO", new OrderDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO"), (BuyerDAO) ctx.getAttribute("buyerDAO"), (ArticleDAO) ctx.getAttribute("articleDAO")));
 		}
 		
 		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");

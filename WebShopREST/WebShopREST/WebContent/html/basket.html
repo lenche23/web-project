@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../css/basket.css"/>
+	<script src="../jquery-3.3.1.min.js"></script>
+	<script src="../js/basket.js"></script>
+</head>
+<body>
+	<header id="titleRectangle">
+		<h1 id="titleText">WebShop</h1>
+	</header>
+	<div id="basketRectangle">
+		<div>
+			<br>
+			<label class="promoText">&nbspKorpa</label>
+		</div>
+		<div style="height: 20px;"></div>
+		<div style="text-align: center; margin: 0 auto; width: 600px;">
+			<button id="orderBtn" class="actionBtn">Poruči</button>
+			<button id="removeBtn" class="actionBtn">Izbaci iz korpe</button>
+			<button id="changeQuantityBtn" class="actionBtn">Izmeni količinu</button>
+		</div>
+		<div>
+			<p><b id="priceSentence" style="font-size: 25px;"></b></p>
+		</div>
+		<div style="height: 10px;"></div>
+		<table id="articlesTable">
+			<thead>
+				<th>Slika</th>
+				<th>Naziv</th>
+				<th>Cena</th>
+				<th>Količina</th>
+			</thead>
+			<tbody id="tableBody">
+				
+			</tbody>
+		</table>
+		<div style="height: 10px;"></div>
+	</div>
+</body>
+</html>

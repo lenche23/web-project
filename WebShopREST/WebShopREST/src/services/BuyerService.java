@@ -21,9 +21,11 @@ import beans.Administrator;
 import beans.Buyer;
 import dao.AdministratorDAO;
 import dao.ArticleDAO;
+import dao.BasketDAO;
 import dao.BuyerDAO;
 import dao.DelivererDAO;
 import dao.ManagerDAO;
+import dao.OrderDAO;
 import dao.RestaurantDAO;
 
 @Path("/buyers")
@@ -106,6 +108,15 @@ public class BuyerService {
 		}
 		if (ctx.getAttribute("articleDAO") == null) {
 	    	ctx.setAttribute("articleDAO", new ArticleDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
+		}
+		if (ctx.getAttribute("basketDAO") == null) {
+	    	ctx.setAttribute("basketDAO", new BasketDAO());
+		}
+		if (ctx.getAttribute("buyerDAO") == null) {
+	    	ctx.setAttribute("buyerDAO", new BuyerDAO());
+		}
+		if (ctx.getAttribute("orderDAO") == null) {
+	    	ctx.setAttribute("orderDAO", new OrderDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO"), (BuyerDAO) ctx.getAttribute("buyerDAO"), (ArticleDAO) ctx.getAttribute("articleDAO")));
 		}
 		
 		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");

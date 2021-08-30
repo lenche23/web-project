@@ -1,0 +1,99 @@
+body {
+	background-image: url('../images/background.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#titleRectangle {
+	position: relative;
+    background: rgba(241, 190, 72, 0.897);
+	border-radius: 25px;
+}
+
+#titleText {
+	font-family: Lucida Handwriting;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 90px;
+	font-size: 45px;
+	color: black;
+}
+
+.photo {
+	width: 100px;
+	height: 100px;
+}
+
+#basketRectangle{
+	position: relative;
+    background: rgba(241, 190, 72, 0.774);
+	display: grid;
+	place-items: left;
+	border-radius: 25px;
+}
+
+.promoText {
+	color: black;
+	font-family: Lucida Handwriting;
+	text-align: left;
+	font-size: 40px;
+}
+
+#articlesTable {
+	border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-family: Georgia, serif;
+	text-align: center;
+	background-color: rgba(199, 207, 199, 0.76);
+	color: black;
+	font-size: 12pt;
+	margin: 10px;
+}
+
+#articlesTable td, #articlesTable th {
+	padding: 15px;
+	border-bottom: 1px solid rgb(177, 135, 38);
+}
+
+#articlesTable tr.selected {
+	background: lightblue;
+}
+
+#articlesTable tr {
+	cursor: pointer;
+}
+
+#articlesTable tr.selected {
+	background: lightblue;
+}
+
+.actionBtn {
+	cursor: pointer;
+	color: black;
+	font-weight: 200;
+	background-color: rgb(241, 190, 72);
+	width: 180px;
+	height: 40px;
+	font-size: 15px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-weight: bold;
+	float: right;
+	margin-top: 0.5%;
+	margin-right: 1%;
+}
+
+.red::placeholder { 
+   color: red;
+   opacity: 0.6;
+}
+
+.red {
+	border: 1px solid red !important;
+}

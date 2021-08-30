@@ -207,3 +207,12 @@ body {
     margin: 5px;
     width: 400px;
 }
+
+.red::placeholder { 
+   color: red;
+   opacity: 0.6;
+}
+
+.red {
+	border: 1px solid red !important;
+}

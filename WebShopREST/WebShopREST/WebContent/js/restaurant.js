@@ -1,6 +1,49 @@
 $(document).ready(function(){
 	loadRestaurantPage();
+	
+	$('#checkCartBtn').click(function(){
+		window.location.href='basket.html';
+	});
+	
+	$('#addToCartBtn').click(function(){
+		addToCart();
+	});
 });
+
+function addToCart() {
+	let quantity = $('tr.selected').find("td:eq(6) input[type='text']").val();
+	let validQuantity = true;
+	
+	$('tr.allTr').find("td:eq(6) input[type='text']").removeAttr('placeholder');
+	$('tr.allTr').find("td:eq(6) input[type='text']").removeClass('red');
+	
+	if(!quantity || quantity < 1 || !Number.isInteger(parseInt(quantity))){
+		validQuantity = false;
+		$('tr.selected').find("td:eq(6) input[type='text']").attr('placeholder', 'Količina je ceo broj veći od 0');
+		$('tr.selected').find("td:eq(6) input[type='text']").addClass('red');
+	}
+	
+	if(validQuantity){
+		let fullLogoPath = $('tr.selected').find("td:eq(0) img").attr('src').split('/');
+		let logo = fullLogoPath[2];
+		let name = $('tr.selected').find("td:eq(1)").text();
+		let price = $('tr.selected').find("td:eq(2)").text();
+		let article = {"name": name,"logo": logo,"price": price};
+		
+		$.ajax({
+					type: 'POST',
+					url: "../rest/basket/addArticleWithQuantity",
+					data: JSON.stringify({"article": article, "quantity": quantity}),
+					contentType: 'application/json',
+					dataType: 'json',
+					success: function(){
+						alert("Artikal uspešno dodat u korpu!");
+					}
+		});
+	}
+	
+	$('tr.selected').find("td:eq(6) input[type='text']").val("");
+}
 
 function loadRestaurantPage() {
 	$.get({
@@ -101,5 +144,6 @@ function selectedRow() {
 	return function() {
 		$('tr.selected').removeClass('selected');
 		$(this).addClass('selected');
+		$(this).addClass('allTr');
 	};
 }
