@@ -91,7 +91,7 @@ public class AdministratorService {
 	    	ctx.setAttribute("basketDAO", new BasketDAO());
 		}
 		if (ctx.getAttribute("orderDAO") == null) {
-	    	ctx.setAttribute("orderDAO", new OrderDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO"), (BuyerDAO) ctx.getAttribute("buyerDAO"), (ArticleDAO) ctx.getAttribute("articleDAO")));
+	    	ctx.setAttribute("orderDAO", new OrderDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO"), (BuyerDAO) ctx.getAttribute("buyerDAO"), (ArticleDAO) ctx.getAttribute("articleDAO"), (DelivererDAO) ctx.getAttribute("delivererDAO")));
 		}
 		
 		AdministratorDAO administratorDAO = (AdministratorDAO) ctx.getAttribute("administratorDAO");

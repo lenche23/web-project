@@ -149,6 +149,10 @@ public class ManagerDAO {
 			managerObject.put("gender", m.getGender().toString());
 			managerObject.put("dateOfBirth", m.getDateOfBirth());
 			managerObject.put("deleted", m.isDeleted());
+			if(m.getRestaurant().getName() != "")
+				managerObject.put("restaurant", m.getRestaurant().getName());
+			else
+				managerObject.put("restaurant", null);
 			
 			JSONObject managerObject2 = new JSONObject(); 
 	        managerObject2.put("manager", managerObject);
@@ -187,6 +191,7 @@ public class ManagerDAO {
 				managerObject.put("restaurant", m.getRestaurant().getName());
 			else
 				managerObject.put("restaurant", null);
+			
 			JSONObject managerObject2 = new JSONObject(); 
 	        managerObject2.put("manager", managerObject);
 			
@@ -218,6 +223,10 @@ public class ManagerDAO {
 			managerObject.put("gender", m.getGender().toString());
 			managerObject.put("dateOfBirth", m.getDateOfBirth());
 			managerObject.put("deleted", m.isDeleted());
+			if(m.getRestaurant().getName() != "")
+				managerObject.put("restaurant", m.getRestaurant().getName());
+			else
+				managerObject.put("restaurant", null);
 			
 			JSONObject managerObject2 = new JSONObject(); 
 	        managerObject2.put("manager", managerObject);

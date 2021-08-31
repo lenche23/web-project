@@ -10,6 +10,7 @@ public class Order {
 	private String dateAndTime;
 	private double price;
 	private Buyer buyer;
+	private Deliverer deliverer;
 	private OrderStatus status;
 	
 	public Order() {
@@ -19,7 +20,16 @@ public class Order {
 		this.dateAndTime = "";
 		this.price = 0.0;
 		this.buyer = new Buyer();
+		this.deliverer = new Deliverer();
 		this.status = OrderStatus.PROCESSING;
+	}
+
+	public Deliverer getDeliverer() {
+		return deliverer;
+	}
+
+	public void setDeliverer(Deliverer deliverer) {
+		this.deliverer = deliverer;
 	}
 
 	public String getId() {
@@ -79,12 +89,20 @@ public class Order {
 	}
 
 	@Override
+	public String toString() {
+		return "Order [id=" + id + ", articles=" + articles + ", restaurant=" + restaurant + ", dateAndTime="
+				+ dateAndTime + ", price=" + price + ", buyer=" + buyer + ", deliverer=" + deliverer + ", status="
+				+ status + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((articles == null) ? 0 : articles.hashCode());
 		result = prime * result + ((buyer == null) ? 0 : buyer.hashCode());
 		result = prime * result + ((dateAndTime == null) ? 0 : dateAndTime.hashCode());
+		result = prime * result + ((deliverer == null) ? 0 : deliverer.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
@@ -118,6 +136,11 @@ public class Order {
 				return false;
 		} else if (!dateAndTime.equals(other.dateAndTime))
 			return false;
+		if (deliverer == null) {
+			if (other.deliverer != null)
+				return false;
+		} else if (!deliverer.equals(other.deliverer))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -135,14 +158,8 @@ public class Order {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", articles=" + articles + ", restaurant=" + restaurant + ", dateAndTime="
-				+ dateAndTime + ", price=" + price + ", buyer=" + buyer + ", status=" + status + "]";
-	}
-
 	public Order(String id, ArrayList<Article> articles, Restaurant restaurant, String dateAndTime, double price,
-			Buyer buyer, OrderStatus status) {
+			Buyer buyer, OrderStatus status, Deliverer deliverer) {
 		super();
 		this.id = id;
 		this.articles = articles;
@@ -151,6 +168,7 @@ public class Order {
 		this.price = price;
 		this.buyer = buyer;
 		this.status = status;
+		this.deliverer = deliverer;
 	}
 	
 	public Order(String id, String dateAndTime, double price, OrderStatus status) {
@@ -159,5 +177,6 @@ public class Order {
 		this.dateAndTime = dateAndTime;
 		this.price = price;
 		this.status = status;
+		this.deliverer = new Deliverer();
 	}
 }

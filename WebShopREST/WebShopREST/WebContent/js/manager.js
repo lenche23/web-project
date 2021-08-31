@@ -99,7 +99,7 @@ function addArticleToTable(article){
 	let logo = $('<img style="width: 100px;" src="../images/' + article.logo + '" alt="Slika">');
 	logoTd.append(logo);
 	let name = $('<td>').text(article.name);
-	let price = $('<td>').text(article.price);
+	let price = $('<td>').text(article.price + ' RSD');
 	let type = "";
 	if(article.type === "FOOD")
 		type = $('<td>').text("Jelo");

@@ -144,7 +144,7 @@ $(document).ready(function(){
 				contentType: 'application/json',
 				dataType: 'json',
 				success: function(){
-					window.location.replace("../html/index.html");
+					window.location.replace("../html/userProfile.html");
 				}
 			});
 		}

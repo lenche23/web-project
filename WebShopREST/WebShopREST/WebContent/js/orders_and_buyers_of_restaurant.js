@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	loadPage();
+
 	$('#logoutBtn').click(function(){
 		logout();
 	});
@@ -14,7 +16,216 @@ $(document).ready(function(){
 	$('#profile').click(function(){
 		window.location.href='userProfile.html';
 	});
+	
+	$('#searchIcon2').click(function(){
+		searchBuyerByUsername();
+	});
+	
+	$('#prepareBtn').click(function(){
+		changeOrderToPrepare();
+	});
+	
+	$('#waitDelivererBtn').click(function(){
+		changeOrderToWaitingForDeliverer();
+	});
+	
+	$('#declineDelivererBtn').click(function(){
+		declineDeliverer();
+	});
+	
+	$('#acceptDelivererBtn').click(function(){
+		changeOrderToInTransport();
+	});
 });
+
+function changeOrderToInTransport() {
+	let status = $('tr.selected').find("td:eq(6)").text();
+	let deliverer = $('tr.selected').find("td:eq(3)").text();
+	let id = $('tr.selected').find("td:eq(0)").text();
+	
+	if(status === "Čeka dostavljača" && deliverer) {
+		$.ajax({
+			type: 'PUT',
+			url: "../rest/orders/changeToInTransport/" + id,
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(){
+				$('tr.selected').find("td:eq(6)").text('U transportu');
+			}
+		});
+	}
+}
+
+function declineDeliverer() {
+	let id = $('tr.selected').find("td:eq(0)").text();
+	let deliverer = $('tr.selected').find("td:eq(3)").text();
+	let status = $('tr.selected').find("td:eq(6)").text();
+	
+	if(status === "Čeka dostavljača" && deliverer) {
+		$.ajax({
+			type: 'PUT',
+			url: "../rest/orders/removeDeliverer/" + id,
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(){
+				$('tr.selected').find("td:eq(3)").text('-');
+			}
+		});
+	}
+}
+
+function changeOrderToWaitingForDeliverer() {
+	let status = $('tr.selected').find("td:eq(6)").text();
+	let id = $('tr.selected').find("td:eq(0)").text();
+	
+	if(status === "U pripremi"){
+		$.ajax({
+			type: 'PUT',
+			url: "../rest/orders/changeToWaitingForDeliverer/" + id,
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(){
+				$('tr.selected').find("td:eq(6)").text('Čeka dostavljača');
+			}
+		});
+	}
+}
+
+function changeOrderToPrepare() {
+	let status = $('tr.selected').find("td:eq(6)").text();
+	let id = $('tr.selected').find("td:eq(0)").text();
+	
+	if(status === "Obrada"){
+		$.ajax({
+			type: 'PUT',
+			url: "../rest/orders/changeToPreparing/" + id,
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(){
+				$('tr.selected').find("td:eq(6)").text('U pripremi');
+			}
+		});
+	}
+}
+
+function searchBuyerByUsername() {
+	$.get({
+			url: '../rest/managers/loggedInManager',
+			success: function(manager){
+				$.get({
+						url: '../rest/orders/',
+						success: function(orders){
+							let buyersInTable = [];
+							let i = 0;
+							for(let order of orders){
+								if(!buyersInTable.includes(order.buyer.username) && order.restaurant.name === manager.restaurant.name){
+									buyersInTable[i] = order.buyer.username;
+									i++;
+								}
+							}
+							
+							$.get({
+									url: '../rest/buyers/getBuyersByUsername?searchUsername=' + $('#inputBox').val(),
+									success: function(buyers){
+										$('#tableBody2').empty();
+										for(let buyer of buyers)
+											if(buyersInTable.includes(buyer.username))
+												addBuyerToTable(buyer);
+										$('#inputBox').val("");
+									}
+							})
+						}
+				})		
+			}
+	})
+}
+
+function loadPage() {
+	$.get({
+			url: '../rest/managers/loggedInManager',
+			success: function(manager){
+				$.get({
+						url: '../rest/orders/',
+						success: function(orders){
+							for(let order of orders)
+								if(order.restaurant.name === manager.restaurant.name)
+									addOrderToTable(order);
+									
+							let buyersInTable = [];
+							let i = 0;
+							for(let order of orders){
+								if(!buyersInTable.includes(order.buyer.username) && order.restaurant.name === manager.restaurant.name){
+									buyersInTable[i] = order.buyer.username;
+									addBuyerToTable(order.buyer);
+									i++;
+								}
+							}
+						}
+				})			
+			}
+	})
+}
+
+function addOrderToTable(order) {
+	let tableBody = $('#tableBody');
+	let newRow = $('<tr>');
+	
+	let id = $('<td>').text(order.id);
+	let price = $('<td>').text(order.price + ' RSD');
+	let status = '';
+	if(order.status == "PROCESSING")
+		status = $('<td>').text('Obrada');
+	else if(order.status == "PREPARATING")
+		status = $('<td>').text('U pripremi');
+	else if(order.status == "WAITING_FOR_DELIVERER")
+		status = $('<td>').text('Čeka dostavljača');
+	else if(order.status == "TRANSPORTING")
+		status = $('<td>').text('U transportu');
+	else if(order.status == "DELIVERED")
+		status = $('<td>').text('Dostavljena');
+	else if(order.status == "CANCELED")
+		status = $('<td>').text('Otkazana');
+	let buyer = $('<td>').text(order.buyer.firstName + ' ' + order.buyer.lastName);
+	let deliverer;
+	if(order.deliverer.username !== "")
+		deliverer = $('<td>').text(order.deliverer.firstName + ' ' + order.deliverer.lastName);
+	else
+		deliverer = $('<td>').text('-');
+	
+	articles = "";
+	for(let article of order.articles)
+		articles = articles.concat(article.name + ', ');
+	articles = articles.substring(0, articles.length-2);
+	let articlesTd = $('<td>').text(articles);
+	
+	let date = new Date(order.dateAndTime);
+	let dateAndTime = $('<td>').text(date.getHours() + ':' + date.getMinutes() + " " + date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear());
+		
+	newRow.append(id).append(articlesTd).append(buyer).append(deliverer).append(dateAndTime).append(price).append(status);
+	newRow.click(selectedRow());
+	tableBody.append(newRow);
+}
+
+function addBuyerToTable(buyer) {
+	let tableBody = $('#tableBody2');
+	let newRow = $('<tr>');
+	
+	let username = $('<td>').text(buyer.username);
+	let email = $('<td>').text(buyer.email);
+	let name = $('<td>').text(buyer.firstName);
+	let surname = $('<td>').text(buyer.lastName);
+	let type = '';
+	if(buyer.type.name == "GOLDEN")
+		type = $('<td>').text('Zlatni');
+	else if(buyer.type.name == "SILVER")
+		type = $('<td>').text('Srebrni');
+	else
+		type = $('<td>').text('Bronzani');
+		
+	newRow.append(name).append(surname).append(username).append(email).append(type);
+	newRow.click(selectedRow());
+	tableBody.append(newRow);
+}
 
 function logout() {
 	$.get({

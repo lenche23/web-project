@@ -109,6 +109,14 @@ input, select {
 	right: 2px;
 }
 
+#searchIcon2 {
+	width: 27px;
+	height: 27px;
+	position: relative;
+	top: 14px;
+	right: 2px;
+}
+
 #articlesTable {
 	border-spacing: 0px;
 	border-style: ridge;

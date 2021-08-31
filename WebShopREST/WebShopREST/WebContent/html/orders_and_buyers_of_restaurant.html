@@ -35,19 +35,20 @@
 			<label style="padding-right: 40px"  class="searchText">Filter:</label>
 			<select id="orderStatusFilter" class="dropdownBoxes">
 				<option selected="selected" value="0">Status</option>
-				<option value="Obrada">Obrada</option>
-				<option value="U pripremi">U pripremi</option>
-				<option value="Čeka dostavljača">Čeka dostavljača</option>
-				<option value="U transportu">U transportu</option>
-				<option value="Dostavljena">Dostavljena</option>
-				<option value="Otkazana">Otkazana</option>
+				<option value="PROCESSING">Obrada</option>
+				<option value="PREPARATING">U pripremi</option>
+				<option value="WAITING_FOR_DELIVERER">Čeka dostavljača</option>
+				<option value="TRANSPORTING">U transportu</option>
+				<option value="DELIVERED">Dostavljena</option>
+				<option value="CANCELED">Otkazana</option>
 			</select>
 		</div>
         <br>
-         <div id="actionBtnsDiv" style="text-align: center; margin: 0 auto; width: 600px;">
-			<button id="prepareBtn" class="actionBtn">Pređi u stanje pripreme</button>
+         <div id="actionBtnsDiv" style="text-align: center; margin: 0 auto; width: 800px;">
+        	<button id="declineDelivererBtn" class="actionBtn">Odbij dostavljača</button>
+         	<button id="acceptDelivererBtn" class="actionBtn">Prihvati dostavljača</button>
 			<button id="waitDelivererBtn" class="actionBtn">Pređi u stanje čekanja dostavljača</button>
-			<button id="transportBtn" class="actionBtn">Pređi u stanje transporta</button>
+			<button id="prepareBtn" class="actionBtn">Pređi u stanje pripreme</button>
 		</div>
 		<div style="height: 20px;"></div>
 		<table id="articlesTable">
@@ -55,11 +56,10 @@
 				<tr>
                     <th>ID</th>
 					<th>Artikli</th>
-					<th onclick="sortTable(2)">Restoran</th>
 					<th>Kupac</th>
 					<th>Dostavljač</th>
-					<th onclick="sortTable(5)">Datum i vreme porudžbine</th>
-					<th onclick="sortTable(6)">Cena</th>
+					<th onclick="sortTable(4)">Datum i vreme porudžbine</th>
+					<th onclick="sortTable(5)">Cena</th>
                     <th>Status</th>
 				</tr>
 			</thead>
@@ -78,7 +78,7 @@
 		<div style="padding-left: 3%;">
 			<label class="searchText">Pretraga:</label>
 			<input id="inputBox" type="text" placeholder="Korisničko ime" />
-			<input id="searchIcon" type="image" src="../images/searchIcon.png" />
+			<input id="searchIcon2" type="image" src="../images/searchIcon.png" />
 		</div>
         <br>
 		<table id="usersTable">
@@ -91,7 +91,7 @@
 					<th>Tip kupca</th>
 				</tr>
 			</thead>
-			<tbody id="tableBody">
+			<tbody id="tableBody2">
 			
 			</tbody>
 		</table>

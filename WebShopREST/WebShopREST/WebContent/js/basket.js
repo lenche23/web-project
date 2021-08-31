@@ -38,6 +38,16 @@ function order(){
 											contentType: 'application/json',
 											dataType: 'json'
 										});
+										
+										$.ajax({
+											type: 'PUT',
+											url: "../rest/buyers/addPoints",
+											data: JSON.stringify({"price": price}),
+											contentType: 'application/json',
+											dataType: 'json'
+										});
+										
+										window.location.href='userProfile.html';
 									}
 							})
 						}
@@ -61,7 +71,8 @@ function changeQuantity() {
 	
 	if(validQuantity){
 		let name = $('tr.selected').find("td:eq(1)").text();
-		let price = $('tr.selected').find("td:eq(2)").text();
+		let fullPrice = $('tr.selected').find("td:eq(2)").text().split(' ');
+		let price = fullPrice[0];
 		let article = {"name": name, "price": price};
 		
 		$.ajax({
@@ -74,7 +85,17 @@ function changeQuantity() {
 						$.get({
 								url: '../rest/basket/',
 								success: function(basket){
-									$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price).toFixed(2));
+									$.get({
+											url: '../rest/buyers/loggedInBuyer',
+											success: function(buyer){
+												if(buyer.type.name === "BRONZE")
+													$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price).toFixed(2) + ' RSD');
+												else if(buyer.type.name === "SILVER")
+													$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price * 0.97).toFixed(2) + ' RSD (' + buyer.type.discount + '% popusta)');
+												else if(buyer.type.name === "GOLDEN")
+													$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price * 0.95).toFixed(2) + ' RSD (' + buyer.type.discount + '% popusta)');		
+											}
+									})
 								}
 						})
 					}
@@ -84,7 +105,8 @@ function changeQuantity() {
 
 function removeFromCart(){
 		let name = $('tr.selected').find("td:eq(1)").text();
-		let price = $('tr.selected').find("td:eq(2)").text();
+		let fullPrice = $('tr.selected').find("td:eq(2)").text().split(' ');
+		let price = fullPrice[0];
 		let quantity = $('tr.selected').find("td:eq(3) input[type='text']").val();
 		let article = {"name": name, "price": price};
 		
@@ -99,7 +121,17 @@ function removeFromCart(){
 				$.get({
 						url: '../rest/basket/',
 						success: function(basket){
-							$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price).toFixed(2));
+							$.get({
+									url: '../rest/buyers/loggedInBuyer',
+									success: function(buyer){
+										if(buyer.type.name === "BRONZE")
+											$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price).toFixed(2) + ' RSD');
+										else if(buyer.type.name === "SILVER")
+											$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price * 0.97).toFixed(2) + ' RSD (' + buyer.type.discount + '% popusta)');
+										else if(buyer.type.name === "GOLDEN")
+											$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price * 0.95).toFixed(2) + ' RSD (' + buyer.type.discount + '% popusta)');		
+									}
+							})
 						}
 				})
 			}
@@ -112,8 +144,18 @@ function loadPage(){
 			success: function(basket){
 				for(let articleWithQuantity of basket.articlesWithQuantity)
 					addArticleWithQuantityToTable(articleWithQuantity);
-				
-				$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price).toFixed(2));
+
+				$.get({
+						url: '../rest/buyers/loggedInBuyer',
+						success: function(buyer){
+							if(buyer.type.name === "BRONZE")
+								$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price).toFixed(2) + ' RSD');
+							else if(buyer.type.name === "SILVER")
+								$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price * 0.97).toFixed(2) + ' RSD (' + buyer.type.discount + '% popusta)');
+							else if(buyer.type.name === "GOLDEN")
+								$('#priceSentence').html('&nbsp&nbsp&nbspUkupna cena porudžbine: ' + parseFloat(basket.price * 0.95).toFixed(2) + ' RSD (' + buyer.type.discount + '% popusta)');		
+						}
+				})				
 			}
 	})
 }
@@ -126,7 +168,7 @@ function addArticleWithQuantityToTable(articleWithQuantity) {
 	let logo = $('<img class="photo" src="../images/' + articleWithQuantity.article.logo + '" alt="Slika">');
 	logoTd.append(logo);
 	let name = $('<td>').text(articleWithQuantity.article.name);
-	let price = $('<td>').text(articleWithQuantity.article.price);
+	let price = $('<td>').text(articleWithQuantity.article.price + ' RSD');
 	let quantityTd = $('<td>');
 	let quantity = $('<input type="text" />');
 	quantity.val(articleWithQuantity.quantity);

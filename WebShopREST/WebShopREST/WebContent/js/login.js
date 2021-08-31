@@ -13,7 +13,7 @@ $(document).ready(function(){
 			success: function(buyer){
 				if(buyer) {
 					userFound = true;
-					window.location.replace("../html/index.html");
+					window.location.replace("../html/userProfile.html");
 				}
 				else {
 					$.get({

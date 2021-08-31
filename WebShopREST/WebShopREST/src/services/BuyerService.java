@@ -64,6 +64,32 @@ public class BuyerService {
 	@Path("/save")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addBuyer(Buyer buyer) {
+		if (ctx.getAttribute("restaurantDAO") == null) {
+	    	ctx.setAttribute("restaurantDAO", new RestaurantDAO());
+		}
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		if (ctx.getAttribute("administratorDAO") == null) {
+	    	ctx.setAttribute("administratorDAO", new AdministratorDAO());
+		}
+		if (ctx.getAttribute("delivererDAO") == null) {
+	    	ctx.setAttribute("delivererDAO", new DelivererDAO());
+		}
+		if (ctx.getAttribute("managerDAO") == null) {
+	    	ctx.setAttribute("managerDAO", new ManagerDAO(restaurantDAO));
+		}
+		if (ctx.getAttribute("articleDAO") == null) {
+	    	ctx.setAttribute("articleDAO", new ArticleDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO")));
+		}
+		if (ctx.getAttribute("basketDAO") == null) {
+	    	ctx.setAttribute("basketDAO", new BasketDAO());
+		}
+		if (ctx.getAttribute("buyerDAO") == null) {
+	    	ctx.setAttribute("buyerDAO", new BuyerDAO());
+		}
+		if (ctx.getAttribute("orderDAO") == null) {
+	    	ctx.setAttribute("orderDAO", new OrderDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO"), (BuyerDAO) ctx.getAttribute("buyerDAO"), (ArticleDAO) ctx.getAttribute("articleDAO"), (DelivererDAO) ctx.getAttribute("delivererDAO")));
+		}
+		
 		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
 		
 		try {
@@ -116,7 +142,7 @@ public class BuyerService {
 	    	ctx.setAttribute("buyerDAO", new BuyerDAO());
 		}
 		if (ctx.getAttribute("orderDAO") == null) {
-	    	ctx.setAttribute("orderDAO", new OrderDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO"), (BuyerDAO) ctx.getAttribute("buyerDAO"), (ArticleDAO) ctx.getAttribute("articleDAO")));
+	    	ctx.setAttribute("orderDAO", new OrderDAO((RestaurantDAO) ctx.getAttribute("restaurantDAO"), (BuyerDAO) ctx.getAttribute("buyerDAO"), (ArticleDAO) ctx.getAttribute("articleDAO"), (DelivererDAO) ctx.getAttribute("delivererDAO")));
 		}
 		
 		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
@@ -146,5 +172,41 @@ public class BuyerService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@PUT
+	@Path("/addPoints")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addPoints(String price) {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		
+		try {
+			double priceDouble = Double.parseDouble(price.split(":")[1].split("}")[0]);
+			buyerDAO.addPoints(priceDouble);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
+	@Path("/removePoints")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void removePoints(String price) {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		
+		try {
+			double priceDouble = Double.parseDouble(price.split(":")[1].split("}")[0]);
+			buyerDAO.removePoints(priceDouble);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@GET
+	@Path("/getBuyersByUsername")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Buyer> getBuyersByUsername(@QueryParam("searchUsername") String username) {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		return buyerDAO.getBuyersByUsername(username);
 	}
 }

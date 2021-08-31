@@ -27,7 +27,8 @@ function addToCart() {
 		let fullLogoPath = $('tr.selected').find("td:eq(0) img").attr('src').split('/');
 		let logo = fullLogoPath[2];
 		let name = $('tr.selected').find("td:eq(1)").text();
-		let price = $('tr.selected').find("td:eq(2)").text();
+		let fullPrice = $('tr.selected').find("td:eq(2)").text().split(' ');
+		let price = fullPrice[0];
 		let article = {"name": name,"logo": logo,"price": price};
 		
 		$.ajax({
@@ -66,9 +67,23 @@ function loadRestaurantPage() {
 								$.get({
 									url: '../rest/articles/articlesFromRestaurant?restaurantName=' + restaurant.name,
 									success: function(articles){
-										for(let article of articles)
-											if(!article.deleted)
-												addArticleToTableBuyer(article);
+										if(restaurant.status === "OPEN"){
+											for(let article of articles)
+												if(!article.deleted){
+													addArticleToTableBuyer(article);
+												}
+										}
+										else {
+											$('#actionBtnsDiv').hide();
+											$('#divBetweenButtonAndMyOrders').hide();
+											$("#articlesTable th:last-child").remove();
+											for(let article of articles)
+												if(!article.deleted){
+													addArticleToTable(article);
+												}
+										}
+									
+										
 									}
 								})
 							}
@@ -101,7 +116,7 @@ function addArticleToTableBuyer(article){
 	let logo = $('<img style="width: 100px;" src="../images/' + article.logo + '" alt="Slika">');
 	logoTd.append(logo);
 	let name = $('<td>').text(article.name);
-	let price = $('<td>').text(article.price);
+	let price = $('<td>').text(article.price + ' RSD');
 	let type = "";
 	if(article.type === "FOOD")
 		type = $('<td>').text("Jelo");
@@ -126,7 +141,7 @@ function addArticleToTable(article){
 	let logo = $('<img style="width: 100px;" src="../images/' + article.logo + '" alt="Slika">');
 	logoTd.append(logo);
 	let name = $('<td>').text(article.name);
-	let price = $('<td>').text(article.price);
+	let price = $('<td>').text(article.price + ' RSD');
 	let type = "";
 	if(article.type === "FOOD")
 		type = $('<td>').text("Jelo");

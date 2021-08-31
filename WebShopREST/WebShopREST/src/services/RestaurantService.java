@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import beans.Restaurant;
+import dao.BasketDAO;
 import dao.BuyerDAO;
 import dao.RestaurantDAO;
 
@@ -40,6 +41,10 @@ public class RestaurantService {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Restaurant> getRestaurants() {
+		if (ctx.getAttribute("basketDAO") == null) {
+	    	ctx.setAttribute("basketDAO", new BasketDAO());
+		}
+		
 		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		return restaurantDAO.getAllRestaurants();
 	}

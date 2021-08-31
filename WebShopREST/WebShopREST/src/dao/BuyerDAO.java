@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -85,19 +86,21 @@ public class BuyerDAO {
         String gender = (String) buyerObject.get("gender");
         String dateOfBirth = (String) buyerObject.get("dateOfBirth");
         boolean deleted = (boolean) buyerObject.get("deleted");
-        String points = (String) buyerObject.get("points");
+        double points = (double) buyerObject.get("points");
         String typeName = (String) buyerObject.get("name");
         String discount = (String) buyerObject.get("discount");
         String pointsNeeded = (String) buyerObject.get("pointsNeeded");
         
         BuyerType buyerType = new BuyerType(TypeName.valueOf(typeName), Integer.parseInt(discount), Integer.parseInt(pointsNeeded));
-        Buyer newBuyer = new Buyer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted, Integer.parseInt(points), buyerType);
+        Buyer newBuyer = new Buyer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted, points, buyerType);
         
 		return newBuyer;
     }
 	
 	public void saveBuyer(Buyer buyer) throws IOException {
-		buyer.setPoints(0);
+		loggedInBuyer = buyer;
+		
+		buyer.setPoints(0.0);
 		buyer.setDeleted(false);
 		buyer.setType(new BuyerType(TypeName.BRONZE, 0, 3000));
 		allBuyers.add(buyer);
@@ -114,7 +117,7 @@ public class BuyerDAO {
 			buyerObject.put("gender", b.getGender().toString());
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
-			buyerObject.put("points", Integer.toString(b.getPoints()));
+			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
 			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
@@ -150,7 +153,7 @@ public class BuyerDAO {
 			buyerObject.put("gender", b.getGender().toString());
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
-			buyerObject.put("points", Integer.toString(b.getPoints()));
+			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
 			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
@@ -232,6 +235,24 @@ public class BuyerDAO {
 		return buyersByNameSurnameAndUsername;
 	}
 	
+	public ArrayList<Buyer> getBuyersByUsername(String username) { 
+		ArrayList<Buyer> buyersByUsername = new ArrayList<Buyer>();
+		
+		if(username.equals("")) {
+			for(int i = 0; i < allBuyers.size(); i++) {
+				buyersByUsername.add(allBuyers.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < allBuyers.size(); i++) {
+				if(allBuyers.get(i).getUsername().toLowerCase().contains(username.toLowerCase()))
+					buyersByUsername.add(allBuyers.get(i));
+			}
+		}
+		
+		return buyersByUsername;
+	}
+	
 	public void saveProfileChanges(String username, Buyer buyer) throws IOException {
 		for(Buyer b : allBuyers) {
 			if(b.getUsername().equals(username)) {
@@ -256,6 +277,120 @@ public class BuyerDAO {
 			buyerObject.put("gender", b.getGender().toString());
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
+			buyerObject.put("points", b.getPoints());
+			buyerObject.put("name", b.getType().getName().toString());
+			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
+			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
+			
+			JSONObject buyerObject2 = new JSONObject(); 
+	        buyerObject2.put("buyer", buyerObject);
+			
+	        buyers.add(buyerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "buyers.json")) {
+            file.write(buyers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void addPoints(double price) throws IOException {
+		double points = 0.133 * price + loggedInBuyer.getPoints();
+		DecimalFormat df = new DecimalFormat("#.##");      
+		points = Double.valueOf(df.format(points));
+		
+		loggedInBuyer.setPoints(points);
+		if(loggedInBuyer.getPoints() < 3000) {
+			loggedInBuyer.setType(new BuyerType(TypeName.BRONZE, 0, 3000));
+		}
+		else if(loggedInBuyer.getPoints() >= 4000) {
+			loggedInBuyer.setType(new BuyerType(TypeName.GOLDEN, 5, 4000));
+		}
+		else {
+			loggedInBuyer.setType(new BuyerType(TypeName.SILVER, 3, 4000));
+		}
+		
+		for(Buyer b : allBuyers) {
+			if(b.getUsername().equals(loggedInBuyer.getUsername())) {
+				b.setPoints(loggedInBuyer.getPoints());
+				b.setType(loggedInBuyer.getType());
+			}
+		}
+		
+		JSONArray buyers = new JSONArray();
+		for (Buyer b : allBuyers) {
+			JSONObject buyerObject = new JSONObject();
+			
+			buyerObject.put("firstName", b.getFirstName());
+			buyerObject.put("lastName", b.getLastName());
+			buyerObject.put("email", b.getEmail());
+			buyerObject.put("username", b.getUsername());
+			buyerObject.put("password", b.getPassword());
+			buyerObject.put("gender", b.getGender().toString());
+			buyerObject.put("dateOfBirth", b.getDateOfBirth());
+			buyerObject.put("deleted", b.isDeleted());
+			buyerObject.put("points", b.getPoints());
+			buyerObject.put("name", b.getType().getName().toString());
+			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
+			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
+			
+			JSONObject buyerObject2 = new JSONObject(); 
+	        buyerObject2.put("buyer", buyerObject);
+			
+	        buyers.add(buyerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "buyers.json")) {
+            file.write(buyers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void removePoints(double price) throws IOException {
+		double points = loggedInBuyer.getPoints() - 0.532 * price;
+		if(points < 0)
+			points = 0;
+		DecimalFormat df = new DecimalFormat("#.##");      
+		points = Double.valueOf(df.format(points));
+		
+		loggedInBuyer.setPoints(points);
+		if(loggedInBuyer.getPoints() < 3000) {
+			loggedInBuyer.setType(new BuyerType(TypeName.BRONZE, 0, 3000));
+		}
+		else if(loggedInBuyer.getPoints() >= 4000) {
+			loggedInBuyer.setType(new BuyerType(TypeName.GOLDEN, 5, 4000));
+		}
+		else {
+			loggedInBuyer.setType(new BuyerType(TypeName.SILVER, 3, 4000));
+		}
+		
+		for(Buyer b : allBuyers) {
+			if(b.getUsername().equals(loggedInBuyer.getUsername())) {
+				b.setPoints(loggedInBuyer.getPoints());
+				b.setType(loggedInBuyer.getType());
+			}
+		}
+		
+		JSONArray buyers = new JSONArray();
+		for (Buyer b : allBuyers) {
+			JSONObject buyerObject = new JSONObject();
+			
+			buyerObject.put("firstName", b.getFirstName());
+			buyerObject.put("lastName", b.getLastName());
+			buyerObject.put("email", b.getEmail());
+			buyerObject.put("username", b.getUsername());
+			buyerObject.put("password", b.getPassword());
+			buyerObject.put("gender", b.getGender().toString());
+			buyerObject.put("dateOfBirth", b.getDateOfBirth());
+			buyerObject.put("deleted", b.isDeleted());
+			buyerObject.put("points", b.getPoints());
+			buyerObject.put("name", b.getType().getName().toString());
+			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
+			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
 			
 			JSONObject buyerObject2 = new JSONObject(); 
 	        buyerObject2.put("buyer", buyerObject);
