@@ -277,6 +277,8 @@ function loadPageForManager() {
 			url: '../rest/managers/loggedInManager',
 			success: function(manager){
 				if(manager.username !== "") {
+					if(manager.restaurant.name === "")
+						$('#managerBtn').hide();
 					$('#buyerType').hide();
 					$('#buyerTypeInput').hide();
 					$('#users').hide();
