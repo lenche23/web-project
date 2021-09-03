@@ -164,4 +164,12 @@ public class OrderService {
 			e.printStackTrace();
 		}
 	}
+
+	@GET
+	@Path("/filter")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Order> getFilteredOrders(@QueryParam("orderStatusFilter") String type) {
+		OrderDAO orderDAO = (OrderDAO) ctx.getAttribute("orderDAO");
+		return orderDAO.getFilteredOrders(type);
+	}
 }

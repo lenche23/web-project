@@ -16,6 +16,14 @@ $(document).ready(function(){
 	$('#profile').click(function(){
 		window.location.href='userProfile.html';
 	});
+
+	$("#orderStatusFilter").change(function() {
+		filter();
+	});
+	
+	$("#searchIcon").click(function() {
+		search();
+	});
 	
 	$('#searchIcon2').click(function(){
 		searchBuyerByUsername();
@@ -106,6 +114,38 @@ function changeOrderToPrepare() {
 			}
 		});
 	}
+}
+
+function filter() {	
+	$.get({
+			url: '../rest/managers/loggedInManager',
+			success: function(manager){
+				$.get({
+						url: '../rest/orders/',
+						success: function(orders){
+							let ordersInTable = [];
+							let i = 0;
+							for(let order of orders){
+								if(order.restaurant.name === manager.restaurant.name){
+									ordersInTable[i] = order.id;
+									i++;
+								}
+							}
+							
+							$.get({
+								url: '../rest/orders/filter?orderStatusFilter=' + $('#orderStatusFilter').val(),
+								success: function(orders){
+									$('#tableBody').empty();
+									for(let order of orders)
+										if(ordersInTable.includes(order.id))
+											addOrderToTable(order);
+										$('#inputBox').val("");
+								}
+							})
+						}
+				})			
+			}
+	})
 }
 
 function searchBuyerByUsername() {

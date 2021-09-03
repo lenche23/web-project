@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import beans.Article;
+import beans.Buyer;
 import beans.Deliverer;
 import beans.Manager;
 import beans.Order;
@@ -26,10 +27,12 @@ import beans.Sex;
 
 public class OrderDAO {
 	private ArrayList<Order> allOrders;
+	private ArrayList<Order> filteredOrders;
 	private String pathToRepository;
 	
 	public OrderDAO(RestaurantDAO restaurantDAO, BuyerDAO buyerDAO, ArticleDAO articleDAO, DelivererDAO delivererDAO) {
 		allOrders = new ArrayList<Order>();
+		filteredOrders = new ArrayList<Order>();
 		pathToRepository = "WebContent/Repository/";
 		loadOrders(restaurantDAO, buyerDAO, articleDAO, delivererDAO);
 	}
@@ -56,6 +59,10 @@ public class OrderDAO {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        
+        for(int i = 0; i < allOrders.size(); i++) {
+        	filteredOrders.add(allOrders.get(i));
+		}
 	}
 	
 	private Order parseOrder(JSONObject order, RestaurantDAO restaurantDAO, BuyerDAO buyerDAO, ArticleDAO articleDAO, DelivererDAO delivererDAO) 
@@ -462,5 +469,24 @@ public class OrderDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	public ArrayList<Order> getFilteredOrders(String type) {
+		filteredOrders.clear();
+		for(int i = 0; i < allOrders.size(); i++) {
+			filteredOrders.add(allOrders.get(i));
+		}
+		
+		if(type.equals("Status"))
+			return allOrders;
+		else {
+			Iterator<Order> i = filteredOrders.iterator();
+			while(i.hasNext()) {
+				Order order = i.next();
+				if(!order.getStatus().toString().equals(type))
+					i.remove();
+			}
+			return filteredOrders;
+		}
 	}
 }
