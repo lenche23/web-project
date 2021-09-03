@@ -477,7 +477,7 @@ public class OrderDAO {
 			filteredOrders.add(allOrders.get(i));
 		}
 		
-		if(type.equals("Status"))
+		if(type.equals("0"))
 			return allOrders;
 		else {
 			Iterator<Order> i = filteredOrders.iterator();
