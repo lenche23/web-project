@@ -489,4 +489,61 @@ public class OrderDAO {
 			return filteredOrders;
 		}
 	}
-}
+	
+	
+	public ArrayList<Order> getSearchedOrders(String price, String date) throws java.text.ParseException {
+		ArrayList<Order> ordersByPrice = new ArrayList<Order>();
+		ArrayList<Order> ordersByPriceAndDate = new ArrayList<Order>();
+		
+		Double leftPrice;
+		Double rightPrice;
+		String dateLeft;
+		String dateRight;
+		Date leftDate;
+		Date rightDate;
+		
+		if (price.equals("")) {
+			leftPrice = 0.00;
+			rightPrice = 1000000.00;
+		} else {
+			leftPrice = Double.parseDouble(price.split("-")[0]);
+			rightPrice = Double.parseDouble(price.split("-")[1]);
+		}
+		
+		if (date.equals("")) {
+			dateLeft = "1990-01-01";
+			dateRight = "2050-01-01";
+		} else {
+			dateLeft = date.split("/")[0];
+			dateRight = date.split("/")[1];
+		}
+		leftDate = new SimpleDateFormat("yyyy-mm-dd").parse(dateLeft);
+		rightDate = new SimpleDateFormat("yyyy-mm-dd").parse(dateRight);
+			
+		if(price.equals("")) {
+			for(int i = 0; i < filteredOrders.size(); i++) {
+				ordersByPrice.add(filteredOrders.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < filteredOrders.size(); i++) {
+				if(filteredOrders.get(i).getPrice() >= leftPrice && filteredOrders.get(i).getPrice() <= rightPrice)
+					ordersByPrice.add(filteredOrders.get(i));
+			}
+		}
+		
+		if(date.equals("")) {
+			for(int i = 0; i < ordersByPrice.size(); i++) {
+				ordersByPriceAndDate.add(ordersByPrice.get(i));
+			}
+		}
+		else {
+			for(int i = 0; i < ordersByPrice.size(); i++) {
+				Date currDate = new SimpleDateFormat("yyyy-mm-dd").parse(ordersByPrice.get(i).getDateAndTime().split(" ")[0]);
+				if(currDate.after(leftDate) && currDate.before(rightDate))
+					ordersByPriceAndDate.add(ordersByPrice.get(i));
+			}
+		}		
+		return ordersByPriceAndDate;
+		}
+	}

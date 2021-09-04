@@ -148,6 +148,42 @@ function filter() {
 	})
 }
 
+function search() {
+	let price = $('#searchPrice').val();
+	let date = $('#searchDateAndTime').val();
+
+	$.get({
+			url: '../rest/managers/loggedInManager',
+			success: function(manager){
+				$.get({
+						url: '../rest/orders/',
+						success: function(orders){
+							let ordersInTable = [];
+							let i = 0;
+							for(let order of orders){
+								if(order.restaurant.name === manager.restaurant.name){
+									ordersInTable[i] = order.id;
+									i++;
+								}
+							}
+							
+							$.get({
+								url: '../rest/orders/search?searchPrice=' + price + '&searchDateAndTime=' + date,
+								success: function(orders){
+									$('#tableBody').empty();
+									for(let order of orders)
+										if(ordersInTable.includes(order.id))
+											addOrderToTable(order);
+									$('#inputBox').val("");
+								}
+							})
+						}
+				})			
+			}
+	})
+}					
+
+
 function searchBuyerByUsername() {
 	$.get({
 			url: '../rest/managers/loggedInManager',

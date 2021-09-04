@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -171,5 +172,13 @@ public class OrderService {
 	public ArrayList<Order> getFilteredOrders(@QueryParam("orderStatusFilter") String type) {
 		OrderDAO orderDAO = (OrderDAO) ctx.getAttribute("orderDAO");
 		return orderDAO.getFilteredOrders(type);
+	}
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Order> getSearchedOrders(@QueryParam("searchPrice") String price, @QueryParam("searchDateAndTime") String date) throws ParseException {
+		OrderDAO orderDAO = (OrderDAO) ctx.getAttribute("orderDAO");
+		return orderDAO.getSearchedOrders(price, date);
 	}
 }
