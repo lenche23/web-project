@@ -117,12 +117,7 @@ function leaveComment() {
 	let restaurant = $('tr.selected').find("td:eq(2)").text();
 	
 	if(status === "Dostavljena"){
-			$.get({
-				url: '../rest/buyers/loggedInBuyer',
-				success: function(buyer){
-					window.location.href = 'comment.html?restaurant=' + restaurant;
-				}
-			})	
+		window.location.href = 'comment.html?restaurant=' + restaurant;
 	}
 }
 

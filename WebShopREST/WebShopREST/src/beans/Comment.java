@@ -5,35 +5,43 @@ import java.util.Objects;
 public class Comment {
 
 	private int id;
-	private Buyer buyer;
-	private Restaurant restaurant;
+	private String buyerUsername;
+	private String restaurantName;
 	private String content;
 	private Grade grade;
 	private Boolean deleted;
 	
 	public Comment() {
 		this.id = 0;
-		this.buyer = new Buyer();
-		this.restaurant = new Restaurant();
+		this.buyerUsername = "";
+		this.restaurantName = "";
 		this.content = "";
 		this.grade = Grade.ONE;
 		this.deleted = false;
 	}
 
-	public Buyer getBuyer() {
-		return buyer;
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setBuyer(Buyer buyer) {
-		this.buyer = buyer;
+	public String getBuyerUsername() {
+		return buyerUsername;
 	}
 
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public void setBuyerUsername(String buyerUsername) {
+		this.buyerUsername = buyerUsername;
 	}
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
 	}
 
 	public String getContent() {
@@ -51,7 +59,6 @@ public class Comment {
 	public void setGrade(Grade grade) {
 		this.grade = grade;
 	}
-	
 
 	public Boolean getDeleted() {
 		return deleted;
@@ -60,27 +67,10 @@ public class Comment {
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
-	
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	
-	
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", buyer=" + buyer + ", restaurant=" + restaurant + ", content=" + content
-				+ ", grade=" + grade + ", deleted=" + deleted + "]";
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(buyer, content, deleted, grade, id, restaurant);
+		return Objects.hash(buyerUsername, content, deleted, grade, id, restaurantName);
 	}
 
 	@Override
@@ -92,25 +82,31 @@ public class Comment {
 		if (getClass() != obj.getClass())
 			return false;
 		Comment other = (Comment) obj;
-		return Objects.equals(buyer, other.buyer) && Objects.equals(content, other.content)
+		return Objects.equals(buyerUsername, other.buyerUsername) && Objects.equals(content, other.content)
 				&& Objects.equals(deleted, other.deleted) && grade == other.grade && id == other.id
-				&& Objects.equals(restaurant, other.restaurant);
+				&& Objects.equals(restaurantName, other.restaurantName);
 	}
 
-	public Comment(int id, Buyer buyer, Restaurant restaurant, String content, Grade grade, Boolean deleted) {
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", buyerUsername=" + buyerUsername + ", restaurantName=" + restaurantName
+				+ ", content=" + content + ", grade=" + grade + ", deleted=" + deleted + "]";
+	}
+
+	public Comment(int id, String buyerUsername, String restaurantName, String content, Grade grade, Boolean deleted) {
 		super();
 		this.id = id;
-		this.buyer = buyer;
-		this.restaurant = restaurant;
+		this.buyerUsername = buyerUsername;
+		this.restaurantName = restaurantName;
 		this.content = content;
 		this.grade = grade;
 		this.deleted = deleted;
 	}
 
-	public Comment(int id, Buyer buyer, String content, Grade grade, Boolean deleted) {
+	public Comment(int id, String buyerUsername, String content, Grade grade, Boolean deleted) {
 		super();
 		this.id = id;
-		this.buyer = buyer;
+		this.buyerUsername = buyerUsername;
 		this.content = content;
 		this.grade = grade;
 		this.deleted = deleted;

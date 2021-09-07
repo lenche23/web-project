@@ -11,10 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import beans.Buyer;
 import beans.Comment;
 import beans.Grade;
-import beans.Restaurant;
 
 public class CommentDAO {
 
@@ -34,7 +32,7 @@ public class CommentDAO {
 	public ArrayList<Comment> getCommentsFromRestaurant(String name) {
 		ArrayList<Comment> commentsFromRestaurant = new ArrayList<Comment>();
 		for(int i = 0; i < allComments.size(); i++)
-			if(allComments.get(i).getRestaurant().getName().equals(name))
+			if(allComments.get(i).getRestaurantName().equals(name))
 				commentsFromRestaurant.add(allComments.get(i));
 		return commentsFromRestaurant;
 	}
@@ -68,23 +66,20 @@ public class CommentDAO {
         JSONObject commentObject = (JSONObject) comment.get("comment");
 
         int id = (int) commentObject.get("id");
-        Buyer buyer = (Buyer) commentObject.get("buyer");
+        String buyer = (String) commentObject.get("buyerUsername");
+        String restaurant = (String) commentObject.get("restaurantName");
         String content = (String) commentObject.get("content");
         String grade = (String) commentObject.get("grade");
         boolean deleted = (boolean) commentObject.get("deleted");
         
-        Comment newComment = new Comment(id, buyer, content, Grade.valueOf(grade), deleted);
-        
-        String restaurantName = (String) commentObject.get("restaurant");
-    	for(int i = 0; i < restaurantDAO.getAllRestaurants().size(); i++)
-    		if(restaurantDAO.getAllRestaurants().get(i).getName().equals(restaurantName))
-    			newComment.setRestaurant(restaurantDAO.getAllRestaurants().get(i));
+        Comment newComment = new Comment(id, buyer, restaurant, content, Grade.valueOf(grade), deleted);
         
 		return newComment;
     }
 	
 	public void saveComment(Comment comment) throws IOException {
 		comment.setDeleted(false);
+		comment.setId(getNumOfComments()+1);
 		allComments.add(comment);
 		
 		JSONArray comments = new JSONArray();
@@ -92,8 +87,8 @@ public class CommentDAO {
 			JSONObject commentObject = new JSONObject();
 			
 			commentObject.put("id", a.getId());
-			commentObject.put("buyer", a.getBuyer());
-			commentObject.put("restaurant", a.getRestaurant().getName());
+			commentObject.put("buyer", a.getBuyerUsername());
+			commentObject.put("restaurant", a.getRestaurantName());
 			commentObject.put("content", a.getContent());
 			commentObject.put("grade", a.getGrade().toString());
 			commentObject.put("deleted", a.getDeleted());
@@ -115,7 +110,7 @@ public class CommentDAO {
 	
 	public void deleteComment(String restaurantName, int commentId) throws IOException {
 		for(int i = 0; i < allComments.size(); i++)
-			if(allComments.get(i).getId() == commentId && allComments.get(i).getRestaurant().getName().equals(restaurantName))
+			if(allComments.get(i).getId() == commentId && allComments.get(i).getRestaurantName().equals(restaurantName))
 				allComments.get(i).setDeleted(true);
 		
 		JSONArray comments = new JSONArray();
@@ -123,8 +118,8 @@ public class CommentDAO {
 			JSONObject commentObject = new JSONObject();
 			
 			commentObject.put("id", a.getId());
-			commentObject.put("buyer", a.getBuyer());
-			commentObject.put("restaurant", a.getRestaurant().getName());
+			commentObject.put("buyer", a.getBuyerUsername());
+			commentObject.put("restaurant", a.getRestaurantName());
 			commentObject.put("content", a.getContent());
 			commentObject.put("grade", a.getGrade().toString());
 			commentObject.put("deleted", a.getDeleted());
