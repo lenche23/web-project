@@ -65,14 +65,14 @@ public class CommentDAO {
     {
         JSONObject commentObject = (JSONObject) comment.get("comment");
 
-        int id = (int) commentObject.get("id");
+        String id =  String.valueOf(commentObject.get("id"));
         String buyer = (String) commentObject.get("buyerUsername");
         String restaurant = (String) commentObject.get("restaurantName");
         String content = (String) commentObject.get("content");
         String grade = (String) commentObject.get("grade");
         boolean deleted = (boolean) commentObject.get("deleted");
         
-        Comment newComment = new Comment(id, buyer, restaurant, content, Grade.valueOf(grade), deleted);
+        Comment newComment = new Comment(Integer.parseInt(id), buyer, restaurant, content, Grade.valueOf(grade), deleted);
         
 		return newComment;
     }
