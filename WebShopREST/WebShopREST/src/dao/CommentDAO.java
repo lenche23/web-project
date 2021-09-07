@@ -144,7 +144,7 @@ public class CommentDAO {
         }
 	}
 	
-/*	public void approveComment(int commentId) throws IOException {
+	public void approveComment(int commentId) throws IOException {
 		for(int i = 0; i < allComments.size(); i++) 
 			if(allComments.get(i).getId() == commentId) 
 				allComments.get(i).setAccepted(true);
@@ -174,5 +174,5 @@ public class CommentDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
-	}*/
+	}
 }

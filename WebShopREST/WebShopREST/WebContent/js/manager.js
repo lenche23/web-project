@@ -123,7 +123,7 @@ function declineComment() {
 	}	
 }
 
-/*function approveComment() {
+function approveComment() {
 	let id = $('tr.selected').find('td:eq(0)').text();
 	let accepted = $('tr.selected').find('td:eq(4)').text();
 	$('tr.selected').find('td:eq(4)').text("Odobren");
@@ -136,7 +136,7 @@ function declineComment() {
 			dataType: 'json'
 		});	
 	}	
-}*/
+}
 
 function addCommentToTable(comment){
 	let tableBody = $('#tableBody2');

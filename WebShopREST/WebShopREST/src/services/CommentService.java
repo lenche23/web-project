@@ -91,7 +91,7 @@ public class CommentService {
 		}
 	}
 	
-/*	@PUT
+	@PUT
 	@Path("/approve/{commentId}")
 	public void approveComment(@PathParam("commentId") int commentId) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
@@ -101,5 +101,5 @@ public class CommentService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
