@@ -10,6 +10,7 @@ public class Comment {
 	private String content;
 	private Grade grade;
 	private Boolean deleted;
+	private Boolean accepted;
 	
 	public Comment() {
 		this.id = 0;
@@ -18,6 +19,7 @@ public class Comment {
 		this.content = "";
 		this.grade = Grade.ONE;
 		this.deleted = false;
+		this.accepted = false;
 	}
 
 	public int getId() {
@@ -68,9 +70,17 @@ public class Comment {
 		this.deleted = deleted;
 	}
 
+	public Boolean getAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(Boolean accepted) {
+		this.accepted = accepted;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(buyerUsername, content, deleted, grade, id, restaurantName);
+		return Objects.hash(accepted, buyerUsername, content, deleted, grade, id, restaurantName);
 	}
 
 	@Override
@@ -82,18 +92,19 @@ public class Comment {
 		if (getClass() != obj.getClass())
 			return false;
 		Comment other = (Comment) obj;
-		return Objects.equals(buyerUsername, other.buyerUsername) && Objects.equals(content, other.content)
-				&& Objects.equals(deleted, other.deleted) && grade == other.grade && id == other.id
-				&& Objects.equals(restaurantName, other.restaurantName);
+		return Objects.equals(accepted, other.accepted) && Objects.equals(buyerUsername, other.buyerUsername)
+				&& Objects.equals(content, other.content) && Objects.equals(deleted, other.deleted)
+				&& grade == other.grade && id == other.id && Objects.equals(restaurantName, other.restaurantName);
 	}
 
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", buyerUsername=" + buyerUsername + ", restaurantName=" + restaurantName
-				+ ", content=" + content + ", grade=" + grade + ", deleted=" + deleted + "]";
+				+ ", content=" + content + ", grade=" + grade + ", deleted=" + deleted + ", accepted=" + accepted + "]";
 	}
 
-	public Comment(int id, String buyerUsername, String restaurantName, String content, Grade grade, Boolean deleted) {
+	public Comment(int id, String buyerUsername, String restaurantName, String content, Grade grade, Boolean deleted,
+			Boolean accepted) {
 		super();
 		this.id = id;
 		this.buyerUsername = buyerUsername;
@@ -101,14 +112,6 @@ public class Comment {
 		this.content = content;
 		this.grade = grade;
 		this.deleted = deleted;
-	}
-
-	public Comment(int id, String buyerUsername, String content, Grade grade, Boolean deleted) {
-		super();
-		this.id = id;
-		this.buyerUsername = buyerUsername;
-		this.content = content;
-		this.grade = grade;
-		this.deleted = deleted;
+		this.accepted = accepted;
 	}
 }

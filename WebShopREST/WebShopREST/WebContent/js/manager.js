@@ -16,6 +16,14 @@ $(document).ready(function(){
 	$("#updateArticle").click(function() {
 		updateArticle();
 	});
+	
+	$("#approveComment").click(function() {
+		approveComment();
+	});
+	
+	$("#declineComment").click(function() {
+		declineComment();
+	});
 });
 
 function logout() {
@@ -87,8 +95,78 @@ function loadPage() {
 								addArticleToTable(article);
 					}
 				})
+				$.get({
+					url: '../rest/comments/',
+					success: function(comments){
+						for(let c of comments) {
+							if(!c.deleted && c.restaurantName === manager.restaurant.name)
+								addCommentToTable(c);
+						}
+					}
+				})
 			}
 	})
+}
+
+function declineComment() {
+	let id = $('tr.selected').find('td:eq(0)').text();
+	let accepted = $('tr.selected').find('td:eq(4)').text();
+	$('tr.selected').remove();
+	
+	if (accepted === "Ceka na odobravanje"){
+		$.ajax({
+			type: 'PUT',
+			url: '../rest/comments/delete/' + id,
+			contentType: 'application/json',
+			dataType: 'json'
+		});	
+	}	
+}
+
+/*function approveComment() {
+	let id = $('tr.selected').find('td:eq(0)').text();
+	let accepted = $('tr.selected').find('td:eq(4)').text();
+	$('tr.selected').find('td:eq(4)').text("Odobren");
+	
+	if (accepted === "Ceka na odobravanje"){
+		$.ajax({
+			type: 'PUT',
+			url: '../rest/comments/approve/' + id,
+			contentType: 'application/json',
+			dataType: 'json'
+		});	
+	}	
+}*/
+
+function addCommentToTable(comment){
+	let tableBody = $('#tableBody2');
+	let newRow = $('<tr>');
+	
+	let id = $('<td>').text(comment.id);
+	let buyer = $('<td>').text(comment.buyerUsername);
+	let content = $('<td>').text(comment.content);
+	let grade = "";
+	if(comment.grade === "ONE") {
+		grade = $('<td>').text("1");
+	} else if (comment.grade === "TWO"){
+		grade = $('<td>').text("2");
+	} else if (comment.grade === "THREE"){
+		grade = $('<td>').text("3");
+	} else if (comment.grade === "FOUR"){
+		grade = $('<td>').text("4");
+	} else {
+		grade = $('<td>').text("5");
+	}
+	let accepted = "";
+	if(comment.accepted) {
+		accepted = $('<td>').text("Odobren");
+	}  else {
+		accepted = $('<td>').text("Ceka na odobravanje");
+	}
+	
+	newRow.append(id).append(buyer).append(content).append(grade).append(accepted);
+	newRow.click(selectedRow());
+	tableBody.append(newRow);
 }
 
 function addArticleToTable(article){

@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import beans.Article;
 import beans.Comment;
 import beans.Grade;
 
@@ -71,14 +72,16 @@ public class CommentDAO {
         String content = (String) commentObject.get("content");
         String grade = (String) commentObject.get("grade");
         boolean deleted = (boolean) commentObject.get("deleted");
+        boolean accepted = (boolean) commentObject.get("accepted");
         
-        Comment newComment = new Comment(Integer.parseInt(id), buyer, restaurant, content, Grade.valueOf(grade), deleted);
+        Comment newComment = new Comment(Integer.parseInt(id), buyer, restaurant, content, Grade.valueOf(grade), deleted, accepted);
         
 		return newComment;
     }
 	
 	public void saveComment(Comment comment) throws IOException {
 		comment.setDeleted(false);
+		comment.setAccepted(false);
 		comment.setId(getNumOfComments()+1);
 		allComments.add(comment);
 		
@@ -87,11 +90,12 @@ public class CommentDAO {
 			JSONObject commentObject = new JSONObject();
 			
 			commentObject.put("id", a.getId());
-			commentObject.put("buyer", a.getBuyerUsername());
-			commentObject.put("restaurant", a.getRestaurantName());
+			commentObject.put("buyerUsername", a.getBuyerUsername());
+			commentObject.put("restaurantName", a.getRestaurantName());
 			commentObject.put("content", a.getContent());
 			commentObject.put("grade", a.getGrade().toString());
 			commentObject.put("deleted", a.getDeleted());
+			commentObject.put("accepted", a.getAccepted());
 			
 			
 			JSONObject commentObject2 = new JSONObject(); 
@@ -108,9 +112,9 @@ public class CommentDAO {
         }
 	}
 	
-	public void deleteComment(String restaurantName, int commentId) throws IOException {
+	public void deleteComment(int commentId) throws IOException {
 		for(int i = 0; i < allComments.size(); i++)
-			if(allComments.get(i).getId() == commentId && allComments.get(i).getRestaurantName().equals(restaurantName))
+			if(allComments.get(i).getId() == commentId)
 				allComments.get(i).setDeleted(true);
 		
 		JSONArray comments = new JSONArray();
@@ -118,11 +122,12 @@ public class CommentDAO {
 			JSONObject commentObject = new JSONObject();
 			
 			commentObject.put("id", a.getId());
-			commentObject.put("buyer", a.getBuyerUsername());
-			commentObject.put("restaurant", a.getRestaurantName());
+			commentObject.put("buyerUsername", a.getBuyerUsername());
+			commentObject.put("restaurantName", a.getRestaurantName());
 			commentObject.put("content", a.getContent());
 			commentObject.put("grade", a.getGrade().toString());
 			commentObject.put("deleted", a.getDeleted());
+			commentObject.put("accepted", a.getAccepted());
 			
 			
 			JSONObject commentObject2 = new JSONObject(); 
@@ -138,4 +143,36 @@ public class CommentDAO {
             e.printStackTrace();
         }
 	}
+	
+/*	public void approveComment(int commentId) throws IOException {
+		for(int i = 0; i < allComments.size(); i++) 
+			if(allComments.get(i).getId() == commentId) 
+				allComments.get(i).setAccepted(true);
+		
+		JSONArray comments = new JSONArray();
+		for (Comment a : allComments) {
+			JSONObject commentObject = new JSONObject();
+			
+			commentObject.put("id", a.getId());
+			commentObject.put("buyerUsername", a.getBuyerUsername());
+			commentObject.put("restaurantName", a.getRestaurantName());
+			commentObject.put("content", a.getContent());
+			commentObject.put("grade", a.getGrade().toString());
+			commentObject.put("deleted", a.getDeleted());
+			commentObject.put("accepted", a.getAccepted());
+			
+			
+			JSONObject commentObject2 = new JSONObject(); 
+			commentObject2.put("comment", commentObject);
+			
+	        comments.add(commentObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "comments.json")) {
+            file.write(comments.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}*/
 }

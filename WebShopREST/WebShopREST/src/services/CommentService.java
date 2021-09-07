@@ -16,7 +16,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.Article;
 import beans.Comment;
+import dao.ArticleDAO;
 import dao.CommentDAO;
 import dao.RestaurantDAO;
 
@@ -78,14 +80,26 @@ public class CommentService {
 	}
 	
 	@PUT
-	@Path("/delete/{restaurantName}/{commentId}")
-	public void deleteArticle(@PathParam("restaurantName") String restaurantName, @PathParam("commentId") int commentId) {
+	@Path("/delete/{commentId}")
+	public void deleteComment(@PathParam("commentId") int commentId) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
 		
 		try {
-			commentDAO.deleteComment(restaurantName, commentId);
+			commentDAO.deleteComment(commentId);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+/*	@PUT
+	@Path("/approve/{commentId}")
+	public void approveComment(@PathParam("commentId") int commentId) {
+		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		
+		try {
+			commentDAO.approveComment(commentId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}*/
 }

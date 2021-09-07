@@ -81,9 +81,7 @@ function loadRestaurantPage() {
 												if(!article.deleted){
 													addArticleToTable(article);
 												}
-										}
-									
-										
+										}					
 									}
 								})
 							}
@@ -100,12 +98,43 @@ function loadRestaurantPage() {
 									}
 								})
 							}
+						
 						}
-				})	
-					
-				$('#commentsTable').hide();
+			})	
+			$.get({
+				url: '../rest/comments/',
+				success: function(comments){
+					for(let c of comments) {
+						if(!c.deleted && c.restaurantName === restaurant.name && c.accepted)
+							addCommentToTable(c);
+					}
+				}
+			})
 			}
 	})
+}
+
+function addCommentToTable(comment){
+	let tableBody = $('#tableBody2');
+	let newRow = $('<tr>');
+	
+	let buyer = $('<td>').text(comment.buyerUsername);
+	let content = $('<td>').text(comment.content);
+	let grade = "";
+	if(comment.grade === "ONE") {
+		grade = $('<td>').text("1");
+	} else if (comment.grade === "TWO"){
+		grade = $('<td>').text("2");
+	} else if (comment.grade === "THREE"){
+		grade = $('<td>').text("3");
+	} else if (comment.grade === "FOUR"){
+		grade = $('<td>').text("4");
+	} else {
+		grade = $('<td>').text("5");
+	}
+	
+	newRow.append(buyer).append(content).append(grade);
+	tableBody.append(newRow);
 }
 
 function addArticleToTableBuyer(article){
