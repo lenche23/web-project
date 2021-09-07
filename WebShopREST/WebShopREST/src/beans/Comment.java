@@ -1,17 +1,23 @@
 package beans;
 
+import java.util.Objects;
+
 public class Comment {
 
+	private int id;
 	private Buyer buyer;
 	private Restaurant restaurant;
 	private String content;
 	private Grade grade;
+	private Boolean deleted;
 	
 	public Comment() {
+		this.id = 0;
 		this.buyer = new Buyer();
 		this.restaurant = new Restaurant();
 		this.content = "";
 		this.grade = Grade.ONE;
+		this.deleted = false;
 	}
 
 	public Buyer getBuyer() {
@@ -45,16 +51,36 @@ public class Comment {
 	public void setGrade(Grade grade) {
 		this.grade = grade;
 	}
+	
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", buyer=" + buyer + ", restaurant=" + restaurant + ", content=" + content
+				+ ", grade=" + grade + ", deleted=" + deleted + "]";
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((buyer == null) ? 0 : buyer.hashCode());
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
-		result = prime * result + ((restaurant == null) ? 0 : restaurant.hashCode());
-		return result;
+		return Objects.hash(buyer, content, deleted, grade, id, restaurant);
 	}
 
 	@Override
@@ -66,39 +92,27 @@ public class Comment {
 		if (getClass() != obj.getClass())
 			return false;
 		Comment other = (Comment) obj;
-		if (buyer == null) {
-			if (other.buyer != null)
-				return false;
-		} else if (!buyer.equals(other.buyer))
-			return false;
-		if (content == null) {
-			if (other.content != null)
-				return false;
-		} else if (!content.equals(other.content))
-			return false;
-		if (grade != other.grade)
-			return false;
-		if (restaurant == null) {
-			if (other.restaurant != null)
-				return false;
-		} else if (!restaurant.equals(other.restaurant))
-			return false;
-		return true;
+		return Objects.equals(buyer, other.buyer) && Objects.equals(content, other.content)
+				&& Objects.equals(deleted, other.deleted) && grade == other.grade && id == other.id
+				&& Objects.equals(restaurant, other.restaurant);
 	}
 
-	@Override
-	public String toString() {
-		return "Comment [buyer=" + buyer + ", restaurant=" + restaurant + ", content=" + content + ", grade=" + grade
-				+ "]";
-	}
-
-	public Comment(Buyer buyer, Restaurant restaurant, String content, Grade grade) {
+	public Comment(int id, Buyer buyer, Restaurant restaurant, String content, Grade grade, Boolean deleted) {
 		super();
+		this.id = id;
 		this.buyer = buyer;
 		this.restaurant = restaurant;
 		this.content = content;
 		this.grade = grade;
+		this.deleted = deleted;
 	}
-	
-	
+
+	public Comment(int id, Buyer buyer, String content, Grade grade, Boolean deleted) {
+		super();
+		this.id = id;
+		this.buyer = buyer;
+		this.content = content;
+		this.grade = grade;
+		this.deleted = deleted;
+	}
 }

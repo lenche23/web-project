@@ -20,6 +20,14 @@ body {
 	color: black;
 }
 
+.promoText {
+	color: black;
+	font-family: Lucida Handwriting;
+	text-align: left;
+	font-size: 40px;
+    margin-left: 30px;
+}
+
 #articlesRectangle{
 	position: relative;
     background: rgba(241, 190, 72, 0.774);
@@ -168,6 +176,33 @@ input, select {
 }
 
 #usersTable tr {
+	cursor: pointer;
+}
+
+#commentsTable {
+	border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	font-family: Georgia, serif;
+	text-align: center;
+	background-color: rgba(199, 207, 199, 0.76);
+	color: black;
+	font-size: 12pt;
+	margin: 10px;
+}
+
+#commentsTable td, #commentsTable th {
+	padding: 15px;
+	border-bottom: 1px solid rgb(177, 135, 38);
+}
+
+#commentsTable tr.selected {
+	background: lightblue;
+}
+
+#commentsTable tr {
 	cursor: pointer;
 }
 
