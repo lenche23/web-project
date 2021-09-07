@@ -69,6 +69,14 @@ public class CommentService {
 		return commentDAO.getCommentsFromRestaurant(name);
 	}
 	
+	@GET
+	@Path("/commentNum")
+	@Produces(MediaType.APPLICATION_JSON)
+	public int getNumOfComments() {
+		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		return commentDAO.getNumOfComments();
+	}
+	
 	@PUT
 	@Path("/delete/{restaurantName}/{commentId}")
 	public void deleteArticle(@PathParam("restaurantName") String restaurantName, @PathParam("commentId") int commentId) {

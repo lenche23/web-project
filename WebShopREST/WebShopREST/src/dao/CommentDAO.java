@@ -38,6 +38,10 @@ public class CommentDAO {
 				commentsFromRestaurant.add(allComments.get(i));
 		return commentsFromRestaurant;
 	}
+	
+	public int getNumOfComments() {
+		return allComments.size();
+	}
 
 	public void loadComments(RestaurantDAO restaurantDAO) {
 		JSONParser jsonParser = new JSONParser();

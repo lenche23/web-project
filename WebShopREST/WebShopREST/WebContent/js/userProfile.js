@@ -28,6 +28,10 @@ $(document).ready(function(){
 		cancelOrder();
 	});
 	
+	$('#leaveComment').click(function(){
+		leaveComment();
+	});
+	
 	$('#requestBtn').click(function(){
 		requestToDeliver();
 	});
@@ -105,6 +109,20 @@ function cancelOrder() {
 				});
 			}
 		});
+	}
+}
+
+function leaveComment() {
+	let status = $('tr.selected').find("td:eq(5)").text();
+	let restaurant = $('tr.selected').find("td:eq(2)").text();
+	
+	if(status === "Dostavljena"){
+			$.get({
+				url: '../rest/buyers/loggedInBuyer',
+				success: function(buyer){
+					window.location.href = 'comment.html?restaurant=' + restaurant;
+				}
+			})	
 	}
 }
 

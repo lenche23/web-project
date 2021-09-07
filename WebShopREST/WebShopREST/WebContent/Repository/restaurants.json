@@ -1,1 +1,38 @@
-[{"restaurant":{"address":"Batutova 5, Beograd, 59714, Srbija","deleted":false,"name":"Chinese Wonderland","length":20.0,"width":40.0,"logo":"chinese.png","type":"Kineski","status":"OPEN"}},{"restaurant":{"address":"Cara Dušana 2, Novi Sad, 21000, Srbija","deleted":false,"name":"Italian Wonderland","length":18.0,"width":42.0,"logo":"italian.png","type":"Italijanski","status":"CLOSED"}},{"restaurant":{"address":"Vlaška 23, Zagreb, 10000, Hrvatska","deleted":false,"name":"Roštiljnica","length":20.0,"width":30.0,"logo":"barbeque.png","type":"Roštilj","status":"OPEN"}}]
+[
+    {
+        "restaurant": {
+            "address": "Batutova 5, Beograd, 59714, Srbija",
+            "deleted": false,
+            "name": "Chinese Wonderland",
+            "length": 20.0,
+            "width": 40.0,
+            "logo": "chinese.png",
+            "type": "Kineski",
+            "status": "OPEN"
+        }
+    },
+    {
+        "restaurant": {
+            "address": "Cara Dušana 2, Novi Sad, 21000, Srbija",
+            "deleted": false,
+            "name": "Italian Wonderland",
+            "length": 18.0,
+            "width": 42.0,
+            "logo": "italian.png",
+            "type": "Italijanski",
+            "status": "CLOSED"
+        }
+    },
+    {
+        "restaurant": {
+            "address": "Vlaška 23, Zagreb, 10000, Hrvatska",
+            "deleted": false,
+            "name": "Roštiljnica",
+            "length": 20.0,
+            "width": 30.0,
+            "logo": "barbeque.png",
+            "type": "Roštilj",
+            "status": "OPEN"
+        }
+    }
+]
