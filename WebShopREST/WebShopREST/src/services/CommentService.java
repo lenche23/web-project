@@ -92,12 +92,14 @@ public class CommentService {
 	}
 	
 	@PUT
-	@Path("/approve/{commentId}")
-	public void approveComment(@PathParam("commentId") int commentId) {
+	@Path("/approve/{commentId}/{name}")
+	public void approveComment(@PathParam("commentId") int commentId, @PathParam("name") String name) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		
 		try {
 			commentDAO.approveComment(commentId);
+			restaurantDAO.updateGrade(name);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

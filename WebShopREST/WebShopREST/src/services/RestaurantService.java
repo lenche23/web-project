@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import beans.Restaurant;
 import dao.BasketDAO;
 import dao.BuyerDAO;
+import dao.CommentDAO;
 import dao.RestaurantDAO;
 
 @Path("/restaurants")
@@ -110,5 +111,17 @@ public class RestaurantService {
 	public Restaurant getViewedRestaurant() {
 		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
 		return restaurantDAO.getViewedRestaurant();
+	}
+	
+	@PUT
+	@Path("/update/{name}")
+	public void updateGrade(@PathParam("name") String name) {
+		RestaurantDAO restaurantDAO = (RestaurantDAO) ctx.getAttribute("restaurantDAO");
+		
+		try {
+			restaurantDAO.updateGrade(name);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

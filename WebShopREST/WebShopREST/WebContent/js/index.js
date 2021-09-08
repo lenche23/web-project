@@ -173,7 +173,7 @@ function addRestaurantToTable(restaurant){
 	let name = $('<td>').text(restaurant.name);
 	let address = $('<td>').text(restaurant.location.address);
 	let type = $('<td>').text(restaurant.type);
-	let grade = $('<td>').text('-');
+	let grade = $('<td>').text(restaurant.grade);
 	let status = '';
 	if(restaurant.status == "OPEN")
 		status = $('<td>').text('Otvoren');

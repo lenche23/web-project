@@ -81,7 +81,7 @@ function loadPage() {
 				$('#name').val(manager.restaurant.name);
 				$('#address').val(manager.restaurant.location.address);
 				$('#type').val(manager.restaurant.type);
-				$('#grade').val('-');
+				$('#grade').val(manager.restaurant.grade);
 				if(manager.restaurant.status === "OPEN")
 					$('#status').val("Otvoren");
 				else if(manager.restaurant.status === "CLOSED")
@@ -129,12 +129,20 @@ function approveComment() {
 	$('tr.selected').find('td:eq(4)').text("Odobren");
 	
 	if (accepted === "Ceka na odobravanje"){
-		$.ajax({
-			type: 'PUT',
-			url: '../rest/comments/approve/' + id,
-			contentType: 'application/json',
-			dataType: 'json'
-		});	
+		$.get({
+			url: '../rest/managers/loggedInManager',
+			success: function(manager){
+				$.ajax({
+					type: 'PUT',
+					url: '../rest/comments/approve/' + id + '/' + manager.restaurant.name,
+					contentType: 'application/json',
+					dataType: 'json',
+					success: function(){
+                        $('#grade').val(manager.restaurant.grade);                   
+					}
+				});	
+			}
+		});
 	}	
 }
 

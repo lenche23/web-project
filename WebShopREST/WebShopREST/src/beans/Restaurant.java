@@ -1,6 +1,7 @@
 package beans;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Restaurant {
 
@@ -11,6 +12,7 @@ public class Restaurant {
 	private Location location;
 	private String logo;
 	private boolean deleted;
+	private double grade;
 
 	public Restaurant() {
 		this.name = "";
@@ -20,6 +22,7 @@ public class Restaurant {
 		this.deleted = false;
 		this.availableArticles = new ArrayList<Article>();;
 		this.location = new Location();
+		this.grade = 0.00;
 	}
 
 	public String getLogo() {
@@ -78,24 +81,24 @@ public class Restaurant {
 		this.location = location;
 	}
 
+	public double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(double grade) {
+		this.grade = grade;
+	}
+
 	@Override
 	public String toString() {
 		return "Restaurant [name=" + name + ", type=" + type + ", availableArticles=" + availableArticles + ", status="
-				+ status + ", location=" + location + ", logo=" + logo + ", deleted=" + deleted + "]";
+				+ status + ", location=" + location + ", logo=" + logo + ", deleted=" + deleted + ", grade=" + grade
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((availableArticles == null) ? 0 : availableArticles.hashCode());
-		result = prime * result + (deleted ? 1231 : 1237);
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
+		return Objects.hash(availableArticles, deleted, grade, location, logo, name, status, type);
 	}
 
 	@Override
@@ -107,36 +110,10 @@ public class Restaurant {
 		if (getClass() != obj.getClass())
 			return false;
 		Restaurant other = (Restaurant) obj;
-		if (availableArticles == null) {
-			if (other.availableArticles != null)
-				return false;
-		} else if (!availableArticles.equals(other.availableArticles))
-			return false;
-		if (deleted != other.deleted)
-			return false;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		if (logo == null) {
-			if (other.logo != null)
-				return false;
-		} else if (!logo.equals(other.logo))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (status != other.status)
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
+		return Objects.equals(availableArticles, other.availableArticles) && deleted == other.deleted
+				&& Double.doubleToLongBits(grade) == Double.doubleToLongBits(other.grade)
+				&& Objects.equals(location, other.location) && Objects.equals(logo, other.logo)
+				&& Objects.equals(name, other.name) && status == other.status && Objects.equals(type, other.type);
 	}
 
 	public Restaurant(String name, String type, ArrayList<Article> availableArticles, RestaurantStatus status,
@@ -151,7 +128,7 @@ public class Restaurant {
 		this.deleted = deleted;
 	}
 	
-	public Restaurant(String name, String type, RestaurantStatus status, Location location, String logo, boolean deleted) {
+	public Restaurant(String name, String type, RestaurantStatus status, Location location, String logo, boolean deleted, double grade) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -159,5 +136,19 @@ public class Restaurant {
 		this.location = location;
 		this.logo = logo;
 		this.deleted = deleted;
+		this.grade = grade;
+	}
+
+	public Restaurant(String name, String type, ArrayList<Article> availableArticles, RestaurantStatus status,
+			Location location, String logo, boolean deleted, double grade) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.availableArticles = availableArticles;
+		this.status = status;
+		this.location = location;
+		this.logo = logo;
+		this.deleted = deleted;
+		this.grade = grade;
 	}
 }
