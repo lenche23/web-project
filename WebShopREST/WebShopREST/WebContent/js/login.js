@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$('#errorDiv').hide();
+	$('#blockDiv').hide();
 	
 	$('#submit').click(function(){
 		let username = $('#username').val();
@@ -7,25 +8,34 @@ $(document).ready(function(){
 		var userFound = false;
 		
 		$('#errorDiv').hide();
+		$('#blockDiv').hide();
 
 		$.get({
 			url: "../rest/buyers/login?username=" + username + "&password=" + password,
 			success: function(buyer){
 				if(buyer) {
-					userFound = true;
-					window.location.replace("../html/userProfile.html");
+					if(!buyer.blocked){
+						userFound = true;
+						window.location.replace("../html/userProfile.html");
+					} else {
+						$('#blockDiv').show();
+					}
 				}
 				else {
 					$.get({
 						url: "../rest/managers/login?username=" + username + "&password=" + password,
 						success: function(manager){
 							if(manager) {
-								userFound = true;
-								if(manager.restaurant.name.length > 0){
-									window.location.replace("../html/manager.html");
-								}
-								else{
-									window.location.replace("../html/index.html");
+								if(!manager.blocked){
+									userFound = true;
+									if(manager.restaurant.name.length > 0){
+										window.location.replace("../html/manager.html");
+									}
+									else{
+										window.location.replace("../html/index.html");
+									}
+								} else {
+									$('#blockDiv').show();
 								}
 							}
 							else {
@@ -33,16 +43,24 @@ $(document).ready(function(){
 									url: "../rest/deliverers/login?username=" + username + "&password=" + password,
 									success: function(deliverer){
 										if(deliverer) {
-											userFound = true;
-											window.location.replace("../html/userProfile.html");	
+											if(!deliverer.blocked) {
+												userFound = true;
+												window.location.replace("../html/userProfile.html");
+											} else {
+												$('#blockDiv').show();
+											}	
 										}
 										else {
 											$.get({
 												url: "../rest/administrators/login?username=" + username + "&password=" + password,
 												success: function(administrator){
 													if(administrator) {
-														userFound = true;
-														window.location.replace("../html/administrator.html");	
+														if(!administrator.blocked) {
+															userFound = true;
+															window.location.replace("../html/administrator.html");	
+														} else {
+															$('#blockDiv').show();
+														}
 													}
 													else {
 														$('#errorDiv').show();
