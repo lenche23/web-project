@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Serializable {
 	
@@ -12,6 +13,7 @@ public class User implements Serializable {
 	protected Sex gender;
 	protected String dateOfBirth;
 	protected boolean deleted;
+	protected boolean blocked;
 	
 	public User() {
 		this.firstName = "";
@@ -22,6 +24,7 @@ public class User implements Serializable {
 		this.gender = Sex.FEMALE;
 		this.dateOfBirth = "";
 		this.deleted = false;
+		this.blocked = false;
 	}
 
 	private static final long serialVersionUID = 6640936480584723344L;
@@ -90,19 +93,26 @@ public class User implements Serializable {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username
+				+ ", password=" + password + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", deleted="
+				+ deleted + ", blocked=" + blocked + "]";
+	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
-		result = prime * result + (deleted ? 1231 : 1237);
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+		return Objects.hash(blocked, dateOfBirth, deleted, email, firstName, gender, lastName, password, username);
 	}
 
 	@Override
@@ -114,52 +124,14 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (dateOfBirth == null) {
-			if (other.dateOfBirth != null)
-				return false;
-		} else if (!dateOfBirth.equals(other.dateOfBirth))
-			return false;
-		if (deleted != other.deleted)
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (gender != other.gender)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username
-				+ ", password=" + password + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", deleted="
-				+ deleted + "]";
+		return blocked == other.blocked && Objects.equals(dateOfBirth, other.dateOfBirth) && deleted == other.deleted
+				&& Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
+				&& gender == other.gender && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 
 	public User(String firstName, String lastName, String email, String username, String password, Sex gender,
-			String dateOfBirth, boolean deleted) {
+			String dateOfBirth, boolean deleted,boolean blocked) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -169,5 +141,6 @@ public class User implements Serializable {
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.deleted = deleted;
+		this.blocked = blocked;
 	}
 }

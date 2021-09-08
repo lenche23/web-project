@@ -66,8 +66,9 @@ public class AdministratorDAO {
         String gender = (String) administratorObject.get("gender");
         String dateOfBirth = (String) administratorObject.get("dateOfBirth");
         boolean deleted = (boolean) administratorObject.get("deleted");
+        boolean blocked = (boolean) administratorObject.get("blocked");
         
-        Administrator newAdministrator = new Administrator(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted);
+        Administrator newAdministrator = new Administrator(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted,blocked);
 		return newAdministrator;
     }
 	
@@ -95,6 +96,8 @@ public class AdministratorDAO {
 			administratorObject.put("gender", a.getGender().toString());
 			administratorObject.put("dateOfBirth", a.getDateOfBirth());
 			administratorObject.put("deleted", a.isDeleted());
+			administratorObject.put("blocked", a.isBlocked());
+			
 			
 			JSONObject administratorObject2 = new JSONObject(); 
 	        administratorObject2.put("administrator", administratorObject);

@@ -77,8 +77,9 @@ public class ManagerDAO {
         String gender = (String) managerObject.get("gender");
         String dateOfBirth = (String) managerObject.get("dateOfBirth");
         boolean deleted = (boolean) managerObject.get("deleted");
+        boolean blocked = (boolean) managerObject.get("blocked");
         
-        Manager newManager = new Manager(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted);
+        Manager newManager = new Manager(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted,blocked);
         
         if(managerObject.get("restaurant") != null) {
         	String name = (String) managerObject.get("restaurant");
@@ -92,6 +93,7 @@ public class ManagerDAO {
 	
 	public void saveManager(Manager manager) throws IOException {
 		manager.setDeleted(false);
+		manager.setBlocked(false);
 		allManagers.add(manager);
 		
 		JSONArray managers = new JSONArray();
@@ -106,6 +108,7 @@ public class ManagerDAO {
 			managerObject.put("gender", m.getGender().toString());
 			managerObject.put("dateOfBirth", m.getDateOfBirth());
 			managerObject.put("deleted", m.isDeleted());
+			managerObject.put("blocked", m.isBlocked());
 			if(m.getRestaurant().getName() != "")
 				managerObject.put("restaurant", m.getRestaurant().getName());
 			else
@@ -149,6 +152,7 @@ public class ManagerDAO {
 			managerObject.put("gender", m.getGender().toString());
 			managerObject.put("dateOfBirth", m.getDateOfBirth());
 			managerObject.put("deleted", m.isDeleted());
+			managerObject.put("blocked", m.isBlocked());
 			if(m.getRestaurant().getName() != "")
 				managerObject.put("restaurant", m.getRestaurant().getName());
 			else
@@ -187,6 +191,7 @@ public class ManagerDAO {
 			managerObject.put("gender", m.getGender().toString());
 			managerObject.put("dateOfBirth", m.getDateOfBirth());
 			managerObject.put("deleted", m.isDeleted());
+			managerObject.put("blocked", m.isBlocked());
 			if(m.getRestaurant().getName() != "")
 				managerObject.put("restaurant", m.getRestaurant().getName());
 			else
@@ -223,6 +228,7 @@ public class ManagerDAO {
 			managerObject.put("gender", m.getGender().toString());
 			managerObject.put("dateOfBirth", m.getDateOfBirth());
 			managerObject.put("deleted", m.isDeleted());
+			managerObject.put("blocked", m.isBlocked());
 			if(m.getRestaurant().getName() != "")
 				managerObject.put("restaurant", m.getRestaurant().getName());
 			else
