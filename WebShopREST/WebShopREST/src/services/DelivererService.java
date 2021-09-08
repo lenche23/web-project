@@ -127,6 +127,18 @@ public class DelivererService {
 	}
 	
 	@PUT
+	@Path("/block/{username}")
+	public void blockDeliverer(@PathParam("username") String username) {
+		DelivererDAO delivererDAO = (DelivererDAO) ctx.getAttribute("delivererDAO");
+		
+		try {
+			delivererDAO.blockDeliverer(username);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
 	@Path("/saveProfileChanges/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveProfileChanges(@PathParam("id") String username, Deliverer deliverer) {

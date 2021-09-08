@@ -133,6 +133,18 @@ public class ManagerService {
 	}
 	
 	@PUT
+	@Path("/block/{username}")
+	public void blockManager(@PathParam("username") String username) {
+		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");
+		
+		try {
+			managerDAO.blockManager(username);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
 	@Path("/addManager/{managerUsername}/toRestaurant/{restaurantName}")
 	public void addManagerToRestaurant(@PathParam("managerUsername") String username, @PathParam("restaurantName") String name) {
 		ManagerDAO managerDAO = (ManagerDAO) ctx.getAttribute("managerDAO");

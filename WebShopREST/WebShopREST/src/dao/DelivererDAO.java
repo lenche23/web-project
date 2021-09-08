@@ -151,6 +151,39 @@ public class DelivererDAO {
         }
 	}
 	
+	public void blockDeliverer(String username) throws IOException {
+		for(int i = 0; i < allDeliverers.size(); i++)
+			if(allDeliverers.get(i).getUsername().equals(username))
+				allDeliverers.get(i).setBlocked(true);
+		
+		JSONArray deliverers = new JSONArray();
+		for (Deliverer d : allDeliverers) {
+			JSONObject delivererObject = new JSONObject();
+			
+			delivererObject.put("firstName", d.getFirstName());
+			delivererObject.put("lastName", d.getLastName());
+			delivererObject.put("email", d.getEmail());
+			delivererObject.put("username", d.getUsername());
+			delivererObject.put("password", d.getPassword());
+			delivererObject.put("gender", d.getGender().toString());
+			delivererObject.put("dateOfBirth", d.getDateOfBirth());
+			delivererObject.put("deleted", d.isDeleted());
+			delivererObject.put("blocked", d.isBlocked());
+			
+			JSONObject delivererObject2 = new JSONObject(); 
+	        delivererObject2.put("deliverer", delivererObject);
+			
+	        deliverers.add(delivererObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "deliverers.json")) {
+            file.write(deliverers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
 	public ArrayList<Deliverer> getSearchedDeliverers(String name, String surname, String username) { 
 		ArrayList<Deliverer> deliverersByName = new ArrayList<Deliverer>();
 		ArrayList<Deliverer> deliverersByNameAndSurname = new ArrayList<Deliverer>();

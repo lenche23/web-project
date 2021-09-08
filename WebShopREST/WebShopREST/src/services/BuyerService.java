@@ -162,6 +162,18 @@ public class BuyerService {
 	}
 	
 	@PUT
+	@Path("/block/{username}")
+	public void blockBuyer(@PathParam("username") String username) {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		
+		try {
+			buyerDAO.blockBuyer(username);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
 	@Path("/saveProfileChanges/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveProfileChanges(@PathParam("id") String username, Buyer buyer) {

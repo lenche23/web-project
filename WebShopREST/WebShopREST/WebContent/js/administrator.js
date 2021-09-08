@@ -45,6 +45,10 @@ $(document).ready(function(){
 		removeUser();
 	});
 	
+	$("#blockUser").click(function() {
+		blockUser();
+	});
+	
 	$('#logoutBtn').click(function(){
 		logout();
 	});
@@ -83,6 +87,39 @@ function removeUser() {
 		$.ajax({
 				type: 'PUT',
 				url: '../rest/deliverers/delete/' + username,
+				contentType: 'application/json',
+				dataType: 'json'
+		});	
+	}
+}
+
+function blockUser() {
+	let username = $('tr.selected').children(':first').text();
+	let img = $('<img>');
+	img.attr('src','../images/block.png');
+	img.attr('style','width: 25px;');
+	$('tr.selected').children(':last').append(img);
+	
+	if ($('#buyers').attr('style') == 'background-color: rgb(140, 140, 140)') {
+		$.ajax({
+				type: 'PUT',
+				url: '../rest/buyers/block/' + username,
+				contentType: 'application/json',
+				dataType: 'json'
+		});	
+	}
+	else if ($('#managers').attr('style') == 'background-color: rgb(140, 140, 140)') {
+		$.ajax({
+				type: 'PUT',
+				url: '../rest/managers/block/' + username,
+				contentType: 'application/json',
+				dataType: 'json'
+		});	
+	}
+	else if ($('#deliverers').attr('style') == 'background-color: rgb(140, 140, 140)') {
+		$.ajax({
+				type: 'PUT',
+				url: '../rest/deliverers/block/' + username,
 				contentType: 'application/json',
 				dataType: 'json'
 		});	
@@ -132,7 +169,9 @@ function loadBuyers() {
 			typeTh.text("Tip");
 			let pointsTh = $('<th onclick="sortTable(8)"></th>');
 			pointsTh.text("Broj bodova");
-			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh).append(typeTh).append(pointsTh);
+			let blockTh = $('<th>');
+			blockTh.text("Blokiran");
+			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh).append(typeTh).append(pointsTh).append(blockTh);
 			tableHeader.append(newRow);
 			for(let buyer of buyers)
 				if(!buyer.deleted)
@@ -168,7 +207,12 @@ function addBuyerToTable(buyer) {
 	else
 		type = $('<td>').text('Bronzani');
 	let points = $('<td>').text(buyer.points);
-	newRow.append(username).append(password).append(email).append(name).append(surname).append(gender).append(dateOfBirth).append(type).append(points);
+	let blocked = '';
+	if (buyer.blocked)
+		blocked = $('<td><img id="blockImg" src="../images/block.png" style="width: 25px;"/></th>');
+	else
+		blocked = $('<td>').text("");
+	newRow.append(username).append(password).append(email).append(name).append(surname).append(gender).append(dateOfBirth).append(type).append(points).append(blocked);
 	newRow.click(selectedRow());
 	tableBody.append(newRow);
 }
@@ -206,7 +250,9 @@ function loadManagers() {
 			genderTh.text("Pol");
 			let dateOfBirthTh = $('<th>');
 			dateOfBirthTh.text("Datum rođenja");
-			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh);
+			let blockTh = $('<th>');
+			blockTh.text("Blokiran");
+			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh).append(blockTh);
 			tableHeader.append(newRow);
 			for(let manager of managers)
 				if(!manager.deleted)
@@ -234,7 +280,12 @@ function addManagerToTable(manager) {
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
 	let dateOfBirth = $('<td>').text([day, month, year].join('.'));
-	newRow.append(username).append(password).append(email).append(name).append(surname).append(gender).append(dateOfBirth);
+	let blocked = '';
+	if (manager.blocked)
+		blocked = $('<td><img id="blockImg" src="../images/block.png" style="width: 25px;"/></th>');
+	else
+		blocked = $('<td>').text("");
+	newRow.append(username).append(password).append(email).append(name).append(surname).append(gender).append(dateOfBirth).append(blocked);
 	newRow.click(selectedRow());
 	tableBody.append(newRow);
 }
@@ -272,7 +323,9 @@ function loadDeliverers() {
 			genderTh.text("Pol");
 			let dateOfBirthTh = $('<th>');
 			dateOfBirthTh.text("Datum rođenja");
-			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh);
+			let blockTh = $('<th>');
+			blockTh.text("Blokiran");
+			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh).append(blockTh);
 			tableHeader.append(newRow);
 			for(let deliverer of deliverers)
 				if(!deliverer.deleted)
@@ -300,7 +353,12 @@ function addDelivererToTable(deliverer) {
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
 	let dateOfBirth = $('<td>').text([day, month, year].join('.'));
-	newRow.append(username).append(password).append(email).append(name).append(surname).append(gender).append(dateOfBirth);
+	let blocked = '';
+	if (deliverer.blocked)
+		blocked = $('<td><img id="blockImg" src="../images/block.png" style="width: 25px;"/></th>');
+	else
+		blocked = $('<td>').text("");
+	newRow.append(username).append(password).append(email).append(name).append(surname).append(gender).append(dateOfBirth).append(blocked);
 	newRow.click(selectedRow());
 	tableBody.append(newRow);
 }
