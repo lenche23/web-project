@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
@@ -434,6 +436,68 @@ public class BuyerDAO {
 			buyerObject.put("email", b.getEmail());
 			buyerObject.put("username", b.getUsername());
 			buyerObject.put("password", b.getPassword());
+			buyerObject.put("gender", b.getGender().toString());
+			buyerObject.put("dateOfBirth", b.getDateOfBirth());
+			buyerObject.put("deleted", b.isDeleted());
+			buyerObject.put("blocked", b.isBlocked());
+			buyerObject.put("sus", b.isSus());
+			buyerObject.put("points", b.getPoints());
+			buyerObject.put("name", b.getType().getName().toString());
+			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
+			buyerObject.put("pointsNeeded", Integer.toString(b.getType().getPointsNeeded()));
+			
+			JSONObject buyerObject2 = new JSONObject(); 
+	        buyerObject2.put("buyer", buyerObject);
+			
+	        buyers.add(buyerObject2);
+		}
+         
+        try (FileWriter file = new FileWriter(pathToRepository + "buyers.json")) {
+            file.write(buyers.toJSONString()); 
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public boolean seemsSus(Buyer b) throws java.text.ParseException {
+		boolean sus = false;
+		int ordersInMonth = 0;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");  
+	    Date date = new Date();
+		
+		for(int i = 0; i < b.getOrders().size(); i++) {
+			if(b.getOrders().get(i).getStatus().equals("CANCELED")) {
+				Date orderDate = formatter.parse(b.getOrders().get(i).getDateAndTime().split(" ")[0]);
+				if (date.compareTo(orderDate) == 30) {
+					ordersInMonth++;
+				}
+			}
+		}
+		if(ordersInMonth >= 5) {
+			sus = true;
+		}
+		
+		return sus;
+	}
+	
+	public void checkSus() throws IOException, java.text.ParseException {
+		
+		for(Buyer b : allBuyers) {
+			if(seemsSus(b)) {
+				b.setSus(true);
+			}
+		}
+		
+		JSONArray buyers = new JSONArray();
+		for (Buyer b : allBuyers) {
+			JSONObject buyerObject = new JSONObject();
+			
+			buyerObject.put("firstName", b.getFirstName());
+			buyerObject.put("lastName", b.getLastName());
+			buyerObject.put("email", b.getEmail());
+			buyerObject.put("username", b.getUsername());
+			buyerObject.put("password", b.getPassword()); 
 			buyerObject.put("gender", b.getGender().toString());
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());

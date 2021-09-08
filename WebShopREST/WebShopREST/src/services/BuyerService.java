@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -209,6 +210,19 @@ public class BuyerService {
 		try {
 			double priceDouble = Double.parseDouble(price.split(":")[1].split("}")[0]);
 			buyerDAO.removePoints(priceDouble);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PUT
+	@Path("/checkSus")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void checkSus() throws ParseException {
+		BuyerDAO buyerDAO = (BuyerDAO) ctx.getAttribute("buyerDAO");
+		
+		try {
+			buyerDAO.checkSus();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

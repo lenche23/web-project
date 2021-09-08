@@ -210,6 +210,8 @@ function addBuyerToTable(buyer) {
 	let blocked = '';
 	if (buyer.blocked)
 		blocked = $('<td><img id="blockImg" src="../images/block.png" style="width: 25px;"/></th>');
+	else if (buyer.sus)
+		blocked = $('<td><img id="blockImg" src="../images/sus.png" style="width: 25px;"/></th>');
 	else
 		blocked = $('<td>').text("");
 	newRow.append(username).append(password).append(email).append(name).append(surname).append(gender).append(dateOfBirth).append(type).append(points).append(blocked);
