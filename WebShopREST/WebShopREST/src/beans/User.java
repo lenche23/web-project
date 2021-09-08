@@ -14,6 +14,7 @@ public class User implements Serializable {
 	protected String dateOfBirth;
 	protected boolean deleted;
 	protected boolean blocked;
+	protected boolean sus;
 	
 	public User() {
 		this.firstName = "";
@@ -25,6 +26,7 @@ public class User implements Serializable {
 		this.dateOfBirth = "";
 		this.deleted = false;
 		this.blocked = false;
+		this.sus = false;
 	}
 
 	private static final long serialVersionUID = 6640936480584723344L;
@@ -101,18 +103,24 @@ public class User implements Serializable {
 		this.blocked = blocked;
 	}
 
-	
+	public boolean isSus() {
+		return sus;
+	}
+
+	public void setSus(boolean sus) {
+		this.sus = sus;
+	}
 
 	@Override
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username
 				+ ", password=" + password + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", deleted="
-				+ deleted + ", blocked=" + blocked + "]";
+				+ deleted + ", blocked=" + blocked + ", sus=" + sus + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(blocked, dateOfBirth, deleted, email, firstName, gender, lastName, password, username);
+		return Objects.hash(blocked, dateOfBirth, deleted, email, firstName, gender, lastName, password, sus, username);
 	}
 
 	@Override
@@ -127,11 +135,12 @@ public class User implements Serializable {
 		return blocked == other.blocked && Objects.equals(dateOfBirth, other.dateOfBirth) && deleted == other.deleted
 				&& Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
 				&& gender == other.gender && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
+				&& Objects.equals(password, other.password) && sus == other.sus
+				&& Objects.equals(username, other.username);
 	}
 
 	public User(String firstName, String lastName, String email, String username, String password, Sex gender,
-			String dateOfBirth, boolean deleted,boolean blocked) {
+			String dateOfBirth, boolean deleted,boolean blocked, boolean sus) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -142,5 +151,6 @@ public class User implements Serializable {
 		this.dateOfBirth = dateOfBirth;
 		this.deleted = deleted;
 		this.blocked = blocked;
+		this.sus = sus;
 	}
 }

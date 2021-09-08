@@ -79,8 +79,9 @@ public class DelivererDAO {
         String dateOfBirth = (String) delivererObject.get("dateOfBirth");
         boolean deleted = (boolean) delivererObject.get("deleted");
         boolean blocked = (boolean) delivererObject.get("blocked");
+        boolean sus = (boolean) delivererObject.get("sus");
         
-        Deliverer newDeliverer = new Deliverer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted,blocked);
+        Deliverer newDeliverer = new Deliverer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted,blocked,sus);
         
 		return newDeliverer;
     }
@@ -88,6 +89,7 @@ public class DelivererDAO {
 	public void saveDeliverer(Deliverer deliverer) throws IOException {
 		deliverer.setDeleted(false);
 		deliverer.setBlocked(false);
+		deliverer.setSus(false);
 		allDeliverers.add(deliverer);
 		
 		JSONArray deliverers = new JSONArray();
@@ -103,6 +105,7 @@ public class DelivererDAO {
 			delivererObject.put("dateOfBirth", d.getDateOfBirth());
 			delivererObject.put("deleted", d.isDeleted());
 			delivererObject.put("blocked", d.isBlocked());
+			delivererObject.put("sus", d.isSus());
 			
 			JSONObject delivererObject2 = new JSONObject(); 
 	        delivererObject2.put("deliverer", delivererObject);
@@ -136,6 +139,7 @@ public class DelivererDAO {
 			delivererObject.put("dateOfBirth", d.getDateOfBirth());
 			delivererObject.put("deleted", d.isDeleted());
 			delivererObject.put("blocked", d.isBlocked());
+			delivererObject.put("sus", d.isSus());
 			
 			JSONObject delivererObject2 = new JSONObject(); 
 	        delivererObject2.put("deliverer", delivererObject);
@@ -169,6 +173,7 @@ public class DelivererDAO {
 			delivererObject.put("dateOfBirth", d.getDateOfBirth());
 			delivererObject.put("deleted", d.isDeleted());
 			delivererObject.put("blocked", d.isBlocked());
+			delivererObject.put("sus", d.isSus());
 			
 			JSONObject delivererObject2 = new JSONObject(); 
 	        delivererObject2.put("deliverer", delivererObject);
@@ -253,6 +258,8 @@ public class DelivererDAO {
 			delivererObject.put("dateOfBirth", d.getDateOfBirth());
 			delivererObject.put("deleted", d.isDeleted());
 			delivererObject.put("blocked", d.isBlocked());
+			delivererObject.put("sus", d.isSus());
+
 			
 			JSONObject delivererObject2 = new JSONObject(); 
 	        delivererObject2.put("deliverer", delivererObject);

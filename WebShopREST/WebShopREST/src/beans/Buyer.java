@@ -42,15 +42,15 @@ public class Buyer extends User {
 	}
 	
 	public Buyer(String firstName, String lastName, String email, String username, String password, Sex gender,
-			String dateOfBirth, boolean deleted, double points, BuyerType type, boolean blocked) {
-		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted, blocked);
+			String dateOfBirth, boolean deleted, double points, BuyerType type, boolean blocked,boolean sus) {
+		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted, blocked,sus);
 		this.points = points;
 		this.type = type;
 	}
 
 	public Buyer(String firstName, String lastName, String email, String username, String password, Sex gender,
-			String dateOfBirth, boolean deleted, ArrayList<Order> orders, Basket basket, double points, BuyerType type, boolean blocked) {
-		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted, blocked);
+			String dateOfBirth, boolean deleted, ArrayList<Order> orders, Basket basket, double points, BuyerType type, boolean blocked,boolean sus) {
+		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted, blocked,sus);
 		this.orders = orders;
 		this.points = points;
 		this.type = type;

@@ -87,13 +87,14 @@ public class BuyerDAO {
         String dateOfBirth = (String) buyerObject.get("dateOfBirth");
         boolean deleted = (boolean) buyerObject.get("deleted");
         boolean blocked = (boolean) buyerObject.get("blocked");
+        boolean sus = (boolean) buyerObject.get("sus");
         double points = (double) buyerObject.get("points");
         String typeName = (String) buyerObject.get("name");
         String discount = (String) buyerObject.get("discount");
         String pointsNeeded = (String) buyerObject.get("pointsNeeded");
         
         BuyerType buyerType = new BuyerType(TypeName.valueOf(typeName), Integer.parseInt(discount), Integer.parseInt(pointsNeeded));
-        Buyer newBuyer = new Buyer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted, points, buyerType,blocked);
+        Buyer newBuyer = new Buyer(firstName, lastName, email, username, password, Sex.valueOf(gender), dateOfBirth, deleted, points, buyerType,blocked,sus);
         
 		return newBuyer;
     }
@@ -104,6 +105,7 @@ public class BuyerDAO {
 		buyer.setPoints(0.0);
 		buyer.setDeleted(false);
 		buyer.setBlocked(false);
+		buyer.setSus(false);
 		buyer.setType(new BuyerType(TypeName.BRONZE, 0, 3000));
 		allBuyers.add(buyer);
 		
@@ -120,6 +122,7 @@ public class BuyerDAO {
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
 			buyerObject.put("blocked", b.isBlocked());
+			buyerObject.put("sus", b.isSus());
 			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
@@ -157,6 +160,7 @@ public class BuyerDAO {
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
 			buyerObject.put("blocked", b.isBlocked());
+			buyerObject.put("sus", b.isSus());
 			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
@@ -194,6 +198,7 @@ public class BuyerDAO {
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
 			buyerObject.put("blocked", b.isBlocked());
+			buyerObject.put("sus", b.isSus());
 			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
@@ -319,6 +324,7 @@ public class BuyerDAO {
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
 			buyerObject.put("blocked", b.isBlocked());
+			buyerObject.put("sus", b.isSus());
 			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
@@ -374,6 +380,7 @@ public class BuyerDAO {
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
 			buyerObject.put("blocked", b.isBlocked());
+			buyerObject.put("sus", b.isSus());
 			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));
@@ -431,6 +438,7 @@ public class BuyerDAO {
 			buyerObject.put("dateOfBirth", b.getDateOfBirth());
 			buyerObject.put("deleted", b.isDeleted());
 			buyerObject.put("blocked", b.isBlocked());
+			buyerObject.put("sus", b.isSus());
 			buyerObject.put("points", b.getPoints());
 			buyerObject.put("name", b.getType().getName().toString());
 			buyerObject.put("discount", Integer.toString(b.getType().getDiscount()));

@@ -2,66 +2,71 @@
     {
         "administrator": {
             "firstName": "Pera",
-            "lastName": "Perić",
+            "lastName": "Peric",
             "password": "pera",
             "deleted": false,
             "gender": "MALE",
             "dateOfBirth": "1976-12-12",
             "email": "pera@gmail.com",
             "username": "pera",
-            "blocked": false
+            "blocked": false,
+            "sus": false
         }
     },
     {
         "administrator": {
             "firstName": "Jovana",
-            "lastName": "Jovanović",
+            "lastName": "Jovanovic",
             "password": "jaca",
             "deleted": false,
             "gender": "FEMALE",
             "dateOfBirth": "1975-11-11",
             "email": "jaca@uns.ac.rs",
             "username": "jaca",
-            "blocked": false
+            "blocked": false,
+            "sus": false
         }
     },
     {
         "administrator": {
             "firstName": "Stojanka",
-            "lastName": "Novaković",
+            "lastName": "Novakovic",
             "password": "stoja",
             "deleted": false,
             "gender": "FEMALE",
             "dateOfBirth": "1974-10-10",
             "email": "stoja@gmail.com",
             "username": "stoja",
-            "blocked": false
+            "blocked": false,
+            "sus": false
         }
     },
     {
         "administrator": {
             "firstName": "Jovan",
-            "lastName": "Jović",
+            "lastName": "Jovic",
             "password": "joca",
             "deleted": false,
             "gender": "MALE",
             "dateOfBirth": "1973-09-09",
             "email": "joca@yahoo.com",
             "username": "joca",
-            "blocked": false
+            "blocked": false,
+            "sus": false
         }
     },
     {
         "administrator": {
             "firstName": "Milica",
-            "lastName": "Milićević",
+            "lastName": "Milićevic",
             "password": "mica",
             "deleted": false,
             "gender": "FEMALE",
             "dateOfBirth": "1972-08-08",
             "email": "mica@gmail.com",
             "username": "mica",
-            "blocked": false
+            "blocked": false,
+            "sus": false
         }
     }
 ]

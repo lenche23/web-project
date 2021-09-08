@@ -57,7 +57,7 @@ public class Deliverer extends User{
 	}
 
 	public Deliverer(String firstName, String lastName, String email, String username, String password, Sex gender,
-			String dateOfBirth, boolean deleted,boolean blocked) {
-		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted,blocked);
+			String dateOfBirth, boolean deleted,boolean blocked,boolean sus) {
+		super(firstName, lastName, email, username, password, gender, dateOfBirth, deleted,blocked,sus);
 	}
 }
