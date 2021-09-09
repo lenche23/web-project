@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 import beans.Administrator;
 import beans.Buyer;
 import beans.BuyerType;
+import beans.OrderStatus;
 import beans.Sex;
 import beans.TypeName;
 
@@ -466,14 +467,18 @@ public class BuyerDAO {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");  
 	    Date date = new Date();
 		
+	    if(b.getOrders() != null) {
 		for(int i = 0; i < b.getOrders().size(); i++) {
-			if(b.getOrders().get(i).getStatus().equals("CANCELED")) {
+			if(b.getOrders().get(i).getStatus() == OrderStatus.CANCELED) {
 				Date orderDate = formatter.parse(b.getOrders().get(i).getDateAndTime().split(" ")[0]);
 				if (date.compareTo(orderDate) == 30) {
 					ordersInMonth++;
 				}
 			}
 		}
+	    } else {
+	    	return false;
+	    }
 		if(ordersInMonth >= 5) {
 			sus = true;
 		}

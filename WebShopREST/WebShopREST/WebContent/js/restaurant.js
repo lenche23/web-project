@@ -54,7 +54,7 @@ function loadRestaurantPage() {
 				$("#logo").attr('src', "../images/" + restaurant.logo );
 				$('#address').val(restaurant.location.address);
 				$('#type').val(restaurant.type);
-				$('#grade').val('-');
+				$('#grade').val(restaurant.grade);
 				if(restaurant.status === "OPEN")
 					$('#status').val("Otvoren");
 				else if(restaurant.status === "CLOSED")

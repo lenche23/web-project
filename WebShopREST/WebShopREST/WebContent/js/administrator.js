@@ -134,48 +134,57 @@ function selectedRow() {
 }
 
 function loadBuyers() {
-	$.get({
-		url: '../rest/buyers/',
-		success: function(buyers){
-			$('#removeUser').show();
-			$('#actionBtnsDiv').attr('style', 'width: 950px');
-			$('#searchName').val("");
-			$('#searchSurname').val("");
-			$('#searchUsername').val("");
-			$("#buyerType").attr('disabled', false);
-			$("#buyers").attr('style', 'background-color: rgb(140, 140, 140)');
-			$("#managers").attr('style', 'background-color: rgb(190, 190, 190)');
-			$("#deliverers").attr('style', 'background-color: rgb(190, 190, 190)');
-			$("#administrators").attr('style', 'background-color: rgb(190, 190, 190)');
-			$('#tableHeader').empty();
-			$('#tableBody').empty();
-			let tableHeader = $('#tableHeader');
-			let newRow = $('<tr>');
-			let usernameTh = $('<th onclick="sortTable(0)"></th>');
-			usernameTh.text("Korisničko ime");
-			let passwordTh = $('<th>');
-			passwordTh.text("Lozinka");
-			let emailTh = $('<th>');
-			emailTh.text("Email");
-			let nameTh = $('<th onclick="sortTable(3)"></th>');
-			nameTh.text("Ime");
-			let surnameTh = $('<th onclick="sortTable(4)"></th>');
-			surnameTh.text("Prezime");
-			let genderTh = $('<th>');
-			genderTh.text("Pol");
-			let dateOfBirthTh = $('<th>');
-			dateOfBirthTh.text("Datum rođenja");
-			let typeTh = $('<th>');
-			typeTh.text("Tip");
-			let pointsTh = $('<th onclick="sortTable(8)"></th>');
-			pointsTh.text("Broj bodova");
-			let blockTh = $('<th>');
-			blockTh.text("Blokiran");
-			newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh).append(typeTh).append(pointsTh).append(blockTh);
-			tableHeader.append(newRow);
-			for(let buyer of buyers)
-				if(!buyer.deleted)
-					addBuyerToTable(buyer);
+	$.ajax({
+		type: 'PUT',
+		url: "../rest/buyers/checkSus",
+		data: JSON.stringify({}),
+		contentType: 'application/json',
+		dataType: 'json',
+		success: function(){
+		$.get({
+			url: '../rest/buyers/',
+			success: function(buyers){
+				$('#removeUser').show();
+				$('#actionBtnsDiv').attr('style', 'width: 950px');
+				$('#searchName').val("");
+				$('#searchSurname').val("");
+				$('#searchUsername').val("");
+				$("#buyerType").attr('disabled', false);
+				$("#buyers").attr('style', 'background-color: rgb(140, 140, 140)');
+				$("#managers").attr('style', 'background-color: rgb(190, 190, 190)');
+				$("#deliverers").attr('style', 'background-color: rgb(190, 190, 190)');
+				$("#administrators").attr('style', 'background-color: rgb(190, 190, 190)');
+				$('#tableHeader').empty();
+				$('#tableBody').empty();
+				let tableHeader = $('#tableHeader');
+				let newRow = $('<tr>');
+				let usernameTh = $('<th onclick="sortTable(0)"></th>');
+				usernameTh.text("Korisničko ime");
+				let passwordTh = $('<th>');
+				passwordTh.text("Lozinka");
+				let emailTh = $('<th>');
+				emailTh.text("Email");
+				let nameTh = $('<th onclick="sortTable(3)"></th>');
+				nameTh.text("Ime");
+				let surnameTh = $('<th onclick="sortTable(4)"></th>');
+				surnameTh.text("Prezime");
+				let genderTh = $('<th>');
+				genderTh.text("Pol");
+				let dateOfBirthTh = $('<th>');
+				dateOfBirthTh.text("Datum rođenja");
+				let typeTh = $('<th>');
+				typeTh.text("Tip");
+				let pointsTh = $('<th onclick="sortTable(8)"></th>');
+				pointsTh.text("Broj bodova");
+				let blockTh = $('<th>');
+				blockTh.text("Blokiran");
+				newRow.append(usernameTh).append(passwordTh).append(emailTh).append(nameTh).append(surnameTh).append(genderTh).append(dateOfBirthTh).append(typeTh).append(pointsTh).append(blockTh);
+				tableHeader.append(newRow);
+				for(let buyer of buyers)
+					if(!buyer.deleted)
+						addBuyerToTable(buyer);
+			}
+		})
 		}
 	})
 }
