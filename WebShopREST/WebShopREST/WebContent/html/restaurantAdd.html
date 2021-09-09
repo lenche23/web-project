@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="../css/restaurantAdd.css"/>
 	<script src="../jquery-3.3.1.min.js"></script>
 	<script src="../js/restaurantAdd.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/css/ol.css" type="text/css">
 </head>
 <body>
 	<header id="titleRectangle">
@@ -82,6 +84,7 @@
                 <label>Datum rođenja *</label>
                 <input id="dateOfBirth" style="cursor: pointer;" type="date"/>
             </div>
+            <div id="map" class="map"></div>
             <div class="btn">
                 <div class="inner"></div>
                 <button type="button" id="submit">Kreiraj</button>
