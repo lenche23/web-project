@@ -1,12 +1,12 @@
 [
     {
         "restaurant": {
-            "address": "Batutova 5, Beograd, 59714, Srbija",
+            "address": "Cara Dusana 2, Novi Sad, 21000, Srbija",
             "deleted": false,
             "grade": 4.0,
             "name": "Chinese Wonderland",
-            "length": 20.0,
-            "width": 40.0,
+            "length": 19.82468151277643,
+            "width": 45.24884062160916,
             "logo": "chinese.png",
             "type": "Kineski",
             "status": "OPEN"
@@ -14,12 +14,12 @@
     },
     {
         "restaurant": {
-            "address": "Cara Dusana 2, Novi Sad, 21000, Srbija",
+            "address": "Batutova 5, Beograd, 59714, Srbija",
             "deleted": false,
             "grade": 0.0,
             "name": "Italian Wonderland",
-            "length": 18.0,
-            "width": 42.0,
+            "length": 20.49941693975026, 
+            "width": 44.79659080564999, 
             "logo": "italian.png",
             "type": "Italijanski",
             "status": "CLOSED"
@@ -31,8 +31,8 @@
             "deleted": false,
             "grade": 0.0,
             "name": "Rostiljnica",
-            "length": 20.0,
-            "width": 30.0,
+            "length": 15.980891682117113, 
+            "width": 45.81364578215494,
             "logo": "barbeque.png",
             "type": "Rostilj",
             "status": "OPEN"

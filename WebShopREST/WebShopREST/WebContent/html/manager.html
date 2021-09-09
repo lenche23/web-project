@@ -127,11 +127,7 @@
 			<br>
 			<label class="promoText">&nbspLokacija restorana</label>
 		</div>
-		<br/>
 		<div id="map" class="map"></div>
-        <!-- <div class="location" style="max-width: max-content;">
-			
-        </div> -->
 	</div>
 	
 	<script type="text/javascript">
@@ -156,18 +152,31 @@
 			            $(this).addClass("selected");
 			});
 
-		var map = new ol.Map({
-		target: 'map',
-		layers: [
-			new ol.layer.Tile({
-			source: new ol.source.OSM()
-			})
-		],
-		view: new ol.View({
-			center: ol.proj.fromLonLat([45.2, 19.8]),
-			zoom: 6
-		})
-		});
+		//MAPA
+		// var map = new ol.Map({
+		// target: 'map',
+		// layers: [
+		// 	new ol.layer.Tile({
+		// 	source: new ol.source.OSM()
+		// 	})
+		// ],
+		// view: new ol.View({
+		// 	center: ol.proj.fromLonLat([19.825,45.25]),
+		// 	zoom: 13
+		// })
+		// });
+
+		// var layer = new ol.layer.Vector({
+		// source: new ol.source.Vector({
+		// 	features: [
+		// 		new ol.Feature({
+		// 			geometry: new ol.geom.Point(ol.proj.fromLonLat([19.825,45.25]))
+		// 		})
+		// 	]
+		// })
+		// });
+		// map.addLayer(layer);
+
 		});
 	</script>
 </body>

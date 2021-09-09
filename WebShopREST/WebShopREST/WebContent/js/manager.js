@@ -24,6 +24,65 @@ $(document).ready(function(){
 	$("#declineComment").click(function() {
 		declineComment();
 	});
+	
+	$.get({
+		url: '../rest/managers/loggedInManager',
+		success: function(manager){
+			var lon = manager.restaurant.location.length;
+			var lat = manager.restaurant.location.width;
+			
+			console.log(lon);
+			console.log(lat);
+			
+			var map = new ol.Map({
+			target: 'map',
+			layers: [
+				new ol.layer.Tile({
+				source: new ol.source.OSM()
+				})
+			],
+			view: new ol.View({
+				center: ol.proj.fromLonLat([19.825,45.25]),
+				zoom: 13
+			})
+			});
+	
+			var layer = new ol.layer.Vector({
+			source: new ol.source.Vector({
+				features: [
+					new ol.Feature({
+						geometry: new ol.geom.Point(ol.proj.fromLonLat([lon,lat]))
+					})
+				]
+			})
+			});
+			map.addLayer(layer);
+		}
+	})
+
+		/*var map = new ol.Map({
+		target: 'map',
+		layers: [
+			new ol.layer.Tile({
+			source: new ol.source.OSM()
+			})
+		],
+		view: new ol.View({
+			center: ol.proj.fromLonLat([19.825,45.25]),
+			zoom: 13
+		})
+		});
+
+		var layer = new ol.layer.Vector({
+		source: new ol.source.Vector({
+			features: [
+				new ol.Feature({
+					geometry: new ol.geom.Point(ol.proj.fromLonLat([19.825,45.25]))
+				})
+			]
+		})
+		});
+		map.addLayer(layer);*/
 });
 
 function logout() {
