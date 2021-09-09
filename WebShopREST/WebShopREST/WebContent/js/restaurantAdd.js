@@ -19,9 +19,24 @@ $(document).ready(function(){
 		],
 		view: new ol.View({
 			center: ol.proj.fromLonLat([19.825,45.25]),
-			zoom: 13.5
+			zoom: 13
 		})
 	});
+	var url_nominatim = "";
+		map.on('singleclick', function (evt) {
+			var coords = ol.proj.toLonLat(evt.coordinate);
+			
+			fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + coords[0] + '&lat=' + coords[1])
+				.then(function(response) {
+					return response.json();
+				}).then(function(json) {
+					var adresa = (json['address'])['road']+", "+(json['address'])['city']+', '+(json['address'])['postcode']+', '+(json['address'])['country'];
+					$("#location").val(adresa);
+					$("#length").val(coords[0].toFixed(4));
+					$("#width").val(coords[1].toFixed(4));
+					
+				});
+		});
 });
 
 function createRestaurantWithNewManager() {
