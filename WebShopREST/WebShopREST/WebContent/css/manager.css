@@ -332,3 +332,16 @@ input, select {
 	cursor: pointer;
 	margin: 5px;
 }
+
+.map {
+	padding: 10px;
+	margin: 30px;
+	width: 80%;
+	height: 400px;
+	border-spacing: 0px;
+	border-style: ridge;
+	border-radius: 15px;
+	border-color: rgb(214, 164, 45);
+	border-width: 3px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
